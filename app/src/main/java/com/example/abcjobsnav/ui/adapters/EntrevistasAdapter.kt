@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.abcjobsnav.R
 import com.example.abcjobsnav.databinding.EntrevistaItemBinding
 import com.example.abcjobsnav.models.Entrevista
+import com.example.abcjobsnav.ui.EntrevistasFragmentDirections
+
 //import com.example.abcjobsnav.ui.AlbumFragmentDirections
 
 class EntrevistasAdapter : RecyclerView.Adapter<EntrevistasAdapter.EntrevistaViewHolder>(){
@@ -33,9 +35,8 @@ class EntrevistasAdapter : RecyclerView.Adapter<EntrevistasAdapter.EntrevistaVie
             it.entrevista = entrevistas[position]
         }
         holder.viewDataBinding.root.setOnClickListener {
-            //val action = EntrevistaFragmentDirections.actionAlbumFragmentToCommentFragment(entrevistas[position].id)
-            // Navigate using that action
-            //holder.viewDataBinding.root.findNavController().navigate(action)
+            val action = EntrevistasFragmentDirections.actionEntrevistasFragmentToResultadoEntrevistaFragment(entrevistas[position].id, "")
+            holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }
 

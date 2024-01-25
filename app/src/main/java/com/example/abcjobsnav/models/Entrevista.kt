@@ -13,5 +13,6 @@ data class Entrevista (
     val Num: Int,
     val cuando: String,
     val calificacion: String,
-    val anotaciones: String
+    val anotaciones: String,
+    val valoracion: Int
 )

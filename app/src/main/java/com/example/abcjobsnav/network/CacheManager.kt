@@ -16,6 +16,8 @@ class CacheManager(context: Context) {
     }
     private var evsCandidato: HashMap<Int, List<Entrevista>> = hashMapOf()
     private var lstCandidatos: HashMap<Int, Candidato> = hashMapOf()
+    private var lstEntrevistas: HashMap<Int, Entrevista> = hashMapOf()
+
     fun addEntrevistasCandidato(idUser: Int, evs: List<Entrevista>){
         if (!evsCandidato.containsKey(idUser)){
             evsCandidato[idUser] = evs
@@ -33,5 +35,14 @@ class CacheManager(context: Context) {
     }
     fun getCandidato(idUser: Int) : Candidato?{
         return if (lstCandidatos.containsKey(idUser)) lstCandidatos[idUser]!! else null
+    }
+
+    fun addEntrevista(idEv: Int, EV: Entrevista){
+        if (!lstEntrevistas.containsKey(idEv)){
+            lstEntrevistas[idEv] = EV
+        }
+    }
+    fun getEntrevista(idEv: Int) : Entrevista?{
+        return if (lstEntrevistas.containsKey(idEv)) lstEntrevistas[idEv]!! else null
     }
 }

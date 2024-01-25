@@ -33,6 +33,9 @@
         <argument
             android:name="token"
             app:argType="string" />
+        <action
+            android:id="@+id/action_entrevistasFragment_to_resultadoEntrevistaFragment"
+            app:destination="@id/resultadoEntrevistaFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -79,4 +82,16 @@
         android:name="com.example.abcjobsnav.ui.JobsFragment"
         android:label="fragment_jobs"
         tools:layout="@layout/fragment_jobs" />
+    <fragment
+        android:id="@+id/resultadoEntrevistaFragment"
+        android:name="com.example.abcjobsnav.ui.ResultadoEntrevistaFragment"
+        android:label="fragment_resultado_entrevista"
+        tools:layout="@layout/fragment_resultado_entrevista" >
+        <argument
+            android:name="evId"
+            app:argType="integer" />
+        <argument
+            android:name="token"
+            app:argType="string" />
+    </fragment>
 </navigation>

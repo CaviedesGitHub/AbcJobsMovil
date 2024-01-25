@@ -38,6 +38,45 @@ class NetworkServiceAdapter constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
+    suspend fun getEntrevista( idEv: Int, token: String)=suspendCoroutine<Entrevista>{contResp ->
+        Log.d("testing","Inicio getEntrevista NetworkServiceAdapter")
+        Log.d("testing idEv",idEv.toString())
+        Log.d("testing token",token)
+        val strReq = object: StringRequest(Request.Method.GET, BASE_URL+"entrevistas/$idEv",
+            Response.Listener<String>{ response ->
+                val resp = JSONObject(response)
+                val EV= Entrevista(id = resp.getInt("id"),
+                    candidato = resp.getString("candidato"),
+                    nom_empresa = resp.getString("nom_empresa"),
+                    nom_proyecto = resp.getString("nom_proyecto"),
+                    nom_perfil = resp.getString("nom_perfil"),
+                    cuando = resp.getString("cuando"),
+                    contacto = resp.getString("contacto"),
+                    calificacion = resp.getString("calificacion"),
+                    anotaciones = resp.getString("anotaciones"),
+                    id_cand = resp.getInt("id_cand"),
+                    idPerfilProy = resp.getInt("idPerfilProy"),
+                    id_perfil = resp.getInt("id_perfil"),
+                    Num = resp.getInt("Num"),
+                    valoracion = resp.getInt("valoracion"))
+                contResp.resume(EV) //onComplete(list)
+            },
+            {
+                Log.d("testing","VolleyError getEntrevista NetworkServiceAdapter")
+                contResp.resumeWithException(it) //throw it   //onError(it)
+            }){
+            override fun getHeaders(): MutableMap<String, String> {
+                Log.d("testing","Inicio getHeaders")
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Authorization"] = "Bearer $token"
+                Log.d("testing", headers.toString())
+                return headers  //return super.getHeaders()  // throws AuthFailureError
+            }
+        };
+        requestQueue.add(strReq)
+    }
+
     suspend fun getCandidato( idUser: Int, token: String)=suspendCoroutine<Candidato>{contResp ->
         Log.d("testing","Inicio getCandidato NetworkServiceAdapter")
         Log.d("testing usuario",idUser.toString())
@@ -183,7 +222,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                         id_cand = item.getInt("id_cand"),
                         idPerfilProy = item.getInt("idPerfilProy"),
                         id_perfil = item.getInt("id_perfil"),
-                        Num = item.getInt("Num"),))
+                        Num = item.getInt("Num"),
+                        valoracion = item.getInt("valoracion") ))
                 }
                 contResp.resume(list) //onComplete(list)
             },
@@ -216,7 +256,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                         id_cand = item.getInt("id_cand"),
                         idPerfilProy = item.getInt("idPerfilProy"),
                         id_perfil = item.getInt("id_perfil"),
-                        Num = item.getInt("Num"),))
+                        Num = item.getInt("Num"),
+                        valoracion = item.getInt("valoracion")))
                 }
                 onComplete(list)
             },
