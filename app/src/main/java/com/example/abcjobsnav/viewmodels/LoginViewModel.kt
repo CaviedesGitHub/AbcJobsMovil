@@ -5,6 +5,9 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.example.abcjobsnav.models.Login
 import com.example.abcjobsnav.repositories.LoginRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import org.json.JSONObject
 
 class LoginViewModel(application: Application) :  AndroidViewModel(application) {
@@ -34,15 +37,20 @@ class LoginViewModel(application: Application) :  AndroidViewModel(application) 
             "password" to password,
         )
         Log.d("testing refreshData", "Inicio ViewModel")
-        loginRepository.refreshData(JSONObject(postParams), {
-            Log.d("testing viewModel","Response getLogin ViewModel")
-            Log.d("testing viewModel", it.toString())
-            _login.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
+        try {
+            viewModelScope.launch(Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = loginRepository.refreshData(JSONObject(postParams))
+                    _login.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){ //se procesa la excepcion
+            Log.d("Error", e.toString())
             _eventNetworkError.value = true
-        })
+        }
     }
 
     fun onNetworkErrorShown() {

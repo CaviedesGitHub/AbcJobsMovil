@@ -7,14 +7,14 @@ import com.example.abcjobsnav.network.NetworkServiceAdapter
 import org.json.JSONObject
 
 class EntrevistaRepository (val application: Application){
-    fun refreshData(params: JSONObject, evId: Int, token: String, callback: (List<Entrevista>)->Unit, onError: (VolleyError)->Unit) {
+    suspend fun refreshData(params: JSONObject, evId: Int, token: String):List<Entrevista>{
         //Determinar la fuente de datos que se va a utilizar. Si es necesario consultar la red, ejecutar el siguiente código
-        NetworkServiceAdapter.getInstance(application).getEntrevistasCandidato(params, evId, token, {
-            //Guardar los albumes de la variable it en un almacén de datos local para uso futuro
+        return NetworkServiceAdapter.getInstance(application).getEntrevistasCandidato(params, evId, token)
+        /*NetworkServiceAdapter.getInstance(application).getEntrevistasCandidato(params, evId, token, {
             callback(it)
         },
             onError
-        )
+        )*/
     }
 }
 

@@ -7,6 +7,10 @@ import androidx.lifecycle.*
 import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.network.NetworkServiceAdapter
 import com.example.abcjobsnav.repositories.CandidatoRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 class CandidatoViewModel(application: Application) :  AndroidViewModel(application) {
     private val candidatoRepository = CandidatoRepository(application)
@@ -33,16 +37,20 @@ class CandidatoViewModel(application: Application) :  AndroidViewModel(applicati
 
     public fun refreshDataFromNetwork(idUser: Int, token: String) {
         Log.d("testing CandidatoViewModel", "Inicio refreshDataFromNetwork")
-        candidatoRepository.refreshData(idUser, token, {
-            Log.d("testing CandidatoViewModel","Response getCandidato ViewModel")
-            Log.d("testing viewModel","Response getCandidato ViewModel")
-            Log.d("testing viewModel", it.toString())
-            _candidato.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
+        try {
+            viewModelScope.launch(Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = candidatoRepository.refreshData(idUser, token)
+                    _candidato.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+        }
+        catch (e:Exception){ //se procesa la excepcion
+            Log.d("Error", e.toString())
             _eventNetworkError.value = true
-        })
+        }
     }
 
     fun onNetworkErrorShown() {

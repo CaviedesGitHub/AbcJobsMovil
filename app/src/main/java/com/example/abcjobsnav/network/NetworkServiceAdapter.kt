@@ -18,6 +18,10 @@ import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.models.Login
 import java.awt.font.NumericShaper
 
+import kotlin.coroutines.resume
+import kotlin.coroutines.resumeWithException
+import kotlin.coroutines.suspendCoroutine
+
 class NetworkServiceAdapter constructor(context: Context) {
     companion object{
         const val BASE_URL= "http://10.0.2.2:5000/" //""https://vynils-back-heroku.herokuapp.com/"
@@ -34,7 +38,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
-    fun getCandidato( idUser: Int, token: String, onComplete:(resp:Candidato)->Unit , onError: (error:VolleyError)->Unit){
+    suspend fun getCandidato( idUser: Int, token: String)=suspendCoroutine<Candidato>{contResp ->
         Log.d("testing","Inicio getCandidato NetworkServiceAdapter")
         Log.d("testing usuario",idUser.toString())
         Log.d("testing token",token)
@@ -54,11 +58,11 @@ class NetworkServiceAdapter constructor(context: Context) {
                             direccion=resp.getString("direccion"),
                             imagen=resp.getString("imagen"),
                             id_usuario=resp.getInt("id_usuario"))
-                        onComplete(cand)
+                        contResp.resume(cand) //onComplete(list)
             },
             {
                 Log.d("testing","VolleyError getCandidato NetworkServiceAdapter")
-                onError(it)
+                contResp.resumeWithException(it) //throw it   //onError(it)
             }){
             override fun getHeaders(): MutableMap<String, String> {
                 Log.d("testing","Inicio getHeaders")
@@ -84,11 +88,11 @@ class NetworkServiceAdapter constructor(context: Context) {
                 direccion=resp.getString("direccion"),
                 imagen=resp.getString("imagen"),
                 id_usuario=resp.getInt("id_usuario"))
-                onComplete(cand)
+                contResp.resume(cand) //onComplete(list)
             },
             {
                 Log.d("testing","VolleyError getCandidato NetworkServiceAdapter")
-                onError(it)
+                contResp.resumeWithException(it) //throw it   //onError(it)
             }){
             override fun getHeaders(): MutableMap<String, String> {
                 Log.d("testing","Inicio getHeaders")
@@ -127,7 +131,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         //)
     }
 
-    fun getLogin(body: JSONObject, onComplete:(resp:Login)->Unit , onError: (error:VolleyError)->Unit){
+    suspend fun getLogin(body: JSONObject)=suspendCoroutine<Login>{contResp ->
         Log.d("testing","Inicio getLogin NetworkServiceAdapter")
         requestQueue.add(postRequest("auth/login", body,
             Response.Listener<JSONObject> { response ->
@@ -145,16 +149,16 @@ class NetworkServiceAdapter constructor(context: Context) {
                     response.getInt("id"),
                     response.getString("tipo"),
                     idTipo)
-                onComplete(log)
+                contResp.resume(log) // onComplete(log)
             },
             {
                 Log.d("testing","VolleyError getLogin NetworkServiceAdapter")
-                onError(it)
+                contResp.resumeWithException(it) //throw it   //onError(it)
             })
         )
     }
 
-    fun getEntrevistasCandidato(body: JSONObject, evId: Int, token: String, onComplete:(resp:List<Entrevista>)->Unit , onError: (error:VolleyError)->Unit){
+    suspend fun getEntrevistasCandidato(body: JSONObject, evId: Int, token: String)=suspendCoroutine<List<Entrevista>>{contResp ->
         Log.d("testing","Inicio getEntrevistasCandidato NetworkServiceAdapter")
         requestQueue.add(postRequest("entrevistasCandidato/$evId", body,
             Response.Listener<JSONObject> { response ->
@@ -167,7 +171,6 @@ class NetworkServiceAdapter constructor(context: Context) {
                 val list = mutableListOf<Entrevista>()
                 for (i in 0 until resp.length()) {
                     val item = resp.getJSONObject(i)
-
                     list.add(i, Entrevista(id = item.getInt("id"),
                         candidato = item.getString("candidato"),
                         nom_empresa = item.getString("nom_empresa"),
@@ -182,11 +185,12 @@ class NetworkServiceAdapter constructor(context: Context) {
                         id_perfil = item.getInt("id_perfil"),
                         Num = item.getInt("Num"),))
                 }
-                onComplete(list)
+                contResp.resume(list) //onComplete(list)
             },
             {
                 Log.d("testing","VolleyError getEntrevistas NetworkServiceAdapter")
-                onError(it)
+                //onError(it)
+                contResp.resumeWithException(it) //throw it
             }))
     }
 

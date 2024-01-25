@@ -8,6 +8,10 @@ import com.example.abcjobsnav.network.NetworkServiceAdapter
 import com.example.abcjobsnav.repositories.EntrevistaRepository
 import org.json.JSONObject
 
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+
 class EntrevistaViewModel(application: Application) :  AndroidViewModel(application) {
     private val entrevistaRepository = EntrevistaRepository(application)
 
@@ -38,13 +42,32 @@ class EntrevistaViewModel(application: Application) :  AndroidViewModel(applicat
             "contacto" to ""
         )
 
-        entrevistaRepository.refreshData(JSONObject(postParams), evId, token, {
+        try {
+            viewModelScope.launch(Dispatchers.Default){
+                withContext(Dispatchers.IO){
+                    var data = entrevistaRepository.refreshData(JSONObject(postParams), evId, token)
+                    _entrevistas.postValue(data)
+                }
+                _eventNetworkError.postValue(false)
+                _isNetworkErrorShown.postValue(false)
+            }
+
+            //var data = entrevistaRepository.refreshData(JSONObject(postParams), evId, token)
+            //_entrevistas.postValue(data)
+            //_eventNetworkError.value = false
+            //_isNetworkErrorShown.value = false
+        }
+        catch (e:Exception){ //se procesa la excepcion
+            Log.d("Error", e.toString())
+            _eventNetworkError.value = true
+        }
+        /*entrevistaRepository.refreshData(JSONObject(postParams), evId, token, {
             _entrevistas.postValue(it)
             _eventNetworkError.value = false
             _isNetworkErrorShown.value = false
         },{
             _eventNetworkError.value = true
-        })
+        })*/
     }
 
     fun onNetworkErrorShown() {
