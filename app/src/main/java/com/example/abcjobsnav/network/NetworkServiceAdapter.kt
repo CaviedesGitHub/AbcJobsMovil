@@ -44,7 +44,11 @@ class NetworkServiceAdapter constructor(context: Context) {
         Log.d("testing token",token)
         val strReq = object: StringRequest(Request.Method.GET, BASE_URL+"entrevistas/$idEv",
             Response.Listener<String>{ response ->
-                val resp = JSONObject(response)
+                Log.d("testing response", "Responde Bien")
+                val resp0 = JSONObject(response)
+                Log.d("testing response", resp0.toString())
+                val resp= resp0.getJSONObject("Entrevista")
+                Log.d("testing response", resp.toString())
                 val EV= Entrevista(id = resp.getInt("id"),
                     candidato = resp.getString("candidato"),
                     nom_empresa = resp.getString("nom_empresa"),
@@ -55,10 +59,10 @@ class NetworkServiceAdapter constructor(context: Context) {
                     calificacion = resp.getString("calificacion"),
                     anotaciones = resp.getString("anotaciones"),
                     id_cand = resp.getInt("id_cand"),
-                    idPerfilProy = resp.getInt("idPerfilProy"),
+                    idPerfilProy = resp.getInt("id_perfilproy"),
                     id_perfil = resp.getInt("id_perfil"),
-                    Num = resp.getInt("Num"),
-                    valoracion = resp.getInt("valoracion"))
+                    Num = 0,
+                    valoracion = 0)
                 contResp.resume(EV) //onComplete(list)
             },
             {
@@ -201,7 +205,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         Log.d("testing","Inicio getEntrevistasCandidato NetworkServiceAdapter")
         requestQueue.add(postRequest("entrevistasCandidato/$evId", body,
             Response.Listener<JSONObject> { response ->
-                Log.d("testing","Response getEntrevistas NetworkServiceAdapter")
+                Log.d("testing","Response getEntrevistasCandidato NetworkServiceAdapter")
                 Log.d("testing", response.toString())
                 val cont=response.getInt("totalCount")
                 Log.d("testing", cont.toString())
@@ -223,8 +227,9 @@ class NetworkServiceAdapter constructor(context: Context) {
                         idPerfilProy = item.getInt("idPerfilProy"),
                         id_perfil = item.getInt("id_perfil"),
                         Num = item.getInt("Num"),
-                        valoracion = item.getInt("valoracion") ))
+                        valoracion = 0 ))
                 }
+                Log.d("testing","Response4 getEntrevistas NetworkServiceAdapter")
                 contResp.resume(list) //onComplete(list)
             },
             {
@@ -257,7 +262,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                         idPerfilProy = item.getInt("idPerfilProy"),
                         id_perfil = item.getInt("id_perfil"),
                         Num = item.getInt("Num"),
-                        valoracion = item.getInt("valoracion")))
+                        valoracion = 0))
                 }
                 onComplete(list)
             },
