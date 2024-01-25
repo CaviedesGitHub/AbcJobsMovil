@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">AbcJobsNav</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="ToDo">Por Hacer</string>
+    <string name="language">Language</string>
+    <string name="profile">Profile</string>
+    <string name="exit">Exit</string>
+    <string name="change">Change</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="candidato">Candidato</string>
+    <string name="contacto">Contacto</string>
+    <string name="Titulo_entrevistas">Entrevistas del Candidato</string>
+    <string name="login">Ingresar</string>
+    <string name="username">Nombre de Usuario</string>
+    <string name="password">PassWord</string>
+    <string name="olvidaste_la_clave"><u>Olvidaste la Clave?</u></string>
+    <string name="inscribete"><u>INSCRIBETE</u></string>
+    <string name="title_login">Login</string>
+    <string name="navegar">navegar</string>
+    <string name="datos_candidato">Datos Candidato</string>
+    <string name="interviews">Interviews</string>
+    <string name="tests">Tests</string>
+</resources>

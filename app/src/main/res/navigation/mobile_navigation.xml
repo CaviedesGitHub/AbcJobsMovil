@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/navigation_home"
+        android:name="com.example.abcjobsnav.ui.home.HomeFragment"
+        android:label="@string/title_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/navigation_dashboard"
+        android:name="com.example.abcjobsnav.ui.dashboard.DashboardFragment"
+        android:label="@string/title_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
+
+    <fragment
+        android:id="@+id/navigation_notifications"
+        android:name="com.example.abcjobsnav.ui.notifications.NotificationsFragment"
+        android:label="@string/title_notifications"
+        tools:layout="@layout/fragment_notifications" />
+    <fragment
+        android:id="@+id/entrevistasFragment"
+        android:name="com.example.abcjobsnav.ui.EntrevistasFragment"
+        android:label="fragment_entrevistas"
+        tools:layout="@layout/fragment_entrevistas" >
+        <argument
+            android:name="id_cand"
+            app:argType="integer" />
+        <argument
+            android:name="token"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.abcjobsnav.ui.LoginFragment"
+        android:label="LoginFragment" >
+        <action
+            android:id="@+id/action_loginFragment_to_candidatoFragment"
+            app:destination="@id/candidatoFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_empresaFragment"
+            app:destination="@id/empresaFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_jobsFragment"
+            app:destination="@id/jobsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/candidatoFragment"
+        android:name="com.example.abcjobsnav.ui.CandidatoFragment"
+        android:label="fragment_candidato"
+        tools:layout="@layout/fragment_candidato" >
+        <argument
+            android:name="TOKEN_PARAM"
+            app:argType="string" />
+        <argument
+            android:name="TIPO_PARAM"
+            app:argType="string" />
+        <argument
+            android:name="ID_PARAM"
+            app:argType="integer" />
+        <argument
+            android:name="IDTIPO_PARAM"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_candidatoFragment_to_entrevistasFragment"
+            app:destination="@id/entrevistasFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/empresaFragment"
+        android:name="com.example.abcjobsnav.ui.EmpresaFragment"
+        android:label="fragment_empresa"
+        tools:layout="@layout/fragment_empresa" />
+    <fragment
+        android:id="@+id/jobsFragment"
+        android:name="com.example.abcjobsnav.ui.JobsFragment"
+        android:label="fragment_jobs"
+        tools:layout="@layout/fragment_jobs" />
+</navigation>
