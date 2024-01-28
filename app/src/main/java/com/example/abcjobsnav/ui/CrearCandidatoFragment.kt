@@ -109,15 +109,15 @@ class CrearCandidatoFragment : Fragment() {
             if (isNetworkError) onNetworkError()
         })
 
-        binding.btnNavCand.setOnClickListener(){
-            Log.d("testing Create Candidato", "Inicio")
-            val action = CrearCandidatoFragmentDirections.actionCrearCandidatoFragmentToCandidatoFragment(
-                                    tokenUser!!,
-                                    "",
-                                    id!!,
-                                    viewModel.candidato.value!!.id)
-            it.findNavController().navigate(action)
-        }
+        //binding.btnNavCand.setOnClickListener(){
+        //    Log.d("testing Create Candidato", "Inicio")
+        //    val action = CrearCandidatoFragmentDirections.actionCrearCandidatoFragmentToCandidatoFragment(
+        //                            tokenUser!!,
+        //                            "",
+        //                            id!!,
+        //                            viewModel.candidato.value!!.id)
+        //    it.findNavController().navigate(action)
+        //}
 
         //binding.btnSignup.setOnClickListener(){
         //    viewModel.refreshDataFromNetwork(binding.txtUserName.text.toString(), binding.txtPassword.text.toString())
