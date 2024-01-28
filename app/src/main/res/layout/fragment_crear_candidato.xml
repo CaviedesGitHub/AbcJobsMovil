@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="20dp"
+    android:orientation="vertical"
+    tools:context=".ui.CrearCandidatoFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/titleCreateCand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/create_candidate"
+        app:layout_constraintTop_toBottomOf="@id/btnCreate"
+        android:textSize="40dp" />
+
+    <ScrollView
+        android:id="@+id/scrollPanel"
+        app:layout_constraintTop_toBottomOf="@id/titleCreateCand"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtMatName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="0dp"
+                android:hint="@string/name"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="type the name"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/change">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtMatLastName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="0dp"
+                android:hint="@string/lastname"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="type the name"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/change">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/lastname"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtMatDocument"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="0dp"
+                android:hint="@string/document"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="type the name"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/change">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/document"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtMatFechaNac"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="0dp"
+                android:hint="@string/birthday"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="type the name"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/change">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fechanac"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtMatEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="0dp"
+                android:hint="@string/email"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="type the name"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/change">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/email"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtMatPhone"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="0dp"
+                android:hint="@string/phone"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="type the name"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/change">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtMatCity"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="0dp"
+                android:hint="@string/city"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="type the name"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/change">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/city"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/txtMatAddress"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="0dp"
+                android:hint="@string/address"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="type the name"
+                app:helperTextEnabled="true"
+                app:startIconDrawable="@drawable/change">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/btnCreate2"
+        app:layout_constraintTop_toBottomOf="@id/scrollPanel"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toLeftOf="@id/btnNavCand"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit" />
+
+    <Button
+        android:id="@+id/btnNavCand"
+        app:layout_constraintTop_toBottomOf="@id/scrollPanel"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/already_a_member_log_in" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,6 +5,7 @@ import android.util.Log
 import com.android.volley.VolleyError
 import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.models.Entrevista
+import com.example.abcjobsnav.models.Signup
 import com.example.abcjobsnav.network.CacheManager
 import com.example.abcjobsnav.network.NetworkServiceAdapter
 import org.json.JSONObject
@@ -22,5 +23,9 @@ class CandidatoRepository (val application: Application){
             Log.d("testing Cache decision", "return Object identified by ${potentialResp.id} id from cache")
             return potentialResp
         }
+    }
+
+    suspend fun candCreate(params: JSONObject, token: String): Candidato {
+        return NetworkServiceAdapter.getInstance(application).candCreate(params, token)
     }
 }

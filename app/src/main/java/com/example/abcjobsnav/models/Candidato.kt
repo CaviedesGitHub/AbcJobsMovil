@@ -11,5 +11,6 @@ data class Candidato (
     val ciudad: String,
     val direccion: String,
     val imagen: String,
-    val id_usuario: Int
+    val id_usuario: Int,
+    val num_perfil: Int
 )

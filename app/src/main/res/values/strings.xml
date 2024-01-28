@@ -23,4 +23,15 @@
     <string name="datos_candidato">Datos Candidato</string>
     <string name="interviews">Interviews</string>
     <string name="tests">Tests</string>
+    <string name="don_t_have_an_account_sign_up">Don\'t have an account? sign up</string>
+    <string name="already_a_member_log_in">Already a member? Log In</string>
+    <string name="create_candidate">Create Candidate</string>
+    <string name="name">Name</string>
+    <string name="lastname">LastName</string>
+    <string name="document">Document</string>
+    <string name="birthday">BirthDay</string>
+    <string name="email">Email</string>
+    <string name="phone">Phone</string>
+    <string name="city">City</string>
+    <string name="address">Address</string>
 </resources>

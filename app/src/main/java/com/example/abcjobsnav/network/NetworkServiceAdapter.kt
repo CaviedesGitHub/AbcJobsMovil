@@ -16,6 +16,7 @@ import org.json.JSONObject
 import com.example.abcjobsnav.models.Entrevista
 import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.models.Login
+import com.example.abcjobsnav.models.Signup
 import java.awt.font.NumericShaper
 
 import kotlin.coroutines.resume
@@ -36,6 +37,53 @@ class NetworkServiceAdapter constructor(context: Context) {
     private val requestQueue: RequestQueue by lazy {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
+    }
+
+    suspend fun candCreate(body: JSONObject, token: String)=suspendCoroutine<Candidato>{contResp ->
+        Log.d("testing","Inicio userCreate NetworkServiceAdapter")
+        requestQueue.add(postRequest("candidatos", body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("testing","Response Signup NetworkServiceAdapter")
+                Log.d("testing Response", response.toString())
+                val resp=response.getJSONObject("Candidato")
+                val cand= Candidato(
+                    id=resp.getInt("id"),
+                    nombres=resp.getString("nombres"),
+                    apellidos=resp.getString("apellidos"),
+                    documento=resp.getString("documento"),
+                    fecha_nac=resp.getString("fecha_nac"),
+                    email=resp.getString("email"),
+                    phone=resp.getString("phone"),
+                    ciudad=resp.getString("ciudad"),
+                    direccion=resp.getString("direccion"),
+                    imagen=resp.getString("imagen"),
+                    id_usuario=resp.getInt("id_usuario"),
+                    num_perfil=resp.getInt("num_perfil"))
+                contResp.resume(cand)
+            },
+            {
+                Log.d("testing","VolleyError Create Cand NetworkServiceAdapter")
+                contResp.resumeWithException(it)
+            })
+        )
+    }
+    suspend fun userSignup(body: JSONObject)=suspendCoroutine<Signup>{contResp ->
+        Log.d("testing","Inicio Signup NetworkServiceAdapter")
+        requestQueue.add(postRequest("auth/signup", body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("testing","Response Signup NetworkServiceAdapter")
+                Log.d("testing Response", response.toString())
+                val sign= Signup(mensaje=response.getString("mensaje"),
+                    token=response.getString("token"),
+                    id=response.getInt("id"),
+                    tipo=response.getString("tipo"))
+                contResp.resume(sign)
+            },
+            {
+                Log.d("testing","VolleyError Signup NetworkServiceAdapter")
+                contResp.resumeWithException(it)
+            })
+        )
     }
 
     suspend fun getEntrevista( idEv: Int, token: String)=suspendCoroutine<Entrevista>{contResp ->
@@ -100,7 +148,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                             ciudad=resp.getString("ciudad"),
                             direccion=resp.getString("direccion"),
                             imagen=resp.getString("imagen"),
-                            id_usuario=resp.getInt("id_usuario"))
+                            id_usuario=resp.getInt("id_usuario"),
+                            num_perfil=resp.getInt("num_perfil"))
                         contResp.resume(cand) //onComplete(list)
             },
             {
@@ -130,7 +179,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                 ciudad=resp.getString("ciudad"),
                 direccion=resp.getString("direccion"),
                 imagen=resp.getString("imagen"),
-                id_usuario=resp.getInt("id_usuario"))
+                id_usuario=resp.getInt("id_usuario"),
+                num_perfil=resp.getInt("num_perfil"))
                 contResp.resume(cand) //onComplete(list)
             },
             {
@@ -181,9 +231,19 @@ class NetworkServiceAdapter constructor(context: Context) {
                 Log.d("testing","Response getLogin NetworkServiceAdapter")
                 Log.d("testing Response", response.toString())
                 val idTipo = if (response.getString("tipo")=="CANDIDATO"){
-                    response.getJSONObject("candidato").getInt("id")
+                    if (!response.isNull("candidato")){
+                        response.getJSONObject("candidato").getInt("id")
+                    }
+                    else{
+                        0
+                    }
                 } else if (response.getString("tipo")=="EMPRESA"){
-                    response.getJSONObject("empresa").getInt("id")
+                    if(!response.isNull("empresa")){
+                        response.getJSONObject("empresa").getInt("id")
+                    }
+                    else{
+                        0
+                    }
                 } else{
                     0
                 }
@@ -195,7 +255,8 @@ class NetworkServiceAdapter constructor(context: Context) {
                 contResp.resume(log) // onComplete(log)
             },
             {
-                Log.d("testing","VolleyError getLogin NetworkServiceAdapter")
+                Log.d("testing error login","VolleyError getLogin NetworkServiceAdapter")
+                Log.d("testing error login",it.toString())
                 contResp.resumeWithException(it) //throw it   //onError(it)
             })
         )
