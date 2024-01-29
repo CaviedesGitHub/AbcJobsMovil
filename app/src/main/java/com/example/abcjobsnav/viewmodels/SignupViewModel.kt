@@ -12,20 +12,22 @@ import org.json.JSONObject
 
 class SignupViewModel(application: Application) :  AndroidViewModel(application) {
     private val signupRepository = SignupRepository(application)
-    private val _signup = MutableLiveData<Signup>()
 
+    private val _signup = MutableLiveData<Signup>()
     val signup: LiveData<Signup>
         get() = _signup
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
-
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
-
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
+
+    private var _errorText = MutableLiveData<String>("")
+    val errorText:LiveData<String>
+        get() = _errorText
 
     init {
         //refreshDataFromNetwork("", "")
@@ -42,11 +44,22 @@ class SignupViewModel(application: Application) :  AndroidViewModel(application)
         try {
             viewModelScope.launch(Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = signupRepository.refreshData(JSONObject(postParams))
-                    _signup.postValue(data)
+                    try{
+                        var data = signupRepository.refreshData(JSONObject(postParams))
+                        _signup.postValue(data)
+                        _eventNetworkError.postValue(false)
+                        _isNetworkErrorShown.postValue(false)
+                    }
+                    catch (e:Exception){ //se procesa la excepcion
+                        Log.d("Testing Error LVM", e.toString())
+                        _errorText.postValue(e.toString())  //_eventNetworkError.postValue(true)
+                        _isNetworkErrorShown.postValue(false)
+                        //throw e  Causa Error: Ultima instancia es esta.
+                        Log.d("Testing Error LVM2", e.toString())
+                    }
                 }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
+                //_eventNetworkError.postValue(false)
+                //_isNetworkErrorShown.postValue(false)
             }
         }
         catch (e:Exception){ //se procesa la excepcion

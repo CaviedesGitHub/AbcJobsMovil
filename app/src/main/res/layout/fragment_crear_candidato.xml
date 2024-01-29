@@ -110,30 +110,6 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/txtMatFechaNac"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="@string/birthday"
-                    android:paddingVertical="10dp"
-                    app:counterEnabled="true"
-                    app:counterMaxLength="20"
-                    app:endIconMode="clear_text"
-                    app:errorEnabled="true"
-                    app:helperText="type the name"
-                    app:helperTextEnabled="true"
-                    app:startIconDrawable="@drawable/change">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/fechanac"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:contentDescription=""
-                        android:maxLength="20"
-                        android:text="" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMatEmail"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
@@ -150,6 +126,30 @@
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:contentDescription=""
+                        android:maxLength="20"
+                        android:text="" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/txtMatFechaNac"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/birthday"
+                    android:paddingVertical="10dp"
+                    app:counterEnabled="true"
+                    app:counterMaxLength="20"
+                    app:endIconMode="clear_text"
+                    app:errorEnabled="true"
+                    app:helperText="type the name"
+                    app:helperTextEnabled="true"
+                    app:startIconDrawable="@drawable/change">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/fechanac"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""

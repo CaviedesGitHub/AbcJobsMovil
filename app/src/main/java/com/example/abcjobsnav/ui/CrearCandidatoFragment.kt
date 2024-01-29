@@ -139,108 +139,60 @@ class CrearCandidatoFragment : Fragment() {
     }
 
     private fun isValidate(): Boolean =
-        validateUserName() && validateEmail() && validatePassword() && validateConfirmPassword()
+        validateName() && validateLastName() && validateDocument() && validateEmail()
 
     private fun setupListeners() {
-        Log.d("testing", "inicio setupListeners")
-        //binding.userName.addTextChangedListener(TextFieldValidation(binding.userName))
-        Log.d("testing", "inicio setupListeners2")
-        //binding.email.addTextChangedListener(TextFieldValidation(binding.email))
-        //binding.password.addTextChangedListener(TextFieldValidation(binding.password))
-        Log.d("testing", "inicio setupListeners3")
-        //binding.confirmPassword.addTextChangedListener(TextFieldValidation(binding.confirmPassword))
-        Log.d("testing", "inicio setupListeners4")
+        binding.name.addTextChangedListener(TextFieldValidation(binding.name))
+        binding.lastname.addTextChangedListener(TextFieldValidation(binding.lastname))
+        binding.document.addTextChangedListener(TextFieldValidation(binding.document))
+        binding.email.addTextChangedListener(TextFieldValidation(binding.email))
     }
 
-    /**
-     * field must not be empy
-     */
-    private fun validateUserName(): Boolean {
-        Log.d("testing", "inicio validateUserName")
-        /*if (binding.userName.text.toString().trim().isEmpty()) {
-            binding.textMatNameUser.error = "Required Field!"
-            binding.userName.requestFocus()
+    private fun validateName(): Boolean {
+        if (binding.name.text.toString().trim().isEmpty()) {
+            binding.txtMatName.error = "Required Field!"
+            binding.name.requestFocus()
             return false
         } else {
-            binding.textMatNameUser.isErrorEnabled = false
-        }*/
+            binding.txtMatName.isErrorEnabled = false
+        }
         return true
     }
 
-    /**
-     * 1) field must not be empty
-     * 2) text should matches email address format
-     */
+    private fun validateLastName(): Boolean {
+        if (binding.lastname.text.toString().trim().isEmpty()) {
+            binding.txtMatLastName.error = "Required Field!"
+            binding.lastname.requestFocus()
+            return false
+        } else {
+            binding.txtMatLastName.isErrorEnabled = false
+        }
+        return true
+    }
+
+    private fun validateDocument(): Boolean {
+        if (binding.document.text.toString().trim().isEmpty()) {
+            binding.txtMatDocument.error = "Required Field!"
+            binding.document.requestFocus()
+            return false
+        } else {
+            binding.txtMatDocument.isErrorEnabled = false
+        }
+        return true
+    }
+
     private fun validateEmail(): Boolean {
-        /*if (binding.email.text.toString().trim().isEmpty()) {
-            binding.emailTextInputLayout.error = "Required Field!"
+        if (binding.email.text.toString().trim().isEmpty()) {
+            binding.txtMatEmail.error = "Required Field!"
             binding.email.requestFocus()
             return false
         } else if (!isValidEmail(binding.email.text.toString())) {
-            binding.emailTextInputLayout.error = "Invalid Email!"
+            binding.txtMatEmail.error = "Invalid Email!"
             binding.email.requestFocus()
             return false
         } else {
-            binding.emailTextInputLayout.isErrorEnabled = false
-        }*/
-        return true
-    }
-
-    /**
-     * 1) field must not be empty
-     * 2) password lenght must not be less than 6
-     * 3) password must contain at least one digit
-     * 4) password must contain atleast one upper and one lower case letter
-     * 5) password must contain atleast one special character.
-     */
-    private fun validatePassword(): Boolean {
-        /*if (binding.password.text.toString().trim().isEmpty()) {
-            binding.txtMatPassword.error = "Required Field!"
-            binding.password.requestFocus()
-            return false
-        } else if (binding.password.text.toString().length < 6) {
-            binding.txtMatPassword.error = "password can't be less than 6"
-            binding.password.requestFocus()
-            return false
-        } else if (!isStringContainNumber(binding.password.text.toString())) {
-            binding.txtMatPassword.error = "Required at least 1 digit"
-            binding.password.requestFocus()
-            return false
-        } else if (!isStringLowerAndUpperCase(binding.password.text.toString())) {
-            binding.txtMatPassword.error =
-                "Password must contain upper and lower case letters"
-            binding.password.requestFocus()
-            return false
-        } else if (!isStringContainSpecialCharacter(binding.password.text.toString())) {
-            binding.txtMatPassword.error = "1 special character required"
-            binding.password.requestFocus()
-            return false
-        } else {
-            binding.txtMatPassword.isErrorEnabled = false
-        }*/
-        return true
-    }
-
-    /**
-     * 1) field must not be empty
-     * 2) password and confirm password should be same
-     */
-    private fun validateConfirmPassword(): Boolean {
-        /*when {
-            binding.confirmPassword.text.toString().trim().isEmpty() -> {
-                binding.txtMatPasswordAgain.error = "Required Field!"
-                binding.confirmPassword.requestFocus()
-                return false
-            }
-            binding.confirmPassword.text.toString() != binding.password.text.toString() -> {
-                binding.txtMatPasswordAgain.error = "Passwords don't match"
-                binding.confirmPassword.requestFocus()
-                return false
-            }
-            else -> {
-                binding.txtMatPasswordAgain.isErrorEnabled = false
-            }
-        }*/
+            binding.txtMatEmail.isErrorEnabled = false
+        }
         return true
     }
 
@@ -250,17 +202,20 @@ class CrearCandidatoFragment : Fragment() {
         override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
             Log.d("testing", "inicio TextFieldValidation2")
             // checking ids of each text field and applying functions accordingly.
-            /*when (view.id) {
-                binding.userName.id -> {
-                    validateUserName()
+            when (view.id) {
+                binding.name.id -> {
+                    validateName()
                 }
-                binding.password.id -> {
-                    validatePassword()
+                binding.lastname.id -> {
+                    validateLastName()
                 }
-                binding.confirmPassword.id -> {
-                    validateConfirmPassword()
+                binding.document.id -> {
+                    validateDocument()
                 }
-            }*/
+                binding.email.id -> {
+                    validateEmail()
+                }
+            }
         }
     }
 

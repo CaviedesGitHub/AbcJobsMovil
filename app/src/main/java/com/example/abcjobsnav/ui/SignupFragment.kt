@@ -94,6 +94,10 @@ class SignupFragment : Fragment() {
             if (isNetworkError) onNetworkError()
         })
 
+        viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
+            onNetworkErrorMsg(errorText.toString())
+        })
+
         binding.textButtonLogin.setOnClickListener(){
             Log.d("testing Signup", "Inicio")
             val action = SignupFragmentDirections.actionSignupFragmentToLoginFragment()
@@ -116,6 +120,28 @@ class SignupFragment : Fragment() {
         if(!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
+        }
+    }
+
+    private fun onNetworkErrorMsg(msg: String) {
+        Log.d("Testing funMensaje", msg)
+        var mensaje:String=""
+        if (!msg.isNullOrEmpty()){
+            if(!viewModel.isNetworkErrorShown.value!!) {
+                if (msg.contains("xAuthFailureError")){
+                    mensaje="Signup Unsuccessful: Unauthorized"
+                }
+                else if(msg.contains("xClientError")){
+                    mensaje="Login Unsuccessful: Wrong user name"
+                }
+                else{
+                    val delimiter = "."
+                    val values=msg.split(delimiter)
+                    mensaje="Login Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                }
+                Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
+                viewModel.onNetworkErrorShown()
+            }
         }
     }
 

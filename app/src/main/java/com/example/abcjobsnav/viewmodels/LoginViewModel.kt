@@ -12,20 +12,22 @@ import org.json.JSONObject
 
 class LoginViewModel(application: Application) :  AndroidViewModel(application) {
     private val loginRepository = LoginRepository(application)
-    private val _login = MutableLiveData<Login>()
 
+    private val _login = MutableLiveData<Login>()
     val login: LiveData<Login>
         get() = _login
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
-
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
-
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
+
+    private var _errorText = MutableLiveData<String>("")
+    val errorText:LiveData<String>
+        get() = _errorText
 
     init {
         //refreshDataFromNetwork("", "")
@@ -73,7 +75,8 @@ class LoginViewModel(application: Application) :  AndroidViewModel(application) 
                     }
                     catch (e:Exception){ //se procesa la excepcion
                         Log.d("Testing Error LVM", e.toString())
-                        _eventNetworkError.postValue(true)
+                        _errorText.postValue(e.toString())
+                        //_eventNetworkError.postValue(true)
                         _isNetworkErrorShown.postValue(false)
                         //throw e  Causa Error: Ultima instancia es esta.
                         Log.d("Testing Error LVM2", e.toString())

@@ -1,6 +1,8 @@
 package com.example.abcjobsnav.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -17,6 +19,11 @@ import com.example.abcjobsnav.databinding.FragmentLoginBinding
 import com.example.abcjobsnav.models.Login
 import com.example.abcjobsnav.viewmodels.LoginViewModel
 import kotlinx.coroutines.launch
+import android.util.Patterns
+import com.example.abcjobsnav.ui.FieldValidators.isStringContainNumber
+import com.example.abcjobsnav.ui.FieldValidators.isStringContainSpecialCharacter
+import com.example.abcjobsnav.ui.FieldValidators.isStringLowerAndUpperCase
+import com.example.abcjobsnav.ui.FieldValidators.isValidEmail
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -38,6 +45,7 @@ class LoginFragment : Fragment() {
     private var param2: String? = null
 
     private var myView: View? = null
+    private var origenBtn: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -53,6 +61,7 @@ class LoginFragment : Fragment() {
     ): View? {
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         val view = binding.root
+        setupListeners()
         return view
         // Inflate the layout for this fragment
         //return inflater.inflate(R.layout.fragment_login, container, false)
@@ -73,44 +82,51 @@ class LoginFragment : Fragment() {
             it.apply {
                 Log.d("testing Observe Login", viewModel.login.value.toString())
                 //viewModelAdapter!!.entrevistas = this
-                if (viewModel.login.value?.tipo =="CANDIDATO"){
-                    Log.d("testing Navegar", "Dentro del If")
-                    if (viewModel.login.value?.idTipo!=0){
-                        Log.d("testing Navegar", "Tipo distinto de cero")
-                        val action = LoginFragmentDirections.actionLoginFragmentToCandidatoFragment(
-                            viewModel.login.value!!.token,
-                            viewModel.login.value!!.tipo,
-                            viewModel.login.value!!.id,
-                            viewModel.login.value!!.idTipo)
-                        //it.findNavController().navigate(action)
-                        Log.d("testing Navegar", "Despues de Action")
-                        //Navigation.findNavController(activity.parent!!, R.id.loginFragment).navigate(action)
-                        if (myView!=null){
-                            Navigation.findNavController(myView!!).navigate(action)
+                if (origenBtn){
+                    origenBtn=false
+                    if (viewModel.login.value?.tipo =="CANDIDATO"){
+                        Log.d("testing Navegar", "Dentro del If")
+                        if (viewModel.login.value?.idTipo!=0){
+                            Log.d("testing Navegar", "Tipo distinto de cero")
+                            val action = LoginFragmentDirections.actionLoginFragmentToCandidatoFragment(
+                                viewModel.login.value!!.token,
+                                viewModel.login.value!!.tipo,
+                                viewModel.login.value!!.id,
+                                viewModel.login.value!!.idTipo)
+                            //it.findNavController().navigate(action)
+                            Log.d("testing Navegar", "Despues de Action")
+                            //Navigation.findNavController(activity.parent!!, R.id.loginFragment).navigate(action)
+                            if (myView!=null){
+                                Navigation.findNavController(myView!!).navigate(action)
+                            }
+                            Log.d("testing Navegar", "NavController")
                         }
-                        Log.d("testing Navegar", "NavController")
+                        else{
+                            val action = LoginFragmentDirections.actionLoginFragmentToCrearCandidatoFragment(
+                                viewModel.login.value!!.id,
+                                viewModel.login.value!!.token)
+                            //it.findNavController().navigate(action)
+                            if (myView!=null){
+                                Navigation.findNavController(myView!!).navigate(action)
+                            }
+                        }
+                        Log.d("testing Navegar", "Despues Navigate")
+                    }
+                    else if (viewModel.login.value?.tipo=="EMPRESA"){
+
                     }
                     else{
-                        val action = LoginFragmentDirections.actionLoginFragmentToCrearCandidatoFragment(
-                            viewModel.login.value!!.id,
-                            viewModel.login.value!!.token)
-                        //it.findNavController().navigate(action)
-                        if (myView!=null){
-                            Navigation.findNavController(myView!!).navigate(action)
-                        }
+
                     }
-                    Log.d("testing Navegar", "Despues Navigate")
                 }
-                else if (viewModel.login.value?.tipo=="EMPRESA"){
 
-                }
-                else{
-
-                }
             }
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
+        })
+        viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
+            onNetworkErrorMsg(errorText.toString())
         })
 
         binding.textButtonSignup.setOnClickListener(){
@@ -121,13 +137,16 @@ class LoginFragment : Fragment() {
 
         binding.btnLogin.setOnClickListener(){
             myView=it
-            try{
-                viewModel.refreshDataFromNetwork(binding.txtUserName.text.toString(), binding.txtPassword.text.toString())
-                Log.d("testing Navegar", "Inicio")
-            }
-            catch (e:Exception){
-                Log.d("Testing Error LF", e.toString())
-                Toast.makeText(activity, "Login Error", Toast.LENGTH_LONG).show()
+            if (isValidate()) {
+                origenBtn=true
+                try{
+                    viewModel.refreshDataFromNetwork(binding.txtUserName.text.toString(), binding.txtPassword.text.toString())
+                    Log.d("testing Navegar", "Inicio")
+                }
+                catch (e:Exception){
+                    Log.d("Testing Error LF", e.toString())
+                    Toast.makeText(activity, "Login Error", Toast.LENGTH_LONG).show()
+                }
             }
             //viewModel.refreshDataFromNetwork(binding.txtUserName.text.toString(), binding.txtPassword.text.toString())
             //Log.d("testing OnClickListener", "LoginFragment after refresh")
@@ -175,22 +194,79 @@ class LoginFragment : Fragment() {
         }
     }
 
-    /*private fun onNetworkError(msg: String) {
+    private fun onNetworkErrorMsg(msg: String) {
+        Log.d("Testing funMensaje", msg)
         var mensaje:String=""
-        if(!viewModel.isNetworkErrorShown.value!!) {
-            if (msg.contains("AuthFailureError")){
-                mensaje="Incorrect Password"
+        if (!msg.isNullOrEmpty()){
+            if(!viewModel.isNetworkErrorShown.value!!) {
+                if (msg.contains("AuthFailureError")){
+                    mensaje="Login Unsuccessful: Incorrect Password"
+                }
+                else if(msg.contains("ClientError")){
+                    mensaje="Login Unsuccessful: Wrong user name"
+                }
+                else{
+                    val delimiter = "."
+                    val values=msg.split(delimiter)
+                    mensaje="Login Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                }
+                Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
+                viewModel.onNetworkErrorShown()
             }
-            else if(msg.contains("AuthFailureError")){
-                mensaje="Wrong user name"
-            }
-            else{
-                mensaje="Network Error"
-            }
-            Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
-            viewModel.onNetworkErrorShown()
         }
-    }*/
+    }
+
+    private fun isValidate(): Boolean =
+        validateUserName() && validatePassword()
+
+    private fun setupListeners() {
+        binding.txtUserName.addTextChangedListener(TextFieldValidation(binding.txtUserName))
+        binding.txtPassword.addTextChangedListener(TextFieldValidation(binding.txtPassword))
+    }
+
+    /**
+     * field must not be empy
+     */
+    private fun validateUserName(): Boolean {
+        Log.d("testing", "inicio validateUserName")
+        if (binding.txtUserName.text.toString().trim().isEmpty()) {
+            binding.txtFieldUsuario.error = "Required Field!"
+            binding.txtUserName.requestFocus()
+            return false
+        } else {
+            binding.txtFieldUsuario.isErrorEnabled = false
+        }
+        return true
+    }
+
+    private fun validatePassword(): Boolean {
+        if (binding.txtPassword.text.toString().trim().isEmpty()) {
+            binding.txtFieldClave.error = "Required Field!"
+            binding.txtPassword.requestFocus()
+            return false
+        }
+        else {
+            binding.txtFieldClave.isErrorEnabled = false
+        }
+        return true
+    }
+
+    inner class TextFieldValidation(private val view: View) : TextWatcher {
+        override fun afterTextChanged(s: Editable?) {}
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            Log.d("testing", "inicio TextFieldValidation2")
+            // checking ids of each text field and applying functions accordingly.
+            when (view.id) {
+                binding.txtUserName.id -> {
+                    validateUserName()
+                }
+                binding.txtPassword.id -> {
+                    validatePassword()
+                }
+            }
+        }
+    }
 
     companion object {
         /**
