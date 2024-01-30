@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import androidx.navigation.Navigation
 import com.example.abcjobsnav.ui.FieldValidators.isStringContainNumber
 import com.example.abcjobsnav.ui.FieldValidators.isStringContainSpecialCharacter
 import com.example.abcjobsnav.ui.FieldValidators.isStringLowerAndUpperCase
@@ -48,6 +49,8 @@ class CrearCandidatoFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var myView: View? = null
+    private var origenBtn: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -55,6 +58,7 @@ class CrearCandidatoFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
             id = it.getInt(ID_PARAM)
             tokenUser = it.getString(TOKEN_PARAM)
+            Log.d("testing id param crearCandidato", id.toString())
         }
     }
 
@@ -66,8 +70,10 @@ class CrearCandidatoFragment : Fragment() {
         val view = binding.root
         setupListeners()
         binding.btnCreate.setOnClickListener {
+            myView=it
             Log.d("testing", "inicio Create Candidato onClickListener")
             if (isValidate()) {
+                origenBtn=true
                 Toast.makeText(view.context, "validated", Toast.LENGTH_SHORT).show()
                 viewModel.refreshDataFromNetwork(
                     binding.name.text.toString(),
@@ -102,11 +108,28 @@ class CrearCandidatoFragment : Fragment() {
             CreateCandidatoViewModel::class.java)
         viewModel.candidato.observe(viewLifecycleOwner, Observer<Candidato> {
             it.apply {
-                //viewModelAdapter!!.entrevistas = this
+                Log.d("testing observe", viewModel.candidato.toString())
+                if (origenBtn) {
+                    origenBtn = false
+                    //val action = SignupFragmentDirections.actionSignupFragmentToLoginFragment()
+                    if (myView!=null){
+                        Log.d("testing id CrearCandidatofragment", id.toString())
+                        Log.d("testing idTipo CreaCandidatofragment", viewModel.candidato.value!!.id.toString())
+                        val action = CrearCandidatoFragmentDirections.actionCrearCandidatoFragmentToCandidatoFragment(
+                                                        tokenUser!!,
+                                                        "CANDIDATO",
+                                                        viewModel.candidato.value!!.id_usuario,
+                                                        viewModel.candidato.value!!.id)
+                        Navigation.findNavController(myView!!).navigate(action)
+                    }
+                }
             }
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
+        })
+        viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
+            onNetworkErrorMsg(errorText.toString())
         })
 
         //binding.btnNavCand.setOnClickListener(){
@@ -135,6 +158,31 @@ class CrearCandidatoFragment : Fragment() {
         if(!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
+        }
+    }
+
+    private fun onNetworkErrorMsg(msg: String) {
+        Log.d("Testing funMensaje", msg)
+        if (!msg.isNullOrEmpty()){
+            val delimiter = "$"
+            val values=msg.split(delimiter)
+            val msg1:String=values[0]
+            val msgBackend:String=values[1]
+            Log.d("Testing msg1", msg1)
+            Log.d("Testing msgBackend", msgBackend)
+            var mensaje:String=""
+            if(!viewModel.isNetworkErrorShown.value!!) {
+                if (!msg.contains("nullllll")){
+                    mensaje="Signup Unsuccessful: "+msgBackend  //"User already exists"  //Unauthorized
+                }
+                else{
+                    val delimiter = "."
+                    val values=msg1.split(delimiter)
+                    mensaje="Signup Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                }
+                Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
+                viewModel.onNetworkErrorShown()
+            }
         }
     }
 

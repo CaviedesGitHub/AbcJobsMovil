@@ -102,6 +102,7 @@ class LoginFragment : Fragment() {
                             Log.d("testing Navegar", "NavController")
                         }
                         else{
+                            Log.d("testing id Loginfragment", viewModel.login.value!!.id.toString())
                             val action = LoginFragmentDirections.actionLoginFragmentToCrearCandidatoFragment(
                                 viewModel.login.value!!.id,
                                 viewModel.login.value!!.token)
@@ -113,10 +114,23 @@ class LoginFragment : Fragment() {
                         Log.d("testing Navegar", "Despues Navigate")
                     }
                     else if (viewModel.login.value?.tipo=="EMPRESA"){
-
+                        if (viewModel.login.value?.idTipo==0){
+                            Toast.makeText(activity, "Complete the registration on the web platform", Toast.LENGTH_LONG).show()
+                        }
+                        else{
+                            val action = LoginFragmentDirections.actionLoginFragmentToEmpresaFragment(
+                                viewModel.login.value!!.id,
+                                viewModel.login.value!!.token)
+                            if (myView!=null){
+                                Navigation.findNavController(myView!!).navigate(action)
+                            }
+                        }
                     }
                     else{
-
+                        val action = LoginFragmentDirections.actionLoginFragmentToJobsFragment()
+                        if (myView!=null){
+                            Navigation.findNavController(myView!!).navigate(action)
+                        }
                     }
                 }
 
@@ -195,6 +209,30 @@ class LoginFragment : Fragment() {
     }
 
     private fun onNetworkErrorMsg(msg: String) {
+        Log.d("Testing funMensaje", msg)
+        if (!msg.isNullOrEmpty()){
+            val delimiter = "$"
+            val values=msg.split(delimiter)
+            val msg1:String=values[0]
+            val msgBackend:String=values[1]
+            Log.d("Testing msg1", msg1)
+            Log.d("Testing msgBackend", msgBackend)
+            var mensaje:String=""
+            if(!viewModel.isNetworkErrorShown.value!!) {
+                if (!msg.contains("nullllll")){
+                    mensaje="Login Unsuccessful: "+msgBackend  //"User already exists"  //Unauthorized
+                }
+                else{
+                    val delimiter = "."
+                    val values=msg1.split(delimiter)
+                    mensaje="Login Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                }
+                Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
+                viewModel.onNetworkErrorShown()
+            }
+        }
+    }
+    private fun onNetworkErrorMsgIni(msg: String) {
         Log.d("Testing funMensaje", msg)
         var mensaje:String=""
         if (!msg.isNullOrEmpty()){

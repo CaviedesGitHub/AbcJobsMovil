@@ -82,7 +82,14 @@
         android:id="@+id/empresaFragment"
         android:name="com.example.abcjobsnav.ui.EmpresaFragment"
         android:label="fragment_empresa"
-        tools:layout="@layout/fragment_empresa" />
+        tools:layout="@layout/fragment_empresa" >
+        <argument
+            android:name="ID_PARAM"
+            app:argType="integer" />
+        <argument
+            android:name="TOKEN_PARAM"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/jobsFragment"
         android:name="com.example.abcjobsnav.ui.JobsFragment"

@@ -3,6 +3,7 @@ package com.example.abcjobsnav.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.android.volley.VolleyError
 import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.repositories.CandidatoRepository
 import kotlinx.coroutines.Dispatchers
@@ -26,6 +27,10 @@ class CreateCandidatoViewModel(application: Application) :  AndroidViewModel(app
 
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
+
+    private var _errorText = MutableLiveData<String>("")
+    val errorText:LiveData<String>
+        get() = _errorText
 
     init {
         //refreshDataFromNetwork("", "")
@@ -61,11 +66,33 @@ class CreateCandidatoViewModel(application: Application) :  AndroidViewModel(app
         try {
             viewModelScope.launch(Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = candidatoRepository.candCreate(JSONObject(postParams), token)
-                    _candidato.postValue(data)
+                    try{
+                        var data = candidatoRepository.candCreate(JSONObject(postParams), token)
+                        _candidato.postValue(data)
+                        _eventNetworkError.postValue(false)
+                        _isNetworkErrorShown.postValue(false)
+                    }
+                    catch (e: VolleyError){
+                        val responseBody: String = String(e.networkResponse.data)
+                        val data: JSONObject = JSONObject(responseBody)
+                        var mensaje: String
+                        if (data.isNull("mensaje")){
+                            mensaje="nullllll"
+                        }
+                        else{
+                            mensaje = data.getString("mensaje")
+                        }
+                        _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
+                        _isNetworkErrorShown.postValue(false)
+                    }
+                    catch (e:Exception){ //se procesa la excepcion
+                        Log.d("Testing Error LVM", e.toString())
+                        _errorText.postValue(e.toString()+"$"+"nullllll")  //_eventNetworkError.postValue(true)
+                        _isNetworkErrorShown.postValue(false)
+                        //throw e  Causa Error: Ultima instancia es esta.
+                        Log.d("Testing Error LVM2", e.toString())
+                    }
                 }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
             }
         }
         catch (e:Exception){ //se procesa la excepcion

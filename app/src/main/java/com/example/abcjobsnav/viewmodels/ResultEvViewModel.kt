@@ -3,29 +3,33 @@ package com.example.abcjobsnav.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.android.volley.VolleyError
 import com.example.abcjobsnav.models.Entrevista
 import com.example.abcjobsnav.repositories.ResultEvRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.json.JSONObject
 
 
 class ResultEvViewModel(application: Application) :  AndroidViewModel(application) {
     private val resultEvRepository = ResultEvRepository(application)
-    private val _entrevista = MutableLiveData<Entrevista>()
 
+    private val _entrevista = MutableLiveData<Entrevista>()
     val entrevista: LiveData<Entrevista>
         get() = _entrevista
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
-
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
-
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
+
+    private var _errorText = MutableLiveData<String>("")
+    val errorText:LiveData<String>
+        get() = _errorText
 
     init {
         Log.d("testing ResultEvViewModel", "Inicio init")
@@ -38,11 +42,32 @@ class ResultEvViewModel(application: Application) :  AndroidViewModel(applicatio
         try {
             viewModelScope.launch(Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = resultEvRepository.refreshData(idEv, token)
-                    _entrevista.postValue(data)
+                    try{
+                        var data = resultEvRepository.refreshData(idEv, token)
+                        _entrevista.postValue(data)
+                        _eventNetworkError.postValue(false)
+                        _isNetworkErrorShown.postValue(false)
+                    }
+                    catch (e: VolleyError){
+                        val responseBody: String = String(e.networkResponse.data)
+                        val data: JSONObject = JSONObject(responseBody)
+                        var mensaje: String
+                        if (data.isNull("mensaje")){
+                            mensaje="nullllll"
+                        }
+                        else{
+                            mensaje = data.getString("mensaje")
+                        }
+                        _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
+                        _isNetworkErrorShown.postValue(false)
+                    }
+                    catch (e:Exception){ //se procesa la excepcion
+                        Log.d("Testing Error LVM", e.toString())
+                        _errorText.postValue(e.toString()+"$"+"nullllll")
+                        _isNetworkErrorShown.postValue(false)
+                        Log.d("Testing Error LVM2", e.toString())
+                    }
                 }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
             }
         }
         catch (e:Exception){ //se procesa la excepcion

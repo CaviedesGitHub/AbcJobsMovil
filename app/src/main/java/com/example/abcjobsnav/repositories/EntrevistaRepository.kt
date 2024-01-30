@@ -17,10 +17,20 @@ class EntrevistaRepository (val application: Application){
     suspend fun refreshData(params: JSONObject, evId: Int, token: String):List<Entrevista>{
         var potentialResp = CacheManager.getInstance(application.applicationContext).getEntrevistasCandidato(evId)
         if(potentialResp.isEmpty()){
-            Log.d("testing Cache decision", "get from network")
-            var evs = NetworkServiceAdapter.getInstance(application).getEntrevistasCandidato(params, evId, token)
-            CacheManager.getInstance(application.applicationContext).addEntrevistasCandidato(evId, evs)
-            return evs
+            try{
+                Log.d("testing Cache decision", "get from network")
+                var evs = NetworkServiceAdapter.getInstance(application).getEntrevistasCandidato(params, evId, token)
+                CacheManager.getInstance(application.applicationContext).addEntrevistasCandidato(evId, evs)
+                return evs
+            }
+            catch (e:VolleyError){
+                Log.d("Testing Error Repository", e.toString())
+                throw e
+            }
+            catch (e:Exception){
+                Log.d("Testing Error Repository", e.toString())
+                throw e
+            }
         }
         else{
             Log.d("testing Cache decision", "return ${potentialResp.size} elements from cache")

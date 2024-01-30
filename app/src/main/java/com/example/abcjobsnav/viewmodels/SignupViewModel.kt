@@ -3,6 +3,7 @@ package com.example.abcjobsnav.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.android.volley.VolleyError
 import com.example.abcjobsnav.models.Signup
 import com.example.abcjobsnav.repositories.SignupRepository
 import kotlinx.coroutines.Dispatchers
@@ -50,9 +51,22 @@ class SignupViewModel(application: Application) :  AndroidViewModel(application)
                         _eventNetworkError.postValue(false)
                         _isNetworkErrorShown.postValue(false)
                     }
+                    catch (e: VolleyError){
+                        val responseBody: String = String(e.networkResponse.data)
+                        val data: JSONObject = JSONObject(responseBody)
+                        var mensaje: String
+                        if (data.isNull("mensaje")){
+                            mensaje="nullllll"
+                        }
+                        else{
+                            mensaje = data.getString("mensaje")
+                        }
+                        _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
+                        _isNetworkErrorShown.postValue(false)
+                    }
                     catch (e:Exception){ //se procesa la excepcion
                         Log.d("Testing Error LVM", e.toString())
-                        _errorText.postValue(e.toString())  //_eventNetworkError.postValue(true)
+                        _errorText.postValue(e.toString()+"$"+"nullllll")  //_eventNetworkError.postValue(true)
                         _isNetworkErrorShown.postValue(false)
                         //throw e  Causa Error: Ultima instancia es esta.
                         Log.d("Testing Error LVM2", e.toString())

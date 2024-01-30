@@ -3,6 +3,7 @@ package com.example.abcjobsnav.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.android.volley.VolleyError
 import com.example.abcjobsnav.models.Entrevista
 import com.example.abcjobsnav.network.NetworkServiceAdapter
 import com.example.abcjobsnav.repositories.EntrevistaRepository
@@ -16,19 +17,20 @@ class EntrevistaViewModel(application: Application) :  AndroidViewModel(applicat
     private val entrevistaRepository = EntrevistaRepository(application)
 
     private val _entrevistas = MutableLiveData<List<Entrevista>>()
-
     val entrevistas: LiveData<List<Entrevista>>
         get() = _entrevistas
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
-
     val eventNetworkError: LiveData<Boolean>
         get() = _eventNetworkError
 
     private var _isNetworkErrorShown = MutableLiveData<Boolean>(false)
-
     val isNetworkErrorShown: LiveData<Boolean>
         get() = _isNetworkErrorShown
+
+    private var _errorText = MutableLiveData<String>("")
+    val errorText:LiveData<String>
+        get() = _errorText
 
     init {
         //refreshDataFromNetwork()
@@ -45,29 +47,38 @@ class EntrevistaViewModel(application: Application) :  AndroidViewModel(applicat
         try {
             viewModelScope.launch(Dispatchers.Default){
                 withContext(Dispatchers.IO){
-                    var data = entrevistaRepository.refreshData(JSONObject(postParams), evId, token)
-                    _entrevistas.postValue(data)
+                    try{
+                        var data = entrevistaRepository.refreshData(JSONObject(postParams), evId, token)
+                        _entrevistas.postValue(data)
+                        _eventNetworkError.postValue(false)
+                        _isNetworkErrorShown.postValue(false)
+                    }
+                    catch (e: VolleyError){
+                        val responseBody: String = String(e.networkResponse.data)
+                        val data: JSONObject = JSONObject(responseBody)
+                        var mensaje: String
+                        if (data.isNull("mensaje")){
+                            mensaje="nullllll"
+                        }
+                        else{
+                            mensaje = data.getString("mensaje")
+                        }
+                        _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
+                        _isNetworkErrorShown.postValue(false)
+                    }
+                    catch (e:Exception){ //se procesa la excepcion
+                        Log.d("Testing Error LVM", e.toString())
+                        _errorText.postValue(e.toString()+"$"+"nullllll")
+                        _isNetworkErrorShown.postValue(false)
+                        Log.d("Testing Error LVM2", e.toString())
+                    }
                 }
-                _eventNetworkError.postValue(false)
-                _isNetworkErrorShown.postValue(false)
             }
-
-            //var data = entrevistaRepository.refreshData(JSONObject(postParams), evId, token)
-            //_entrevistas.postValue(data)
-            //_eventNetworkError.value = false
-            //_isNetworkErrorShown.value = false
         }
         catch (e:Exception){ //se procesa la excepcion
             Log.d("Error", e.toString())
             _eventNetworkError.value = true
         }
-        /*entrevistaRepository.refreshData(JSONObject(postParams), evId, token, {
-            _entrevistas.postValue(it)
-            _eventNetworkError.value = false
-            _isNetworkErrorShown.value = false
-        },{
-            _eventNetworkError.value = true
-        })*/
     }
 
     fun onNetworkErrorShown() {

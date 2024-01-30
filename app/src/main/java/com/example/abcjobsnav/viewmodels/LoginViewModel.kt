@@ -3,6 +3,7 @@ package com.example. abcjobsnav.viewmodels
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
+import com.android.volley.VolleyError
 import com.example.abcjobsnav.models.Login
 import com.example.abcjobsnav.repositories.LoginRepository
 import kotlinx.coroutines.Dispatchers
@@ -71,6 +72,19 @@ class LoginViewModel(application: Application) :  AndroidViewModel(application) 
                         var data = loginRepository.refreshData(JSONObject(postParams))
                         _login.postValue(data)
                         _eventNetworkError.postValue(false)
+                        _isNetworkErrorShown.postValue(false)
+                    }
+                    catch (e: VolleyError){
+                        val responseBody: String = String(e.networkResponse.data)
+                        val data: JSONObject = JSONObject(responseBody)
+                        var mensaje: String
+                        if (data.isNull("mensaje")){
+                            mensaje="nullllll"
+                        }
+                        else{
+                            mensaje = data.getString("mensaje")
+                        }
+                        _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
                         _isNetworkErrorShown.postValue(false)
                     }
                     catch (e:Exception){ //se procesa la excepcion

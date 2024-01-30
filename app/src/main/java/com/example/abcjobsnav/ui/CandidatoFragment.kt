@@ -52,6 +52,8 @@ class CandidatoFragment : Fragment() {
             tokenUser = it.getString(TOKEN_PARAM)
             tipo = it.getString(TIPO_PARAM)
             idTipo = it.getInt(IDTIPO_PARAM)
+            Log.d("testing id Candidatofragment", id.toString())
+            Log.d("testing idTipo Candidatofragment", idTipo.toString())
         }
         Log.d("testing Candidatofragment", "Inicio onCreate3")
     }
@@ -99,6 +101,10 @@ class CandidatoFragment : Fragment() {
         })
         Log.d("testing Candidatofragment", "Inicio onActivityCreated7")
 
+        viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
+            onNetworkErrorMsg(errorText.toString())
+        })
+
         binding.btnEntrevistasCand.setOnClickListener() {
             Log.d("testing Entrevistas", "Inicio")
             val action = CandidatoFragmentDirections.actionCandidatoFragmentToEntrevistasFragment(
@@ -120,6 +126,30 @@ class CandidatoFragment : Fragment() {
         if(!viewModel.isNetworkErrorShown.value!!) {
             Toast.makeText(activity, "Network Error", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
+        }
+    }
+    private fun onNetworkErrorMsg(msg: String) {
+        Log.d("Testing funMensaje", msg)
+        if (!msg.isNullOrEmpty()){
+            val delimiter = "$"
+            val values=msg.split(delimiter)
+            val msg1:String=values[0]
+            val msgBackend:String=values[1]
+            Log.d("Testing msg1", msg1)
+            Log.d("Testing msgBackend", msgBackend)
+            var mensaje:String=""
+            if(!viewModel.isNetworkErrorShown.value!!) {
+                if (!msg.contains("nullllll")){
+                    mensaje="Signup Unsuccessful: "+msgBackend  //"User already exists"  //Unauthorized
+                }
+                else{
+                    val delimiter = "."
+                    val values=msg1.split(delimiter)
+                    mensaje="Signup Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                }
+                Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
+                viewModel.onNetworkErrorShown()
+            }
         }
     }
 

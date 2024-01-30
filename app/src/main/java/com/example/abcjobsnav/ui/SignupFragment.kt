@@ -17,6 +17,7 @@ import androidx.lifecycle.Observer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import androidx.navigation.Navigation
 import com.example.abcjobsnav.ui.FieldValidators.isStringContainNumber
 import com.example.abcjobsnav.ui.FieldValidators.isStringContainSpecialCharacter
 import com.example.abcjobsnav.ui.FieldValidators.isStringLowerAndUpperCase
@@ -44,6 +45,9 @@ class SignupFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private var myView: View? = null
+    private var origenBtn: Boolean = false
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -60,9 +64,11 @@ class SignupFragment : Fragment() {
         val view = binding.root
         setupListeners()
         binding.btnSignUp.setOnClickListener {
+            myView=it
             Log.d("testing", "inicio Singup onClickListener")
             if (isValidate()) {
-                Toast.makeText(view.context, "validated", Toast.LENGTH_SHORT).show()
+                origenBtn=true
+                //Toast.makeText(view.context, "validated", Toast.LENGTH_SHORT).show()
                 viewModel.refreshDataFromNetwork(binding.userName.text.toString(),
                     binding.password.text.toString(),
                     binding.confirmPassword.text.toString(),
@@ -87,13 +93,18 @@ class SignupFragment : Fragment() {
             SignupViewModel::class.java)
         viewModel.signup.observe(viewLifecycleOwner, Observer<Signup> {
             it.apply {
-                //viewModelAdapter!!.entrevistas = this
+                if (origenBtn) {
+                    origenBtn = false
+                    val action = SignupFragmentDirections.actionSignupFragmentToLoginFragment()
+                    if (myView!=null){
+                        Navigation.findNavController(myView!!).navigate(action)
+                    }
+                }
             }
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
-
         viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
             onNetworkErrorMsg(errorText.toString())
         })
@@ -125,19 +136,22 @@ class SignupFragment : Fragment() {
 
     private fun onNetworkErrorMsg(msg: String) {
         Log.d("Testing funMensaje", msg)
-        var mensaje:String=""
         if (!msg.isNullOrEmpty()){
+            val delimiter = "$"
+            val values=msg.split(delimiter)
+            val msg1:String=values[0]
+            val msgBackend:String=values[1]
+            Log.d("Testing msg1", msg1)
+            Log.d("Testing msgBackend", msgBackend)
+            var mensaje:String=""
             if(!viewModel.isNetworkErrorShown.value!!) {
-                if (msg.contains("xAuthFailureError")){
-                    mensaje="Signup Unsuccessful: Unauthorized"
-                }
-                else if(msg.contains("xClientError")){
-                    mensaje="Login Unsuccessful: Wrong user name"
+                if (!msg.contains("nullllll")){
+                    mensaje="Signup Unsuccessful: "+msgBackend  //"User already exists"  //Unauthorized
                 }
                 else{
                     val delimiter = "."
-                    val values=msg.split(delimiter)
-                    mensaje="Login Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    val values=msg1.split(delimiter)
+                    mensaje="Signup Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
                 }
                 Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
                 viewModel.onNetworkErrorShown()

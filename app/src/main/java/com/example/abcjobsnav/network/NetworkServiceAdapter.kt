@@ -41,6 +41,44 @@ class NetworkServiceAdapter constructor(context: Context) {
 
     suspend fun candCreate(body: JSONObject, token: String)=suspendCoroutine<Candidato>{contResp ->
         Log.d("testing","Inicio userCreate NetworkServiceAdapter")
+        val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"candidatos", body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("testing","Response Signup NetworkServiceAdapter")
+                Log.d("testing Response", response.toString())
+                val resp=response.getJSONObject("Candidato")
+                val cand= Candidato(
+                    id=resp.getInt("id"),
+                    nombres=resp.getString("nombres"),
+                    apellidos=resp.getString("apellidos"),
+                    documento=resp.getString("documento"),
+                    fecha_nac=resp.getString("fecha_nac"),
+                    email=resp.getString("email"),
+                    phone=resp.getString("phone"),
+                    ciudad=resp.getString("ciudad"),
+                    direccion=resp.getString("direccion"),
+                    imagen=resp.getString("imagen"),
+                    id_usuario=resp.getInt("id_usuario"),
+                    num_perfil=resp.getInt("num_perfil"))
+                contResp.resume(cand)
+            },
+            {
+                Log.d("testing","VolleyError createCandidato NetworkServiceAdapter")
+                contResp.resumeWithException(it) //throw it   //onError(it)
+            }){
+            override fun getHeaders(): MutableMap<String, String> {
+                Log.d("testing","Inicio getHeaders")
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Authorization"] = "Bearer $token"
+                Log.d("testing", headers.toString())
+                return headers  //return super.getHeaders()  // throws AuthFailureError
+            }
+        };
+        requestQueue.add(jsonReq)
+    }
+
+    suspend fun candCreateSigSeguridad(body: JSONObject, token: String)=suspendCoroutine<Candidato>{contResp ->
+        Log.d("testing","Inicio userCreate NetworkServiceAdapter")
         requestQueue.add(postRequest("candidatos", body,
             Response.Listener<JSONObject> { response ->
                 Log.d("testing","Response Signup NetworkServiceAdapter")
@@ -80,7 +118,20 @@ class NetworkServiceAdapter constructor(context: Context) {
                 contResp.resume(sign)
             },
             {
-                Log.d("testing","VolleyError Signup NetworkServiceAdapter")
+                Log.d("testing","VolleyError1 Signup NetworkServiceAdapter")
+                val responseBody: String = String(it.networkResponse.data)
+                Log.d("testing",responseBody.toString())
+                Log.d("testing","VolleyError2 Signup NetworkServiceAdapter")
+                val data: JSONObject = JSONObject(responseBody)
+                Log.d("testing","VolleyError3 Signup NetworkServiceAdapter")
+                Log.d("testing",data.toString())
+                //val errors: JSONArray = data.getJSONArray("errors")
+                //Log.d("testing","VolleyError4 Signup NetworkServiceAdapter")
+                //val jsonMessage: JSONObject = errors.getJSONObject(0)
+                //Log.d("testing","VolleyError5 Signup NetworkServiceAdapter")
+                //val message: String = jsonMessage.getString("message")
+                //Log.d("testing",message)
+                Log.d("testing",it.networkResponse.statusCode.toString())
                 contResp.resumeWithException(it)
             })
         )
@@ -249,9 +300,9 @@ class NetworkServiceAdapter constructor(context: Context) {
                 }
                 //MutableLiveData<Login>()
                 val log= Login(token=response.getString("token"),
-                    response.getInt("id"),
-                    response.getString("tipo"),
-                    idTipo)
+                    id=response.getInt("id"),
+                    tipo=response.getString("tipo"),
+                    idTipo=idTipo)
                 contResp.resume(log) // onComplete(log)
             },
             {
@@ -263,6 +314,53 @@ class NetworkServiceAdapter constructor(context: Context) {
     }
 
     suspend fun getEntrevistasCandidato(body: JSONObject, evId: Int, token: String)=suspendCoroutine<List<Entrevista>>{contResp ->
+        Log.d("testing","Inicio getEntrevistasCandidato NetworkServiceAdapter")
+        val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"entrevistasCandidato/$evId", body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("testing","Response getEntrevistasCandidato NetworkServiceAdapter")
+                Log.d("testing", response.toString())
+                val cont=response.getInt("totalCount")
+                Log.d("testing", cont.toString())
+                val resp = response.getJSONArray("Entrevistas")
+                Log.d("testing","Response3 getEntrevistas NetworkServiceAdapter")
+                val list = mutableListOf<Entrevista>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    list.add(i, Entrevista(id = item.getInt("id"),
+                        candidato = item.getString("candidato"),
+                        nom_empresa = item.getString("nom_empresa"),
+                        nom_proyecto = item.getString("nom_proyecto"),
+                        nom_perfil = item.getString("nom_perfil"),
+                        cuando = item.getString("cuando"),
+                        contacto = item.getString("contacto"),
+                        calificacion = item.getString("calificacion"),
+                        anotaciones = item.getString("anotaciones"),
+                        id_cand = item.getInt("id_cand"),
+                        idPerfilProy = item.getInt("idPerfilProy"),
+                        id_perfil = item.getInt("id_perfil"),
+                        Num = item.getInt("Num"),
+                        valoracion = 0 ))
+                }
+                Log.d("testing","Response4 getEntrevistas NetworkServiceAdapter")
+                contResp.resume(list) //onComplete(list)
+            },
+            {
+                Log.d("testing","VolleyError getEntrevista NetworkServiceAdapter")
+                contResp.resumeWithException(it) //throw it   //onError(it)
+            }){
+            override fun getHeaders(): MutableMap<String, String> {
+                Log.d("testing","Inicio getHeaders")
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Authorization"] = "Bearer $token"
+                Log.d("testing", headers.toString())
+                return headers  //return super.getHeaders()  // throws AuthFailureError
+            }
+        };
+        requestQueue.add(jsonReq)
+    }
+
+    suspend fun getEntrevistasCandidatoSinSeguuridad(body: JSONObject, evId: Int, token: String)=suspendCoroutine<List<Entrevista>>{contResp ->
         Log.d("testing","Inicio getEntrevistasCandidato NetworkServiceAdapter")
         requestQueue.add(postRequest("entrevistasCandidato/$evId", body,
             Response.Listener<JSONObject> { response ->

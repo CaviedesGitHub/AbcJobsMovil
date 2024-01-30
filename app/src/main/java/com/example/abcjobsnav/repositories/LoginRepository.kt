@@ -13,6 +13,10 @@ class LoginRepository (val application: Application){
             val log: Login = NetworkServiceAdapter.getInstance(application).getLogin(params)
             return log
         }
+        catch (e:VolleyError){
+            Log.d("Testing Error Repository", e.toString())
+            throw e
+        }
         catch (e:Exception){
             Log.d("Testing Error Repository", e.toString())
             throw e
