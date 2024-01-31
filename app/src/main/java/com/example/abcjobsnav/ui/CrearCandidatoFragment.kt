@@ -1,5 +1,6 @@
 package com.example.abcjobsnav.ui
 
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -17,12 +18,16 @@ import androidx.lifecycle.Observer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Patterns
+import androidx.annotation.RequiresApi
 import androidx.navigation.Navigation
 import com.example.abcjobsnav.ui.FieldValidators.isStringContainNumber
 import com.example.abcjobsnav.ui.FieldValidators.isStringContainSpecialCharacter
 import com.example.abcjobsnav.ui.FieldValidators.isStringLowerAndUpperCase
 import com.example.abcjobsnav.ui.FieldValidators.isValidEmail
-
+import java.time.LocalDate
+import java.time.format.DateTimeFormatter
+import java.text.SimpleDateFormat
+import java.util.Date
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -187,13 +192,14 @@ class CrearCandidatoFragment : Fragment() {
     }
 
     private fun isValidate(): Boolean =
-        validateName() && validateLastName() && validateDocument() && validateEmail()
+        validateName() && validateLastName() && validateDocument() && validateEmail() &&validateFecha()
 
     private fun setupListeners() {
         binding.name.addTextChangedListener(TextFieldValidation(binding.name))
         binding.lastname.addTextChangedListener(TextFieldValidation(binding.lastname))
         binding.document.addTextChangedListener(TextFieldValidation(binding.document))
         binding.email.addTextChangedListener(TextFieldValidation(binding.email))
+        binding.fechanac.addTextChangedListener(TextFieldValidation(binding.fechanac))
     }
 
     private fun validateName(): Boolean {
@@ -244,6 +250,64 @@ class CrearCandidatoFragment : Fragment() {
         return true
     }
 
+    private fun validateFecha(): Boolean {
+        if (binding.fechanac.text.toString().trim().isEmpty()) {
+            binding.txtMatFechaNac.isErrorEnabled = false
+            return true
+            //binding.txtMatFechaNac.error = "Required Field!"
+            //binding.fechanac.requestFocus()
+            //return false
+        } else if (!isValidFecha(binding.fechanac.text.toString())) {
+            binding.txtMatFechaNac.error = "Invalid Date!: YYYY-MM-DD"
+            binding.fechanac.requestFocus()
+            return false
+        } else if (!isValidFecha18(binding.fechanac.text.toString())) {
+            binding.txtMatFechaNac.error = "Invalid Date!: Over 18"
+            binding.fechanac.requestFocus()
+            return false
+        }
+        else {
+            binding.txtMatFechaNac.isErrorEnabled = false
+        }
+        return true
+    }
+
+    //@RequiresApi(Build.VERSION_CODES.O)
+    private fun isValidFecha(strFecha: String): Boolean{
+        //val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        //val date = LocalDate.parse(strFecha, formatter)
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        try {
+            val date = formatter.parse(strFecha)
+            Log.d("Testing fecha",date.toString())
+            return true
+        }
+        catch(e: Exception){
+            return false
+        }
+    }
+
+    private fun isValidFecha18(strFecha: String): Boolean{
+        //val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd")
+        //val date = LocalDate.parse(strFecha, formatter)
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        try {
+            val ahora= Date()
+            val fecha_nac = formatter.parse(strFecha)
+            val dif=ahora.getTime()-fecha_nac.getTime()
+            val year = dif/(1000*60*60*24*365)
+            if (year>=18){
+                return true
+            }
+            else {
+                return false
+            }
+        }
+        catch(e: Exception){
+            return false
+        }
+    }
+
     inner class TextFieldValidation(private val view: View) : TextWatcher {
         override fun afterTextChanged(s: Editable?) {}
         override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
@@ -262,6 +326,9 @@ class CrearCandidatoFragment : Fragment() {
                 }
                 binding.email.id -> {
                     validateEmail()
+                }
+                binding.fechanac.id -> {
+                    validateFecha()
                 }
             }
         }

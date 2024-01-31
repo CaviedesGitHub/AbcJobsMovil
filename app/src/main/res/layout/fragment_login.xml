@@ -10,7 +10,6 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/Rosado"
         tools:context=".ui.LoginFragment">
 
         <!-- TODO: Update blank fragment layout -->
@@ -18,8 +17,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/border"
             android:layout_margin="20dp"
-            android:background="@color/Rosado"
             android:orientation="vertical"
             android:padding="30dp"
             android:paddingLeft="30dp"
@@ -32,52 +31,56 @@
 
             <TextView
                 android:id="@+id/textView"
+                android:textAlignment="center"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/title_login"
+                android:textColor="@color/black"
                 android:textSize="40sp"
-                android:textStyle="bold|italic" />
+                android:textStyle="bold" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtFieldUsuario"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/usuario_24"
+                app:endIconMode="clear_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:background="#C7FF926A"
-                android:hint="@string/username"
+                android:hint="User Name"
                 android:textColorHint="@color/black"
                 app:expandedHintEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                app:hintTextColor="@color/design_default_color_secondary">
+                app:helperTextEnabled="true"
+                app:helperText="type the user name"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:errorEnabled="true">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtUserName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="24sp" />
-
+                    android:contentDescription=""
+                    android:maxLength="20"/>
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/txtFieldClave"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:startIconDrawable="@drawable/candado1_24"
+                app:endIconMode="password_toggle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:background="#C7FF926A"
                 android:hint="@string/password"
-                android:textColorHint="@color/black"
                 app:expandedHintEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
-                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-                app:hintTextColor="@color/design_default_color_secondary">
+                app:helperTextEnabled="true"
+                app:helperText="Type the password"
+                app:counterEnabled="true"
+                app:counterMaxLength="15">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/txtPassword"
@@ -85,63 +88,26 @@
                     android:layout_height="wrap_content"
                     android:password="true"
                     android:text=""
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="24sp" />
+                    android:maxLength="15" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
-
-            <TextView
-                android:id="@+id/textView29"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@{login.tipo}"
-                android:textSize="16sp" />
-            <TextView
-                android:id="@+id/textView14"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/olvidaste_la_clave"
-                android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/textView15"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:text="@string/inscribete"
-                android:textSize="16sp" />
-
             <Button
                 android:id="@+id/btnLogin"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:backgroundTint="@color/Fucsia"
-                android:text="@string/login"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-            <Button
-                android:id="@+id/btnNavegar"
-                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="0dp"
-                android:backgroundTint="@color/Fucsia"
-                android:text="@string/navegar"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
+                android:textAlignment="center"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp"
+                android:text="@string/submit" />
 
             <Button
                 android:id="@+id/textButtonSignup"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/don_t_have_an_account_sign_up"
+                android:textAllCaps="false"
+                android:layout_marginTop="20dp"
                 style="@style/Widget.MaterialComponents.Button.TextButton" />
         </LinearLayout>
 

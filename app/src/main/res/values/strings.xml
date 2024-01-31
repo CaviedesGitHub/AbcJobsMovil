@@ -34,4 +34,6 @@
     <string name="phone">Phone</string>
     <string name="city">City</string>
     <string name="address">Address</string>
+    <string name="submit">Submit</string>
+    <string name="user_type">User Type</string>
 </resources>

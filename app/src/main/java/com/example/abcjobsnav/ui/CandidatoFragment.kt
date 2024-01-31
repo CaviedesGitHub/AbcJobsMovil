@@ -14,6 +14,7 @@ import com.example.abcjobsnav.databinding.FragmentCandidatoBinding
 import com.example.abcjobsnav.viewmodels.CandidatoViewModel
 import com.example.abcjobsnav.models.Candidato
 import androidx.lifecycle.Observer
+import com.squareup.picasso.Picasso
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -92,7 +93,12 @@ class CandidatoFragment : Fragment() {
         viewModel.candidato.observe(viewLifecycleOwner, Observer<Candidato> {
             it.apply {
                 binding.candidato=viewModel.candidato.value
-                //viewModelAdapter!!.entrevistas = this
+                if(!viewModel.candidato.value?.imagen.isNullOrEmpty()){
+                    Picasso.get().load(viewModel.candidato.value?.imagen).into(binding.imageView)
+                }
+                else{
+
+                }
             }
         })
         Log.d("testing Candidatofragment", "Inicio onActivityCreated6")

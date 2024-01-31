@@ -11,9 +11,11 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/titleCreateCand"
+        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/create_candidate"
+        android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="40dp" />
 
@@ -40,193 +42,187 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMatName"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/name"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="20"
+                    app:counterMaxLength="30"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="type the name"
+                    app:helperText="Type the candidate's name"
                     app:helperTextEnabled="true"
-                    app:startIconDrawable="@drawable/change">
+                    app:startIconDrawable="@drawable/face_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="20"
+                        android:maxLength="30"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMatLastName"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/lastname"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="20"
+                    app:counterMaxLength="30"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="type the name"
+                    app:helperText="Type the candidate's last name"
                     app:helperTextEnabled="true"
-                    app:startIconDrawable="@drawable/change">
+                    app:startIconDrawable="@drawable/face_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/lastname"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="20"
+                        android:maxLength="30"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMatDocument"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/document"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="20"
+                    app:counterMaxLength="10"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="type the name"
+                    app:helperText="Only numbers"
                     app:helperTextEnabled="true"
-                    app:startIconDrawable="@drawable/change">
+                    app:startIconDrawable="@drawable/numbers_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/document"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="number"
                         android:contentDescription=""
-                        android:maxLength="20"
+                        android:maxLength="10"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMatEmail"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/email"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="20"
+                    app:counterMaxLength="40"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="type the name"
+                    app:helperText="Candidate's email address"
                     app:helperTextEnabled="true"
-                    app:startIconDrawable="@drawable/change">
+                    app:startIconDrawable="@drawable/email_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="20"
+                        android:maxLength="40"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMatFechaNac"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/birthday"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="20"
+                    app:counterMaxLength="10"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="type the name"
+                    app:helperText="YYYY-MM-DD, Over 18 years"
                     app:helperTextEnabled="true"
-                    app:startIconDrawable="@drawable/change">
+                    app:startIconDrawable="@drawable/date_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/fechanac"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="20"
+                        android:maxLength="10"
+                        android:inputType="date"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMatPhone"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/phone"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="20"
+                    app:counterMaxLength="15"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="type the name"
+                    app:helperText="enter contact phone number"
                     app:helperTextEnabled="true"
-                    app:startIconDrawable="@drawable/change">
+                    app:startIconDrawable="@drawable/phone_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="20"
+                        android:maxLength="15"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMatCity"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/city"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="20"
+                    app:counterMaxLength="40"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="type the name"
+                    app:helperText="City of residence"
                     app:helperTextEnabled="true"
-                    app:startIconDrawable="@drawable/change">
+                    app:startIconDrawable="@drawable/city_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/city"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="20"
+                        android:maxLength="40"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/txtMatAddress"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/address"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="20"
+                    app:counterMaxLength="50"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="type the name"
+                    app:helperText="Residence Address"
                     app:helperTextEnabled="true"
-                    app:startIconDrawable="@drawable/change">
+                    app:startIconDrawable="@drawable/location_on_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="20"
+                        android:maxLength="50"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>

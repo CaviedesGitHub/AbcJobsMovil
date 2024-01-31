@@ -162,37 +162,6 @@ class LoginFragment : Fragment() {
                     Toast.makeText(activity, "Login Error", Toast.LENGTH_LONG).show()
                 }
             }
-            //viewModel.refreshDataFromNetwork(binding.txtUserName.text.toString(), binding.txtPassword.text.toString())
-            //Log.d("testing OnClickListener", "LoginFragment after refresh")
-            //Log.d("testing OnClickListener", viewModel.login.toString())
-        }
-
-        binding.btnNavegar.setOnClickListener(){
-            Log.d("testing Navegar", "Inicio")
-            if (viewModel.login.value?.tipo =="CANDIDATO"){
-                Log.d("testing Navegar", "Dentro del If")
-                if (viewModel.login.value?.idTipo!=0){
-                    val action = LoginFragmentDirections.actionLoginFragmentToCandidatoFragment(
-                        viewModel.login.value!!.token,
-                        viewModel.login.value!!.tipo,
-                        viewModel.login.value!!.id,
-                        viewModel.login.value!!.idTipo)
-                    it.findNavController().navigate(action)
-                }
-                else{
-                    val action = LoginFragmentDirections.actionLoginFragmentToCrearCandidatoFragment(
-                        viewModel.login.value!!.id,
-                        viewModel.login.value!!.token)
-                    it.findNavController().navigate(action)
-                }
-                Log.d("testing Navegar", "Despues Navigate")
-            }
-            else if (viewModel.login.value?.tipo=="EMPRESA"){
-
-            }
-            else{
-
-            }
         }
     }
 
