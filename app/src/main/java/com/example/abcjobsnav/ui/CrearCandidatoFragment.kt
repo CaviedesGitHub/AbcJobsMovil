@@ -108,7 +108,7 @@ class CrearCandidatoFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = "Signup"
+        activity.actionBar?.title = getString(R.string.abc_jobs)
         viewModel = ViewModelProvider(this, CreateCandidatoViewModel.Factory(activity.application)).get(
             CreateCandidatoViewModel::class.java)
         viewModel.candidato.observe(viewLifecycleOwner, Observer<Candidato> {

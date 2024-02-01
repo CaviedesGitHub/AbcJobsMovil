@@ -70,7 +70,7 @@ class ResultadoEntrevistaFragment : Fragment() {
             "You can only access the viewModel after onActivityCreated()"
         }
         Log.d("testing Entrevistafragment", "Inicio onActivityCreated3")
-        activity.actionBar?.title = "Interview Result"
+        activity.actionBar?.title = getString(R.string.abc_jobs)
         Log.d("testing Entrevistafragment", "Inicio onActivityCreated4")
         viewModel = ViewModelProvider(this, ResultEvViewModel.Factory(activity.application)).get(
             ResultEvViewModel::class.java)

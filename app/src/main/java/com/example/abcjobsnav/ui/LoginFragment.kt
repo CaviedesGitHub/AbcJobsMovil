@@ -75,7 +75,7 @@ class LoginFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.Titulo_entrevistas)
+        activity.actionBar?.title = getString(R.string.abc_jobs)
         viewModel = ViewModelProvider(this, LoginViewModel.Factory(activity.application)).get(
             LoginViewModel::class.java)
         viewModel.login.observe(viewLifecycleOwner, Observer<Login> {

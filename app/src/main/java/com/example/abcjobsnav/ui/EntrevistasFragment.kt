@@ -86,12 +86,17 @@ class EntrevistasFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        activity.actionBar?.title = getString(R.string.Titulo_entrevistas)
+        activity.actionBar?.title = getString(R.string.abc_jobs)
         viewModel = ViewModelProvider(this, EntrevistaViewModel.Factory(activity.application)).get(EntrevistaViewModel::class.java)
         viewModel.refreshDataFromNetwork(id!!, tokenUser!!)
         viewModel.entrevistas.observe(viewLifecycleOwner, Observer<List<Entrevista>> {
             it.apply {
                 viewModelAdapter!!.entrevistas = this
+                if (viewModel.entrevistas.value.isNullOrEmpty()){
+                    binding.txtMsgVacio.visibility=View.VISIBLE
+                    binding.progressBar.visibility=View.INVISIBLE
+                }
+
             }
         })
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->

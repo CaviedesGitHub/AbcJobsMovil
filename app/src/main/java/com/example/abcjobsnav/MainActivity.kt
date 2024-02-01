@@ -53,11 +53,12 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController2, appBarConfiguration)
         navView.setupWithNavController(navController2)
+        //finishAffinity()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.main_menu, menu)
-        supportActionBar!!.title = "Volley"
+        supportActionBar!!.title = getString(R.string.abc_jobs)
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -65,7 +66,10 @@ class MainActivity : AppCompatActivity() {
         when(item.itemId){
             R.id.language_change -> Toast.makeText(this, "Language Change", Toast.LENGTH_SHORT).show()
             R.id.action_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
-            R.id.action_exit -> Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show()
+            R.id.action_exit -> {
+                Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show()
+                finishAffinity()
+            }
             R.id.action_switch_layout -> {
                 Toast.makeText(this, "Change", Toast.LENGTH_SHORT).show()
                 // Create an intent with a destination of the other Activity

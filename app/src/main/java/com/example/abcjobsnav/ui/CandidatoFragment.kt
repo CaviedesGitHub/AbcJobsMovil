@@ -84,7 +84,7 @@ class CandidatoFragment : Fragment() {
             "You can only access the viewModel after onActivityCreated()"
         }
         Log.d("testing Candidatofragment", "Inicio onActivityCreated3")
-        activity.actionBar?.title = getString(R.string.datos_candidato)
+        activity.actionBar?.title = getString(R.string.abc_jobs)
         Log.d("testing Candidatofragment", "Inicio onActivityCreated4")
         viewModel = ViewModelProvider(this, CandidatoViewModel.Factory(activity.application)).get(
             CandidatoViewModel::class.java)

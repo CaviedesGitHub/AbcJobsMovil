@@ -36,4 +36,6 @@
     <string name="address">Address</string>
     <string name="submit">Submit</string>
     <string name="user_type">User Type</string>
+    <string name="abc_jobs">ABC Jobs</string>
+    <string name="no_interviews_were_found">No interviews were found</string>
 </resources>
