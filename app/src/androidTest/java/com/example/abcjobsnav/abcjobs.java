@@ -9,6 +9,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import static androidx.core.content.res.TypedArrayUtils.getText;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
@@ -17,7 +18,21 @@ import static androidx.test.espresso.action.ViewActions.scrollTo;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static junit.framework.TestCase.assertEquals;
 import static org.hamcrest.Matchers.allOf;
+
+
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewParent;
+import org.hamcrest.Description;
+import org.hamcrest.Matcher;
+import org.hamcrest.TypeSafeMatcher;
+//import androidx.test.rule.ActivityTestRule;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+
+
+
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
@@ -96,9 +111,10 @@ public class abcjobs {
         ViewInteraction ApellidoCand = onView(withId(R.id.lastname));
         ApellidoCand.perform(scrollTo(), replaceText("Padilla"), closeSoftKeyboard());
 
-        long numero = (long) (Math.random() * 1500000000) + 1;
         ViewInteraction DocumentoCand = onView(withId(R.id.document));
-        DocumentoCand.perform(scrollTo(), replaceText(Long.toString(numero)), closeSoftKeyboard());
+        long numero = (long) (Math.random() * 1500000000) + 1;
+        String docStr = Long.toString(numero);
+        DocumentoCand.perform(scrollTo(), replaceText(docStr), closeSoftKeyboard());
 
         ViewInteraction EmailCand = onView(withId(R.id.email));
         EmailCand.perform(scrollTo(), replaceText(nombreUsuario+"@g.com"), closeSoftKeyboard());
@@ -117,5 +133,47 @@ public class abcjobs {
 
         ViewInteraction CreateCandBtn = onView(allOf(withId(R.id.btnCreate), withText("Submit")));
         CreateCandBtn.perform(click());
+
+        ViewInteraction lastnameCand = onView(withId(R.id.txtApellidosCand));
+        lastnameCand.check(matches(withText("Padilla")));
+
+        ViewInteraction nameCand = onView(withId(R.id.txtNombresCand));
+        nameCand.check(matches(withText(nombreUsuario)));
+
+        ViewInteraction docCand = onView(withId(R.id.txtDocumento));
+        docCand.check(matches(withText(docStr)));
+
+        ViewInteraction fechaCand = onView(withId(R.id.txtFechaNac));
+        fechaCand.check(matches(withText("1980-05-09")));
+
+        ViewInteraction mailCand = onView(withId(R.id.txtMail));
+        mailCand.check(matches(withText(nombreUsuario+"@g.com")));
+
+        ViewInteraction telCand = onView(withId(R.id.txtTelefono));
+        telCand.check(matches(withText("3014561234")));
+
+        ViewInteraction ciudadCand = onView(withId(R.id.txtCiudad));
+        ciudadCand.check(matches(withText("Valledupar")));
+
+        ViewInteraction dirCand = onView(withId(R.id.txtDireccion));
+        dirCand.check(matches(withText("Calle 10 # 17 - 27")));
+    }
+
+    private static Matcher<View> childAtPosition(
+            final Matcher<View> parentMatcher, final int position) {
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public void describeTo(Description description) {
+                description.appendText("Child at position " + position + " in parent ");
+                parentMatcher.describeTo(description);
+            }
+            @Override
+            public boolean matchesSafely(View view) {
+                ViewParent parent = view.getParent();
+                return parent instanceof ViewGroup &&
+                        parentMatcher.matches(parent)&& view.equals(((ViewGroup)
+                        parent).getChildAt(position));
+            }
+        };
     }
 }
