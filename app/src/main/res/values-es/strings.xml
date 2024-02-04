@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">AbcJobsNav-es</string>
+    <string name="abc_jobs">ABC Jobs</string>
+    <string name="title_home">Inicio</string>
+    <string name="title_dashboard">Control</string>
+    <string name="title_notifications">Notificaciones</string>
+    <string name="ToDo">Por Hacer</string>
+    <string name="language">Lenguaje</string>
+    <string name="profile">Perfil</string>
+    <string name="exit">Salir</string>
+    <string name="change">Cambio</string>
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+
+    <!-- TODO: ERRORS -->
+    <string name="required_field">Campo requerido!</string>
+    <string name="login_unsuccessful_incorrect_password">Ingreso no exitoso: clave incorrecta</string>
+    <string name="login_unsuccessful_wrong_user_name">Ingreso no exitoso: nombre ya existe</string>
+    <string name="login_unsuccessful">Ingreso no exitoso: error de red!!</string>
+
+    <string name="password_can_t_be_less_than_6">Contraseña no puede ser menor a 6</string>
+    <string name="required_at_least_1_digit">Requiere al menos un digito</string>
+    <string name="password_must_contain_upper_and_lower_case_letters">Contraseña debe contener mayusculas y minusculas</string>
+    <string name="_1_special_character_required">Se requiere un caracter especial</string>
+    <string name="passwords_don_t_match">Contraseñas no concuerdan</string>
+    <string name="signup_unsuccessful">Registro NO exitoso</string>
+
+    <string name="invalid_email">Correo Invalido!</string>
+    <string name="invalid_date_yyyy_mm_dd">Fecha Invalida!: YYYY-MM-DD</string>
+    <string name="invalid_date_over_18">Fecha invalida!: Mayor a 18</string>
+    <string name="successfully_created_candidate">Candidato no pudo ser creado</string>
+
+    <string name="candidate_not_recovered">Candidato no recuperado</string>
+
+    <!-- TODO: LOGIN -->
+    <string name="login_title">Ingresar</string>
+    <string name="hint_login_username">Nombre Usuario</string>
+    <string name="helper_login_username">Digite el nombre del usuario</string>
+    <string name="hint_login_password">Contraseña</string>
+    <string name="helper_login_password">Ingrese la contraseña</string>
+    <string name="login_submit">Enviar</string>
+    <string name="don_t_have_an_account_sign_up">No tienes una cuenta? Inscribete</string>
+    <string name="Forgot_your_password">Olvidaste la clave?</string>
+
+    <!-- TODO: SIGNUP -->
+    <string name="signup_title">Registro</string>
+    <string name="hint_signup_username">Nombre de Usuario</string>
+    <string name="helper_signup_username">Digite el nombre de usuario</string>
+    <string name="hint_signup_password">Contraseña</string>
+    <string name="helper_signup_password">minimo 5, maximo 15</string>
+    <string name="hint_signup_password_confirm">Confirmar contraseña</string>
+    <string name="helper_signup_password_confirm">Repita la contraseña</string>
+    <string name="user_type">Tipo de Usuario</string>
+    <string name="candidate_type">Candidato</string>
+    <string name="company_type">Empresa</string>
+    <string name="abcjob_employee_type">Empleado ABCJob</string>
+    <string name="signup_submit">Enviar</string>
+    <string name="already_a_member_log_in">Ya eres miembro? Ingresa</string>
+
+    <!-- TODO: CREATE CANDIDATE -->
+    <string name="create_candidate_title">Crear Candidato</string>
+    <string name="create_candidate_hint_name">Nombres</string>
+    <string name="create_candidate_helper_name">Nombres del candidato</string>
+    <string name="create_candidate_hint_lastname">Apellidos</string>
+    <string name="create_candidate_helper_lastname">Apellidos del candidato</string>
+    <string name="create_candidate_hint_document">Document0</string>
+    <string name="create_candidate_helper_document">Numeros unicamente</string>
+    <string name="create_candidate_hint_birthday">Fecha Nac</string>
+    <string name="create_candidate_helper_birthday">YYYY-MM-DD, Mayores de 18 años</string>
+    <string name="create_candidate_hint_email">Correo Electronico</string>
+    <string name="create_candidate_helper_email">Correo del Candidato</string>
+    <string name="create_candidate_hint_phone">Telefono</string>
+    <string name="create_candidate_helper_phone">Ingrese el telefono de contacto</string>
+    <string name="create_candidate_hint_city">Ciudad</string>
+    <string name="create_candidate_helper_city">Ciudad de Residencia</string>
+    <string name="create_candidate_hint_address">Direccion</string>
+    <string name="create_candidate_helper_address">Direccion de Residencia</string>
+    <string name="create_candidate_submit">Enviar</string>
+
+    <!-- TODO: CANDIDATE -->
+    <string name="candidate_title">Candidato</string>
+    <string name="candidate_document">Documento:</string>
+    <string name="candidate_birthday">Fecha Nac:</string>
+    <string name="candidate_email">Correo:</string>
+    <string name="candidate_phone">Telefono:</string>
+    <string name="candidate_city">Ciudad:</string>
+    <string name="candidate_address">Direccion:</string>
+    <string name="candidate_interviews">Entrevistas</string>
+    <string name="candidate_tests">Pruebas</string>
+
+    <!-- TODO: CANDIDATE INTERVIEWS -->
+    <string name="candidate_interviews_title">Lista de Entrevistas</string>
+    <string name="candidate_interviews_datetime">Fecha y Hora:</string>
+    <string name="candidate_interviews_profile">Perfil:</string>
+    <string name="candidate_interviews_project">Proyecto:</string>
+    <string name="candidate_interviews_company">Empresa:</string>
+    <string name="candidate_interviews_contact">Contacto:</string>
+    <string name="no_interviews_were_found">Ninguna entrevista fue encontrada</string>
+    <string name="interview_list_not_retrieved">Lista de entrevistas no recuperada</string>
+
+    <!-- TODO: RESULT INTERVIEW -->
+    <string name="result_interview_title">Entrevista</string>
+    <string name="result_interview_datetime">Fecha y Hora:</string>
+    <string name="result_interview_profile">Perfil:</string>
+    <string name="result_interview_project">Proyecto:</string>
+    <string name="result_interview_company">Empresa:</string>
+    <string name="result_interview_contact">Contacto:</string>
+    <string name="result_interview_result">Resultado</string>
+    <string name="result_interview_evaluation">Evaluacion:</string>
+    <string name="result_view_annotations">Anotaciones</string>
+    <string name="interview_not_retrieved">Entrevista NO recuperada</string>
+
+    <!-- TODO: OTROS -->
+    <string name="candidato">Candidato</string>
+    <string name="contacto">Contacto</string>
+    <string name="Titulo_entrevistas">Entrevistas del Candidato</string>
+    <string name="login">Ingresar</string>
+    <string name="username">Nombre de Usuario</string>
+    <string name="password">PassWord</string>
+    <string name="olvidaste_la_clave"><u>Olvidaste la Clave?</u></string>
+    <string name="inscribete"><u>Inscribete</u></string>
+    <string name="title_login">Ingresar</string>
+    <string name="navegar">navegar</string>
+    <string name="datos_candidato">Datos Candidato</string>
+    <string name="interviews">Interviews</string>
+    <string name="tests">Tests</string>
+</resources>

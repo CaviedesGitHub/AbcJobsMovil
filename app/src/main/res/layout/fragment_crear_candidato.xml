@@ -14,7 +14,7 @@
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_candidate"
+        android:text="@string/create_candidate_title"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
         android:textSize="40dp" />
@@ -26,7 +26,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/btnCreate"
+        app:layout_constraintBottom_toTopOf="@id/btnCreate"
         app:layout_constraintTop_toBottomOf="@id/titleCreateCand">
 
         <ScrollView
@@ -44,13 +44,13 @@
                     android:id="@+id/txtMatName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/name"
+                    android:hint="@string/create_candidate_hint_name"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="Type the candidate's name"
+                    app:helperText="@string/create_candidate_helper_name"
                     app:helperTextEnabled="true"
                     app:startIconDrawable="@drawable/face_24">
 
@@ -67,13 +67,13 @@
                     android:id="@+id/txtMatLastName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/lastname"
+                    android:hint="@string/create_candidate_hint_lastname"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="Type the candidate's last name"
+                    app:helperText="@string/create_candidate_helper_lastname"
                     app:helperTextEnabled="true"
                     app:startIconDrawable="@drawable/face_24">
 
@@ -90,13 +90,13 @@
                     android:id="@+id/txtMatDocument"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/document"
+                    android:hint="@string/create_candidate_hint_document"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="10"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="Only numbers"
+                    app:helperText="@string/create_candidate_helper_document"
                     app:helperTextEnabled="true"
                     app:startIconDrawable="@drawable/numbers_24">
 
@@ -114,13 +114,13 @@
                     android:id="@+id/txtMatEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/email"
+                    android:hint="@string/create_candidate_hint_email"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="40"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="Candidate's email address"
+                    app:helperText="@string/create_candidate_helper_email"
                     app:helperTextEnabled="true"
                     app:startIconDrawable="@drawable/email_24">
 
@@ -128,7 +128,7 @@
                         android:id="@+id/email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription=""
+                        android:contentDescription="@null"
                         android:maxLength="40"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -137,13 +137,13 @@
                     android:id="@+id/txtMatFechaNac"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/birthday"
+                    android:hint="@string/create_candidate_hint_birthday"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="10"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="YYYY-MM-DD, Over 18 years"
+                    app:helperText="@string/create_candidate_helper_birthday"
                     app:helperTextEnabled="true"
                     app:startIconDrawable="@drawable/date_24">
 
@@ -161,13 +161,13 @@
                     android:id="@+id/txtMatPhone"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/phone"
+                    android:hint="@string/create_candidate_hint_phone"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="15"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="enter contact phone number"
+                    app:helperText="@string/create_candidate_helper_phone"
                     app:helperTextEnabled="true"
                     app:startIconDrawable="@drawable/phone_24">
 
@@ -184,13 +184,13 @@
                     android:id="@+id/txtMatCity"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/city"
+                    android:hint="@string/create_candidate_hint_city"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="40"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="City of residence"
+                    app:helperText="@string/create_candidate_helper_city"
                     app:helperTextEnabled="true"
                     app:startIconDrawable="@drawable/city_24">
 
@@ -207,13 +207,13 @@
                     android:id="@+id/txtMatAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="@string/address"
+                    android:hint="@string/create_candidate_hint_address"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="50"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
-                    app:helperText="Residence Address"
+                    app:helperText="@string/create_candidate_helper_address"
                     app:helperTextEnabled="true"
                     app:startIconDrawable="@drawable/location_on_24">
 
@@ -233,7 +233,7 @@
         android:id="@+id/btnCreate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Submit"
+        android:text="@string/create_candidate_submit"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

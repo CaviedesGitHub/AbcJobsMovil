@@ -1,41 +1,126 @@
 <resources>
     <string name="app_name">AbcJobsNav</string>
+    <string name="abc_jobs">ABC Jobs</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
-    <string name="ToDo">Por Hacer</string>
     <string name="language">Language</string>
     <string name="profile">Profile</string>
     <string name="exit">Exit</string>
     <string name="change">Change</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="ToDo">To Do</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="candidato">Candidato</string>
-    <string name="contacto">Contacto</string>
-    <string name="Titulo_entrevistas">Entrevistas del Candidato</string>
-    <string name="login">Ingresar</string>
-    <string name="username">Nombre de Usuario</string>
+
+    <!-- TODO: ERRORS -->
+    <string name="required_field">Required Field!</string>
+    <string name="login_unsuccessful_incorrect_password">Login Unsuccessful: Incorrect Password</string>
+    <string name="login_unsuccessful_wrong_user_name">Login Unsuccessful: Wrong user name</string>
+    <string name="login_unsuccessful">Login Unsuccessful: Network Error!!</string>
+
+    <string name="password_can_t_be_less_than_6">password can\'t be less than 6</string>
+    <string name="required_at_least_1_digit">Required at least 1 digit</string>
+    <string name="password_must_contain_upper_and_lower_case_letters">Password must contain upper and lower case letters</string>
+    <string name="_1_special_character_required">1 special character required</string>
+    <string name="passwords_don_t_match">Passwords don\'t match</string>
+    <string name="signup_unsuccessful">Signup Unsuccessful</string>
+
+    <string name="invalid_email">Invalid Email!</string>
+    <string name="invalid_date_yyyy_mm_dd">Invalid Date!: YYYY-MM-DD</string>
+    <string name="invalid_date_over_18">Invalid Date!: Over 18</string>
+    <string name="successfully_created_candidate">Candidate could not be created</string>
+
+    <string name="candidate_not_recovered">candidate not recovered</string>
+
+    <!-- TODO: LOGIN -->
+    <string name="login_title">Login</string>
+    <string name="hint_login_username">UserName</string>
+    <string name="helper_login_username">type the user name</string>
+    <string name="hint_login_password">PassWord</string>
+    <string name="helper_login_password">Type the password</string>
+    <string name="login_submit">Submit</string>
+    <string name="don_t_have_an_account_sign_up">Do not have an account? Sign up</string>
+    <string name="Forgot_your_password">You forgot the password?</string>
+
+    <!-- TODO: SIGNUP -->
+    <string name="signup_title">Signup</string>
+    <string name="hint_signup_username">User Name</string>
+    <string name="helper_signup_username">type the user name</string>
+    <string name="hint_signup_password">PassWord</string>
+    <string name="helper_signup_password">minimun 5, maximun 15</string>
+    <string name="hint_signup_password_confirm">Repeat Password</string>
+    <string name="helper_signup_password_confirm">minimun 5, maximun 15</string>
+    <string name="user_type">User Type</string>
+    <string name="candidate_type">Candidate</string>
+    <string name="company_type">Company</string>
+    <string name="abcjob_employee_type">ABCJob Employee</string>
+    <string name="signup_submit">Submit</string>
+    <string name="already_a_member_log_in">Already a member? Log In</string>
+
+    <!-- TODO: CREATE CANDIDATE -->
+    <string name="create_candidate_title">Create Candidate</string>
+    <string name="create_candidate_hint_name">Name</string>
+    <string name="create_candidate_helper_name">Type the candidate\'s name</string>
+    <string name="create_candidate_hint_lastname">LastName</string>
+    <string name="create_candidate_helper_lastname">Type the candidate\'s last name</string>
+    <string name="create_candidate_hint_document">Document</string>
+    <string name="create_candidate_helper_document">Only numbers</string>
+    <string name="create_candidate_hint_birthday">BirthDay</string>
+    <string name="create_candidate_helper_birthday">YYYY-MM-DD, Over 18 years</string>
+    <string name="create_candidate_hint_email">Email</string>
+    <string name="create_candidate_helper_email">Candidate\'s email address</string>
+    <string name="create_candidate_hint_phone">Phone</string>
+    <string name="create_candidate_helper_phone">Enter contact phone number</string>
+    <string name="create_candidate_hint_city">City</string>
+    <string name="create_candidate_helper_city">City of residence</string>
+    <string name="create_candidate_hint_address">Address</string>
+    <string name="create_candidate_helper_address">Residence Address</string>
+    <string name="create_candidate_submit">Submit</string>
+
+    <!-- TODO: CANDIDATE -->
+    <string name="candidate_title">Candidate</string>
+    <string name="candidate_document">Document:</string>
+    <string name="candidate_birthday">BirthDay:</string>
+    <string name="candidate_email">EMail:</string>
+    <string name="candidate_phone">Phone:</string>
+    <string name="candidate_city">City:</string>
+    <string name="candidate_address">Address:</string>
+    <string name="candidate_interviews">Interviews</string>
+    <string name="candidate_tests">Tests</string>
+
+    <!-- TODO: CANDIDATE INTERVIEWS -->
+    <string name="candidate_interviews_title">List of Interviews</string>
+    <string name="candidate_interviews_datetime">DateTime:</string>
+    <string name="candidate_interviews_profile">Profile:</string>
+    <string name="candidate_interviews_project">Project:</string>
+    <string name="candidate_interviews_company">Company:</string>
+    <string name="candidate_interviews_contact">Contact:</string>
+    <string name="no_interviews_were_found">No interviews were found</string>
+    <string name="interview_list_not_retrieved">Interview list not retrieved</string>
+
+    <!-- TODO: RESULT INTERVIEW -->
+    <string name="result_interview_title">Interview</string>
+    <string name="result_interview_datetime">DateTime:</string>
+    <string name="result_interview_profile">Profile:</string>
+    <string name="result_interview_project">Project:</string>
+    <string name="result_interview_company">Company:</string>
+    <string name="result_interview_contact">Contact:</string>
+    <string name="result_interview_result">Result</string>
+    <string name="result_interview_evaluation">Evaluation:</string>
+    <string name="result_view_annotations">Annotations</string>
+    <string name="interview_not_retrieved">Interview not retrieved</string>
+
+    <!-- TODO: OTROS -->
+    <string name="candidato">Candidate</string>
+    <string name="contacto">Contact</string>
+    <string name="Titulo_entrevistas">Interviews of Candidate</string>
+    <string name="login">Login</string>
+    <string name="username">UserName</string>
     <string name="password">PassWord</string>
-    <string name="olvidaste_la_clave"><u>Olvidaste la Clave?</u></string>
-    <string name="inscribete"><u>INSCRIBETE</u></string>
+    <string name="olvidaste_la_clave">You forgot the password?</string>
+    <string name="inscribete"><u>Sign Up</u></string>
     <string name="title_login">Login</string>
     <string name="navegar">navegar</string>
-    <string name="datos_candidato">Datos Candidato</string>
+    <string name="datos_candidato">Candidate Data</string>
     <string name="interviews">Interviews</string>
     <string name="tests">Tests</string>
-    <string name="don_t_have_an_account_sign_up">Do not have an account? sign up</string>
-    <string name="already_a_member_log_in">Already a member? Log In</string>
-    <string name="create_candidate">Create Candidate</string>
-    <string name="name">Name</string>
-    <string name="lastname">LastName</string>
-    <string name="document">Document</string>
-    <string name="birthday">BirthDay</string>
-    <string name="email">Email</string>
-    <string name="phone">Phone</string>
-    <string name="city">City</string>
-    <string name="address">Address</string>
-    <string name="submit">Submit</string>
-    <string name="user_type">User Type</string>
-    <string name="abc_jobs">ABC Jobs</string>
-    <string name="no_interviews_were_found">No interviews were found</string>
 </resources>

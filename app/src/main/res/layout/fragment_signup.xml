@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:layout_marginBottom="10dp"
-        android:text="Signup"
+        android:text="@string/signup_title"
         android:textColor="@color/black"
         android:textStyle="bold"
         android:textSize="40sp" />
@@ -36,9 +36,9 @@
                 android:layout_marginTop="5dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="User Name"
+                android:hint="@string/hint_signup_username"
                 app:helperTextEnabled="true"
-                app:helperText="type the user name"
+                app:helperText="@string/helper_signup_username"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
                 app:errorEnabled="true">
@@ -59,9 +59,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/password"
+                android:hint="@string/hint_signup_password"
                 app:helperTextEnabled="true"
-                app:helperText="minimun 5, maximun 15"
+                app:helperText="@string/helper_signup_password"
                 app:counterEnabled="true"
                 app:counterMaxLength="15">
 
@@ -81,9 +81,9 @@
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Repeat Password"
+                android:hint="@string/hint_signup_password_confirm"
                 app:helperTextEnabled="true"
-                app:helperText="minimun 5, maximun 15"
+                app:helperText="@string/helper_signup_password_confirm"
                 app:counterEnabled="true"
                 app:counterMaxLength="15">
 
@@ -120,7 +120,7 @@
                     android:layout_height="match_parent"
                     android:layout_marginVertical="0dp"
                     android:paddingVertical="0dp"
-                    android:text="Candidate"/>
+                    android:text="@string/candidate_type"/>
                 <RadioButton
                     android:id="@+id/radio_button_2"
                     android:layout_width="match_parent"
@@ -128,7 +128,7 @@
                     android:layout_marginVertical="0dp"
                     android:paddingVertical="0dp"
                     android:enabled="false"
-                    android:text="Company"/>
+                    android:text="@string/company_type"/>
                 <RadioButton
                     android:id="@+id/radio_button_3"
                     android:layout_width="match_parent"
@@ -136,7 +136,7 @@
                     android:layout_marginVertical="0dp"
                     android:paddingVertical="0dp"
                     android:enabled="false"
-                    android:text="ABCJob Employee"/>
+                    android:text="@string/abcjob_employee_type"/>
             </RadioGroup>
 
             <Button
@@ -144,7 +144,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:text="Submit"
+                android:text="@string/signup_submit"
                 />
 
             <Button

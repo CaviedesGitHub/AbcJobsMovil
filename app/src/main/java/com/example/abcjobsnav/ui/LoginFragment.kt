@@ -11,19 +11,13 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.Observer
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import com.example.abcjobsnav.R
 import com.example.abcjobsnav.databinding.FragmentLoginBinding
 import com.example.abcjobsnav.models.Login
 import com.example.abcjobsnav.viewmodels.LoginViewModel
-import kotlinx.coroutines.launch
-import android.util.Patterns
-import com.example.abcjobsnav.ui.FieldValidators.isStringContainNumber
-import com.example.abcjobsnav.ui.FieldValidators.isStringContainSpecialCharacter
-import com.example.abcjobsnav.ui.FieldValidators.isStringLowerAndUpperCase
-import com.example.abcjobsnav.ui.FieldValidators.isValidEmail
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -172,12 +166,54 @@ class LoginFragment : Fragment() {
 
     private fun onNetworkError() {
         if(!viewModel.isNetworkErrorShown.value!!) {
+            Log.d("Testing Login errorNet", "login")
             Toast.makeText(activity, "Login Unsuccessful", Toast.LENGTH_LONG).show()
             viewModel.onNetworkErrorShown()
         }
     }
 
     private fun onNetworkErrorMsg(msg: String) {
+        Log.d("Testing Login 000 funMensaje", msg)
+        if (!msg.isNullOrEmpty()){
+            val delimiter = "$"
+            val values=msg.split(delimiter)
+            val msg1:String=values[0]
+            val msgBackend:String=values[1]
+            Log.d("Testing Login msg1", msg1)
+            Log.d("Testing Login msgBackend", msgBackend)
+            var mensaje:String=""
+            if(!viewModel.isNetworkErrorShown.value!!) {
+                if (!msg.contains("nullllll")){
+                    // mensaje="Signup Unsuccessful: "+msgBackend
+                    if (msg.contains("AuthFailureError")){
+                        mensaje= getString(R.string.login_unsuccessful_incorrect_password)
+                    }
+                    else if(msg.contains("ClientError")){
+                        mensaje= getString(R.string.login_unsuccessful_wrong_user_name)
+                    }
+                    else{
+                        val delimiter = "."
+                        val values2=msg1.split(delimiter)
+                        val lenguaje=lenguajeActivo()
+                        if (lenguaje=="español"){
+                            mensaje=getString(R.string.login_unsuccessful)+": "+msgBackend //values2[values2.size-1]
+                        }
+                        else{
+                            mensaje=getString(R.string.login_unsuccessful)
+                        }
+                    }
+                }
+                else{
+                    val delimiter = "."
+                    val values3=msg1.split(delimiter)
+                    mensaje=getString(R.string.login_unsuccessful)+"=>"+values3[values3.size-1]
+                }
+                Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
+                viewModel.onNetworkErrorShown()
+            }
+        }
+    }
+    private fun onNetworkErrorMsgIni(msg: String) {
         Log.d("Testing funMensaje", msg)
         if (!msg.isNullOrEmpty()){
             val delimiter = "$"
@@ -189,33 +225,34 @@ class LoginFragment : Fragment() {
             var mensaje:String=""
             if(!viewModel.isNetworkErrorShown.value!!) {
                 if (!msg.contains("nullllll")){
-                    mensaje="Login Unsuccessful: "+msgBackend  //"User already exists"  //Unauthorized
+                    // mensaje="Signup Unsuccessful: "+msgBackend
+                    if (msg.contains("AuthFailureError")){
+                        mensaje= getString(R.string.login_unsuccessful_incorrect_password)
+                        Log.d("Testing mensaje", mensaje)
+                    }
+                    else if(msg.contains("ClientError")){
+                        mensaje= getString(R.string.login_unsuccessful_wrong_user_name)
+                        Log.d("Testing mensaje", mensaje)
+                    }
+                    else{
+                        val delimiter = "."
+                        val values2=msg1.split(delimiter)
+                        val lenguaje=lenguajeActivo()
+                        Log.d("Testing lenguaje login", lenguaje)
+                        if (lenguaje=="español"){
+                            mensaje=getString(R.string.login_unsuccessful)+": "+values2[values2.size-1]
+                            Log.d("Testing mensaje", mensaje)
+                        }
+                        else{
+                            mensaje=getString(R.string.login_unsuccessful)
+                            Log.d("Testing mensaje", mensaje)
+                        }
+                    }
                 }
                 else{
                     val delimiter = "."
                     val values=msg1.split(delimiter)
-                    mensaje="Login Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
-                }
-                Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
-                viewModel.onNetworkErrorShown()
-            }
-        }
-    }
-    private fun onNetworkErrorMsgIni(msg: String) {
-        Log.d("Testing funMensaje", msg)
-        var mensaje:String=""
-        if (!msg.isNullOrEmpty()){
-            if(!viewModel.isNetworkErrorShown.value!!) {
-                if (msg.contains("AuthFailureError")){
-                    mensaje="Login Unsuccessful: Incorrect Password"
-                }
-                else if(msg.contains("ClientError")){
-                    mensaje="Login Unsuccessful: Wrong user name"
-                }
-                else{
-                    val delimiter = "."
-                    val values=msg.split(delimiter)
-                    mensaje="Login Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    mensaje=getString(R.string.login_unsuccessful)  //"Signup Unsuccessful: "+values[values.size-1]
                 }
                 Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
                 viewModel.onNetworkErrorShown()
@@ -237,7 +274,7 @@ class LoginFragment : Fragment() {
     private fun validateUserName(): Boolean {
         Log.d("testing", "inicio validateUserName")
         if (binding.txtUserName.text.toString().trim().isEmpty()) {
-            binding.txtFieldUsuario.error = "Required Field!"
+            binding.txtFieldUsuario.error = getString(R.string.required_field)
             binding.txtUserName.requestFocus()
             return false
         } else {
@@ -248,7 +285,7 @@ class LoginFragment : Fragment() {
 
     private fun validatePassword(): Boolean {
         if (binding.txtPassword.text.toString().trim().isEmpty()) {
-            binding.txtFieldClave.error = "Required Field!"
+            binding.txtFieldClave.error = getString(R.string.required_field)
             binding.txtPassword.requestFocus()
             return false
         }
@@ -256,6 +293,10 @@ class LoginFragment : Fragment() {
             binding.txtFieldClave.isErrorEnabled = false
         }
         return true
+    }
+
+    private fun lenguajeActivo(): String {
+        return Locale.getDefault().getDisplayLanguage()
     }
 
     inner class TextFieldValidation(private val view: View) : TextWatcher {

@@ -14,6 +14,7 @@ import com.example.abcjobsnav.models.Entrevista
 import androidx.lifecycle.Observer
 import com.example.abcjobsnav.databinding.FragmentResultadoEntrevistaBinding
 import com.example.abcjobsnav.viewmodels.ResultEvViewModel
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -127,17 +128,33 @@ class ResultadoEntrevistaFragment : Fragment() {
             var mensaje:String=""
             if(!viewModel.isNetworkErrorShown.value!!) {
                 if (!msg.contains("nullllll")){
-                    mensaje="Signup Unsuccessful: "+msgBackend  //"User already exists"  //Unauthorized
+                    val lenguaje=lenguajeActivo()
+                    if (lenguaje=="español"){
+                        mensaje=getString(R.string.interview_not_retrieved)+": "+msgBackend  //"User already exists"  //Unauthorized
+                    }
+                    else{
+                        mensaje=getString(R.string.interview_not_retrieved)
+                    }
                 }
                 else{
                     val delimiter = "."
                     val values=msg1.split(delimiter)
-                    mensaje="Signup Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    val lenguaje=lenguajeActivo()
+                    if (lenguaje=="español"){
+                        mensaje=getString(R.string.interview_not_retrieved)
+                    }
+                    else{
+                        mensaje=getString(R.string.interview_not_retrieved)+": "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    }
                 }
                 Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
                 viewModel.onNetworkErrorShown()
             }
         }
+    }
+
+    private fun lenguajeActivo(): String {
+        return Locale.getDefault().getDisplayLanguage()
     }
 
     companion object {

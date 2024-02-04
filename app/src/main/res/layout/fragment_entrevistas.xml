@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         app:layout_constraintTop_toTopOf="parent"
-        android:text="List of Interviews"
+        android:text="@string/candidate_interviews_title"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="40sp"

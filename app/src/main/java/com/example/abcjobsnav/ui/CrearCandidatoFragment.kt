@@ -28,6 +28,7 @@ import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.text.SimpleDateFormat
 import java.util.Date
+import java.util.Locale
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -178,12 +179,24 @@ class CrearCandidatoFragment : Fragment() {
             var mensaje:String=""
             if(!viewModel.isNetworkErrorShown.value!!) {
                 if (!msg.contains("nullllll")){
-                    mensaje="Signup Unsuccessful: "+msgBackend  //"User already exists"  //Unauthorized
+                    val lenguaje=lenguajeActivo()
+                    if (lenguaje=="español"){
+                        mensaje=getString(R.string.successfully_created_candidate)+" :"+msgBackend  //"User already exists"  //Unauthorized
+                    }
+                    else {
+                        mensaje=getString(R.string.successfully_created_candidate)
+                    }
                 }
                 else{
                     val delimiter = "."
                     val values=msg1.split(delimiter)
-                    mensaje="Signup Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    val lenguaje=lenguajeActivo()
+                    if (lenguaje=="español"){
+                        mensaje=getString(R.string.successfully_created_candidate)
+                    }
+                    else{
+                        mensaje=getString(R.string.successfully_created_candidate)+" :"+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    }
                 }
                 Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
                 viewModel.onNetworkErrorShown()
@@ -204,7 +217,7 @@ class CrearCandidatoFragment : Fragment() {
 
     private fun validateName(): Boolean {
         if (binding.name.text.toString().trim().isEmpty()) {
-            binding.txtMatName.error = "Required Field!"
+            binding.txtMatName.error = getString(R.string.required_field)
             binding.name.requestFocus()
             return false
         } else {
@@ -215,7 +228,7 @@ class CrearCandidatoFragment : Fragment() {
 
     private fun validateLastName(): Boolean {
         if (binding.lastname.text.toString().trim().isEmpty()) {
-            binding.txtMatLastName.error = "Required Field!"
+            binding.txtMatLastName.error = getString(R.string.required_field)
             binding.lastname.requestFocus()
             return false
         } else {
@@ -226,7 +239,7 @@ class CrearCandidatoFragment : Fragment() {
 
     private fun validateDocument(): Boolean {
         if (binding.document.text.toString().trim().isEmpty()) {
-            binding.txtMatDocument.error = "Required Field!"
+            binding.txtMatDocument.error = getString(R.string.required_field)
             binding.document.requestFocus()
             return false
         } else {
@@ -237,11 +250,11 @@ class CrearCandidatoFragment : Fragment() {
 
     private fun validateEmail(): Boolean {
         if (binding.email.text.toString().trim().isEmpty()) {
-            binding.txtMatEmail.error = "Required Field!"
+            binding.txtMatEmail.error = getString(R.string.required_field)
             binding.email.requestFocus()
             return false
         } else if (!isValidEmail(binding.email.text.toString())) {
-            binding.txtMatEmail.error = "Invalid Email!"
+            binding.txtMatEmail.error = getString(R.string.invalid_email)
             binding.email.requestFocus()
             return false
         } else {
@@ -258,11 +271,11 @@ class CrearCandidatoFragment : Fragment() {
             //binding.fechanac.requestFocus()
             //return false
         } else if (!isValidFecha(binding.fechanac.text.toString())) {
-            binding.txtMatFechaNac.error = "Invalid Date!: YYYY-MM-DD"
+            binding.txtMatFechaNac.error = getString(R.string.invalid_date_yyyy_mm_dd)
             binding.fechanac.requestFocus()
             return false
         } else if (!isValidFecha18(binding.fechanac.text.toString())) {
-            binding.txtMatFechaNac.error = "Invalid Date!: Over 18"
+            binding.txtMatFechaNac.error = getString(R.string.invalid_date_over_18)
             binding.fechanac.requestFocus()
             return false
         }
@@ -306,6 +319,10 @@ class CrearCandidatoFragment : Fragment() {
         catch(e: Exception){
             return false
         }
+    }
+
+    private fun lenguajeActivo(): String {
+        return Locale.getDefault().getDisplayLanguage()
     }
 
     inner class TextFieldValidation(private val view: View) : TextWatcher {

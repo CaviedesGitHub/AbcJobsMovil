@@ -22,7 +22,7 @@ import com.example.abcjobsnav.ui.FieldValidators.isStringContainNumber
 import com.example.abcjobsnav.ui.FieldValidators.isStringContainSpecialCharacter
 import com.example.abcjobsnav.ui.FieldValidators.isStringLowerAndUpperCase
 import com.example.abcjobsnav.ui.FieldValidators.isValidEmail
-
+import java.util.Locale
 
 
 // TODO: Rename parameter arguments, choose names that match
@@ -146,12 +146,25 @@ class SignupFragment : Fragment() {
             var mensaje:String=""
             if(!viewModel.isNetworkErrorShown.value!!) {
                 if (!msg.contains("nullllll")){
-                    mensaje="Signup Unsuccessful: "+msgBackend  //"User already exists"  //Unauthorized
+                    val lenguaje=lenguajeActivo()
+                    if (lenguaje=="español"){
+                        mensaje=getString(R.string.signup_unsuccessful)+": "+msgBackend  //"User already exists"  //Unauthorized
+                    }
+                    else {
+                        mensaje=getString(R.string.signup_unsuccessful)
+                    }
                 }
                 else{
                     val delimiter = "."
                     val values=msg1.split(delimiter)
-                    mensaje="Signup Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    val lenguaje=lenguajeActivo()
+                    if (lenguaje=="español"){
+                        mensaje=getString(R.string.signup_unsuccessful)
+                    }
+                    else{
+                        mensaje=getString(R.string.signup_unsuccessful)+": "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    }
+
                 }
                 Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
                 viewModel.onNetworkErrorShown()
@@ -179,7 +192,7 @@ class SignupFragment : Fragment() {
     private fun validateUserName(): Boolean {
         Log.d("testing", "inicio validateUserName")
         if (binding.userName.text.toString().trim().isEmpty()) {
-            binding.textMatNameUser.error = "Required Field!"
+            binding.textMatNameUser.error = getString(R.string.required_field)
             binding.userName.requestFocus()
             return false
         } else {
@@ -216,24 +229,24 @@ class SignupFragment : Fragment() {
      */
     private fun validatePassword(): Boolean {
         if (binding.password.text.toString().trim().isEmpty()) {
-            binding.txtMatPassword.error = "Required Field!"
+            binding.txtMatPassword.error = getString(R.string.required_field)
             binding.password.requestFocus()
             return false
         } else if (binding.password.text.toString().length < 6) {
-            binding.txtMatPassword.error = "password can't be less than 6"
+            binding.txtMatPassword.error = getString(R.string.password_can_t_be_less_than_6)
             binding.password.requestFocus()
             return false
         } else if (!isStringContainNumber(binding.password.text.toString())) {
-            binding.txtMatPassword.error = "Required at least 1 digit"
+            binding.txtMatPassword.error = getString(R.string.required_at_least_1_digit)
             binding.password.requestFocus()
             return false
         } else if (!isStringLowerAndUpperCase(binding.password.text.toString())) {
             binding.txtMatPassword.error =
-                "Password must contain upper and lower case letters"
+                getString(R.string.password_must_contain_upper_and_lower_case_letters)
             binding.password.requestFocus()
             return false
         } else if (!isStringContainSpecialCharacter(binding.password.text.toString())) {
-            binding.txtMatPassword.error = "1 special character required"
+            binding.txtMatPassword.error = getString(R.string._1_special_character_required)
             binding.password.requestFocus()
             return false
         } else {
@@ -249,12 +262,12 @@ class SignupFragment : Fragment() {
     private fun validateConfirmPassword(): Boolean {
         when {
             binding.confirmPassword.text.toString().trim().isEmpty() -> {
-                binding.txtMatPasswordAgain.error = "Required Field!"
+                binding.txtMatPasswordAgain.error = getString(R.string.required_field)
                 binding.confirmPassword.requestFocus()
                 return false
             }
             binding.confirmPassword.text.toString() != binding.password.text.toString() -> {
-                binding.txtMatPasswordAgain.error = "Passwords don't match"
+                binding.txtMatPasswordAgain.error = getString(R.string.passwords_don_t_match)
                 binding.confirmPassword.requestFocus()
                 return false
             }
@@ -263,6 +276,10 @@ class SignupFragment : Fragment() {
             }
         }
         return true
+    }
+
+    private fun lenguajeActivo(): String {
+        return Locale.getDefault().getDisplayLanguage()
     }
 
     inner class TextFieldValidation(private val view: View) : TextWatcher {

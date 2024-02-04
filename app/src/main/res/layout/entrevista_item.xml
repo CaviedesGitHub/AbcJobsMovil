@@ -55,7 +55,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:text="DateTime: " />
+                            android:text="@string/candidate_interviews_datetime" />
                         <TextView
                             android:id="@+id/txtCuando"
                             android:layout_width="match_parent"
@@ -73,7 +73,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:text="Profile: " />
+                            android:text="@string/candidate_interviews_profile" />
                         <TextView
                             android:id="@+id/txtPerfil"
                             android:layout_width="wrap_content"
@@ -91,7 +91,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:text="Project: " />
+                            android:text="@string/candidate_interviews_project" />
                         <TextView
                             android:id="@+id/txtProyecto"
                             android:layout_width="wrap_content"
@@ -109,7 +109,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:text="Company: " />
+                            android:text="@string/candidate_interviews_company" />
                         <TextView
                             android:id="@+id/txtEmpresa"
                             android:layout_width="wrap_content"
@@ -127,7 +127,7 @@
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:textStyle="bold"
-                            android:text="Contact: " />
+                            android:text="@string/candidate_interviews_contact" />
                         <TextView
                             android:id="@+id/txtContacto"
                             android:layout_width="wrap_content"

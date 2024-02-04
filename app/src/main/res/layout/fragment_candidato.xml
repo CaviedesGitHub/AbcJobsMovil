@@ -18,7 +18,7 @@
             android:layout_height="wrap_content"
             android:textAlignment="center"
             android:layout_marginBottom="10dp"
-            android:text="Candidate"
+            android:text="@string/candidate_title"
             android:textStyle="bold"
             android:textSize="40sp" />
 
@@ -82,7 +82,7 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         android:textStyle="bold"
-                        android:text="Document:" />
+                        android:text="@string/candidate_document" />
 
                     <TextView
                         android:id="@+id/txtDocumento"
@@ -90,7 +90,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/lblDocumento"
+                        app:layout_constraintLeft_toRightOf="@id/lblDocumento"
                         android:text="@{candidato.documento}" />
 
                     <TextView
@@ -101,7 +101,7 @@
                         app:layout_constraintTop_toBottomOf="@id/lblDocumento"
                         app:layout_constraintStart_toStartOf="parent"
                         android:textStyle="bold"
-                        android:text="BirthDay:" />
+                        android:text="@string/candidate_birthday" />
 
                     <TextView
                         android:id="@+id/txtFechaNac"
@@ -120,7 +120,7 @@
                         app:layout_constraintTop_toBottomOf="@id/lblFechaNac"
                         app:layout_constraintStart_toStartOf="parent"
                         android:textStyle="bold"
-                        android:text="EMail:" />
+                        android:text="@string/candidate_email" />
 
                     <TextView
                         android:id="@+id/txtMail"
@@ -139,7 +139,7 @@
                         app:layout_constraintTop_toBottomOf="@id/lblMail"
                         app:layout_constraintStart_toStartOf="parent"
                         android:textStyle="bold"
-                        android:text="Phone:" />
+                        android:text="@string/candidate_phone" />
 
                     <TextView
                         android:id="@+id/txtTelefono"
@@ -158,7 +158,7 @@
                         app:layout_constraintTop_toBottomOf="@id/lblTelefono"
                         app:layout_constraintStart_toStartOf="parent"
                         android:textStyle="bold"
-                        android:text="City:" />
+                        android:text="@string/candidate_city" />
 
                     <TextView
                         android:id="@+id/txtCiudad"
@@ -177,7 +177,7 @@
                         app:layout_constraintTop_toBottomOf="@id/lblCiudad"
                         app:layout_constraintStart_toStartOf="parent"
                         android:textStyle="bold"
-                        android:text="Address:" />
+                        android:text="@string/candidate_address" />
 
                     <TextView
                         android:id="@+id/txtDireccion"
@@ -199,7 +199,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="0dp"
                         android:backgroundTint="@color/design_default_color_primary"
-                        android:text="@string/interviews"
+                        android:text="@string/candidate_interviews"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
 
@@ -210,7 +210,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="0dp"
                         android:backgroundTint="@color/design_default_color_primary"
-                        android:text="@string/tests"
+                        android:text="@string/candidate_tests"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
                 </LinearLayout>

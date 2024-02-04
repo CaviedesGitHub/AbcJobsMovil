@@ -46,13 +46,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:hint="User Name"
+                android:hint="@string/hint_login_username"
                 android:textColorHint="@color/black"
                 app:expandedHintEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
                 app:helperTextEnabled="true"
-                app:helperText="type the user name"
+                app:helperText="@string/helper_login_username"
                 app:counterEnabled="true"
                 app:counterMaxLength="20"
                 app:errorEnabled="true">
@@ -62,7 +62,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text=""
-                    android:contentDescription=""
+                    android:contentDescription="@null"
                     android:maxLength="20"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -73,12 +73,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
-                android:hint="@string/password"
+                android:hint="@string/hint_login_password"
                 app:expandedHintEnabled="true"
                 app:hintAnimationEnabled="true"
                 app:hintEnabled="true"
                 app:helperTextEnabled="true"
-                app:helperText="Type the password"
+                app:helperText="@string/helper_login_password"
                 app:counterEnabled="true"
                 app:counterMaxLength="15">
 
@@ -99,7 +99,7 @@
                 android:textAlignment="center"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:text="@string/submit" />
+                android:text="@string/login_submit" />
 
             <Button
                 android:id="@+id/textButtonSignup"

@@ -15,6 +15,7 @@ import com.example.abcjobsnav.viewmodels.CandidatoViewModel
 import com.example.abcjobsnav.models.Candidato
 import androidx.lifecycle.Observer
 import com.squareup.picasso.Picasso
+import java.util.Locale
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -146,12 +147,24 @@ class CandidatoFragment : Fragment() {
             var mensaje:String=""
             if(!viewModel.isNetworkErrorShown.value!!) {
                 if (!msg.contains("nullllll")){
-                    mensaje="Signup Unsuccessful: "+msgBackend  //"User already exists"  //Unauthorized
+                    val lenguaje=lenguajeActivo()
+                    if (lenguaje=="español"){
+                        mensaje=getString(R.string.candidate_not_recovered)+": "+msgBackend  //"User already exists"  //Unauthorized
+                    }
+                    else{
+                        mensaje=getString(R.string.candidate_not_recovered)
+                    }
                 }
                 else{
                     val delimiter = "."
                     val values=msg1.split(delimiter)
-                    mensaje="Signup Unsuccessful: "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    val lenguaje=lenguajeActivo()
+                    if (lenguaje=="español"){
+                        mensaje=getString(R.string.candidate_not_recovered)
+                    }
+                    else{
+                        mensaje=getString(R.string.candidate_not_recovered)+": "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                    }
                 }
                 Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
                 viewModel.onNetworkErrorShown()
@@ -159,6 +172,9 @@ class CandidatoFragment : Fragment() {
         }
     }
 
+    private fun lenguajeActivo(): String {
+        return Locale.getDefault().getDisplayLanguage()
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
