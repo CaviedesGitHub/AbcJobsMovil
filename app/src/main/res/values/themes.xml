@@ -17,4 +17,9 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="Theme.AbcJobsNav.title1" parent="ThemeOverlay.AppCompat.ActionBar">
+        <item name="colorPrimary">@color/white</item>
+    </style>
+    <style name="Theme.AbcJobsNav.popup" parent="ThemeOverlay.AppCompat.Light">
+    </style>
 </resources>

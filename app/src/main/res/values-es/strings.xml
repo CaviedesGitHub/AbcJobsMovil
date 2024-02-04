@@ -21,7 +21,7 @@
     <string name="password_can_t_be_less_than_6">Contraseña no puede ser menor a 6</string>
     <string name="required_at_least_1_digit">Requiere al menos un digito</string>
     <string name="password_must_contain_upper_and_lower_case_letters">Contraseña debe contener mayusculas y minusculas</string>
-    <string name="_1_special_character_required">Se requiere un caracter especial</string>
+    <string name="_1_special_character_required">Se requiere un carácter especial</string>
     <string name="passwords_don_t_match">Contraseñas no concuerdan</string>
     <string name="signup_unsuccessful">Registro NO exitoso</string>
 
@@ -47,7 +47,7 @@
     <string name="hint_signup_username">Nombre de Usuario</string>
     <string name="helper_signup_username">Digite el nombre de usuario</string>
     <string name="hint_signup_password">Contraseña</string>
-    <string name="helper_signup_password">minimo 5, maximo 15</string>
+    <string name="helper_signup_password">mínimo 5, máximo 15</string>
     <string name="hint_signup_password_confirm">Confirmar contraseña</string>
     <string name="helper_signup_password_confirm">Repita la contraseña</string>
     <string name="user_type">Tipo de Usuario</string>
@@ -64,7 +64,7 @@
     <string name="create_candidate_hint_lastname">Apellidos</string>
     <string name="create_candidate_helper_lastname">Apellidos del candidato</string>
     <string name="create_candidate_hint_document">Document0</string>
-    <string name="create_candidate_helper_document">Numeros unicamente</string>
+    <string name="create_candidate_helper_document">Numeros únicamente</string>
     <string name="create_candidate_hint_birthday">Fecha Nac</string>
     <string name="create_candidate_helper_birthday">YYYY-MM-DD, Mayores de 18 años</string>
     <string name="create_candidate_hint_email">Correo Electronico</string>
@@ -87,6 +87,7 @@
     <string name="candidate_address">Direccion:</string>
     <string name="candidate_interviews">Entrevistas</string>
     <string name="candidate_tests">Pruebas</string>
+    <string name="candidato_image">Imagen del Candidato</string>
 
     <!-- TODO: CANDIDATE INTERVIEWS -->
     <string name="candidate_interviews_title">Lista de Entrevistas</string>

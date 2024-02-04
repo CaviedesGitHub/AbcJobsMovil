@@ -86,6 +86,7 @@
     <string name="candidate_address">Address:</string>
     <string name="candidate_interviews">Interviews</string>
     <string name="candidate_tests">Tests</string>
+    <string name="candidato_image">Candidate Image</string>
 
     <!-- TODO: CANDIDATE INTERVIEWS -->
     <string name="candidate_interviews_title">List of Interviews</string>

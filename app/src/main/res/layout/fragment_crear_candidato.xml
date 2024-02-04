@@ -17,27 +17,22 @@
         android:text="@string/create_candidate_title"
         android:textColor="@color/black"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="40dp" />
+        android:textSize="40sp" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/padreScroll"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:orientation="vertical"
         app:layout_constraintBottom_toTopOf="@id/btnCreate"
         app:layout_constraintTop_toBottomOf="@id/titleCreateCand">
 
-        <ScrollView
-            android:id="@+id/scrollPanel"
-            android:isScrollContainer="false"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
                 android:orientation="vertical">
 
                 <com.google.android.material.textfield.TextInputLayout
@@ -45,6 +40,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/create_candidate_hint_name"
+                    android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
@@ -52,6 +48,11 @@
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_name"
                     app:helperTextEnabled="true"
+                    app:counterTextColor="@color/black"
+                    app:helperTextTextColor="@color/black"
+                    android:background="@color/white"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:hintTextColor="@color/black"
                     app:startIconDrawable="@drawable/face_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -60,6 +61,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription=""
                         android:maxLength="30"
+                        android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -68,6 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/create_candidate_hint_lastname"
+                    android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="30"
@@ -75,6 +78,11 @@
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_lastname"
                     app:helperTextEnabled="true"
+                    app:counterTextColor="@color/black"
+                    app:helperTextTextColor="@color/black"
+                    android:background="@color/white"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:hintTextColor="@color/black"
                     app:startIconDrawable="@drawable/face_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -83,6 +91,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription=""
                         android:maxLength="30"
+                        android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -91,6 +100,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/create_candidate_hint_document"
+                    android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="10"
@@ -98,6 +108,11 @@
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_document"
                     app:helperTextEnabled="true"
+                    app:counterTextColor="@color/black"
+                    app:helperTextTextColor="@color/black"
+                    android:background="@color/white"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:hintTextColor="@color/black"
                     app:startIconDrawable="@drawable/numbers_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -107,6 +122,7 @@
                         android:inputType="number"
                         android:contentDescription=""
                         android:maxLength="10"
+                        android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -115,6 +131,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/create_candidate_hint_email"
+                    android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="40"
@@ -122,6 +139,11 @@
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_email"
                     app:helperTextEnabled="true"
+                    app:counterTextColor="@color/black"
+                    app:helperTextTextColor="@color/black"
+                    android:background="@color/white"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:hintTextColor="@color/black"
                     app:startIconDrawable="@drawable/email_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -130,6 +152,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription="@null"
                         android:maxLength="40"
+                        android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,6 +161,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/create_candidate_hint_birthday"
+                    android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="10"
@@ -145,6 +169,11 @@
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_birthday"
                     app:helperTextEnabled="true"
+                    app:counterTextColor="@color/black"
+                    app:helperTextTextColor="@color/black"
+                    android:background="@color/white"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:hintTextColor="@color/black"
                     app:startIconDrawable="@drawable/date_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -154,6 +183,7 @@
                         android:contentDescription=""
                         android:maxLength="10"
                         android:inputType="date"
+                        android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -162,6 +192,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/create_candidate_hint_phone"
+                    android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="15"
@@ -169,6 +200,11 @@
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_phone"
                     app:helperTextEnabled="true"
+                    app:counterTextColor="@color/black"
+                    app:helperTextTextColor="@color/black"
+                    android:background="@color/white"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:hintTextColor="@color/black"
                     app:startIconDrawable="@drawable/phone_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -177,6 +213,7 @@
                         android:layout_height="wrap_content"
                         android:contentDescription=""
                         android:maxLength="15"
+                        android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -185,6 +222,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/create_candidate_hint_city"
+                    android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="40"
@@ -192,14 +230,21 @@
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_city"
                     app:helperTextEnabled="true"
+                    app:counterTextColor="@color/black"
+                    app:helperTextTextColor="@color/black"
+                    android:background="@color/white"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:hintTextColor="@color/black"
                     app:startIconDrawable="@drawable/city_24">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/city"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:contentDescription=""
+                        android:contentDescription="@null"
                         android:maxLength="40"
+                        android:backgroundTint="@color/GrisClaro"
+                        android:textColor="@color/black"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -208,6 +253,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/create_candidate_hint_address"
+                    android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
                     app:counterMaxLength="50"
@@ -215,6 +261,11 @@
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_address"
                     app:helperTextEnabled="true"
+                    app:counterTextColor="@color/black"
+                    app:helperTextTextColor="@color/black"
+                    android:background="@color/white"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:hintTextColor="@color/black"
                     app:startIconDrawable="@drawable/location_on_24">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -223,10 +274,10 @@
                         android:layout_height="wrap_content"
                         android:contentDescription=""
                         android:maxLength="50"
+                        android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
-        </ScrollView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <Button

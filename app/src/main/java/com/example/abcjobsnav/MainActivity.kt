@@ -1,26 +1,21 @@
 package com.example.abcjobsnav
 
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.FrameLayout
 import android.widget.Toast
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.abcjobsnav.databinding.ActivityMainBinding
-import android.util.Log
-import com.google.android.material.snackbar.Snackbar
-import androidx.navigation.findNavController
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.example.abcjobsnav.R
-
 
 class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
@@ -31,9 +26,9 @@ class MainActivity : AppCompatActivity() {
 
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setSupportActionBar(findViewById(R.id.my_toolbar))
+        setSupportActionBar(binding.myToolbar)
 
-
+        //binding.myToolbar.setTitleTextColor(Color.WHITE) //Color.parseColor("#00FF00") "#00FF0000"
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
         // Instantiate the navController using the NavHostFragment
@@ -48,12 +43,43 @@ class MainActivity : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
             )
         )
         setupActionBarWithNavController(navController2, appBarConfiguration)
         navView.setupWithNavController(navController2)
+
         //finishAffinity()
+        val width = this.resources.configuration.screenWidthDp
+        val height = this.resources.configuration.screenHeightDp
+        val widthPixels = this.resources.displayMetrics.widthPixels
+        val heightPixels = this.resources.displayMetrics.heightPixels
+        val wtb = binding.myToolbar.width
+        val htb = binding.myToolbar.height
+        val bwtb = binding.navView.width
+        val bhtb = binding.navView.height
+        val widthScroll=binding.myScroll.width
+        Log.d("Testing width scroll", widthScroll.toString())
+        val myHeightScroll=height-112-10
+        Log.d("Testing myHeightScroll", myHeightScroll.toString())
+        val myHeightScrollPixels=((myHeightScroll*heightPixels)/height)
+        Log.d("Testing Scroll widthPixels ", myHeightScrollPixels.toString())
+
+        //PercentRelativeLayout
+        val paramScroll=binding.myScroll.layoutParams
+        paramScroll.height=myHeightScrollPixels
+        binding.myScroll.layoutParams = paramScroll
+
+        //binding.myScroll.setLayoutParams(ViewGroup.LayoutParams(FrameLayout.LayoutParams.MATCH_PARENT, myHeightScrollPixels-100))
+        Log.d("Testing width", width.toString())
+        Log.d("Testing height", height.toString())
+        Log.d("Testing widthPixels", widthPixels.toString())
+        Log.d("Testing heightPixels", heightPixels.toString())
+        Log.d("Testing width toolbar", wtb.toString())
+        Log.d("Testing height toolbar", htb.toString())
+        Log.d("Testing width bottom", bwtb.toString())
+        Log.d("Testing height bottom", bhtb.toString())
+
+        //setSupportActionBar(binding.my_toolbar)
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
@@ -84,5 +110,6 @@ class MainActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
+
 }
 
