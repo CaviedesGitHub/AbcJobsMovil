@@ -56,10 +56,12 @@
                             android:id="@+id/lblCuando"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/result_interview_datetime" />
                         <TextView
                             android:id="@+id/txtCuando"
+                            android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.cuando}" />
@@ -74,10 +76,12 @@
                             android:id="@+id/lblPerfil"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/result_interview_profile" />
                         <TextView
                             android:id="@+id/txtPerfil"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.nom_perfil}" />
@@ -92,10 +96,12 @@
                             android:id="@+id/lblProyecto"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/result_interview_project" />
                         <TextView
                             android:id="@+id/txtProyecto"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.nom_proyecto}" />
@@ -110,10 +116,12 @@
                             android:id="@+id/lblEmpresa"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/result_interview_company" />
                         <TextView
                             android:id="@+id/txtEmpresa"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.nom_empresa}" />
@@ -128,10 +136,12 @@
                             android:id="@+id/lblContacto"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/result_interview_contact" />
                         <TextView
                             android:id="@+id/txtContacto"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.contacto}" />
@@ -179,10 +189,12 @@
                         android:id="@+id/lblCalif"
                         android:layout_width="100dp"
                         android:layout_height="wrap_content"
+                        android:textColor="@color/black"
                         android:textStyle="bold"
                         android:text="@string/result_interview_evaluation" />
                     <TextView
                         android:id="@+id/txtCalif"
+                        android:textColor="@color/black"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@{entrevista.calificacion}" />
@@ -190,9 +202,16 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/layoutAnotaciones"
+                    android:hint="@string/result_view_annotations"
+                    android:textColorHint="@color/black"
+                    app:expandedHintEnabled="true"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
                     android:layout_marginVertical="10dp"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                    app:hintTextColor="@color/black" >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/txtAnotaciones"
@@ -201,10 +220,11 @@
                         android:layout_height="300dp"
                         android:inputType="none"
                         android:clickable="true"
-                        android:focusable="true"
+                        android:focusable="false"
                         android:textIsSelectable="false"
-                        android:gravity="top"
-                        android:hint="@string/result_view_annotations" />
+                        android:textColor="@color/black"
+                        android:backgroundTint="@color/GrisClaro"
+                        android:gravity="top"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
             </LinearLayout>

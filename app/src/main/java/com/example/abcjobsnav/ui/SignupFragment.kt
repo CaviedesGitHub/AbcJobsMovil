@@ -192,7 +192,7 @@ class SignupFragment : Fragment() {
     private fun validateUserName(): Boolean {
         Log.d("testing", "inicio validateUserName")
         if (binding.userName.text.toString().trim().isEmpty()) {
-            binding.textMatNameUser.error = getString(R.string.required_field)
+            binding.textMatNameUser.error = getString(R.string.required_username)
             binding.userName.requestFocus()
             return false
         } else {
@@ -229,7 +229,7 @@ class SignupFragment : Fragment() {
      */
     private fun validatePassword(): Boolean {
         if (binding.password.text.toString().trim().isEmpty()) {
-            binding.txtMatPassword.error = getString(R.string.required_field)
+            binding.txtMatPassword.error = getString(R.string.required_password)
             binding.password.requestFocus()
             return false
         } else if (binding.password.text.toString().length < 6) {
@@ -262,7 +262,7 @@ class SignupFragment : Fragment() {
     private fun validateConfirmPassword(): Boolean {
         when {
             binding.confirmPassword.text.toString().trim().isEmpty() -> {
-                binding.txtMatPasswordAgain.error = getString(R.string.required_field)
+                binding.txtMatPasswordAgain.error = getString(R.string.required_password_repeat)
                 binding.confirmPassword.requestFocus()
                 return false
             }

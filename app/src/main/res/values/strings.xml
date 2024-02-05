@@ -31,6 +31,14 @@
 
     <string name="candidate_not_recovered">candidate not recovered</string>
 
+    <string name="required_username">Required UserName!!</string>
+    <string name="required_password">Required Password!!</string>
+    <string name="required_password_repeat">Required PassWord Repeat!!</string>
+    <string name="required_name">Required Name!</string>
+    <string name="required_lastname">Required LastName!</string>
+    <string name="required_document">Required Document!</string>
+    <string name="required_email">Required Email!</string>
+
     <!-- TODO: LOGIN -->
     <string name="login_title">Login</string>
     <string name="hint_login_username">UserName</string>

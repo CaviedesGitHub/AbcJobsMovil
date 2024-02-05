@@ -43,7 +43,7 @@
                     android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="30"
+                    app:counterMaxLength="28"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_name"
@@ -60,7 +60,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="30"
+                        android:maxLength="28"
                         android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -73,7 +73,7 @@
                     android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="30"
+                    app:counterMaxLength="25"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_lastname"
@@ -90,7 +90,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="30"
+                        android:maxLength="25"
                         android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -103,7 +103,7 @@
                     android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="10"
+                    app:counterMaxLength="9"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_document"
@@ -121,7 +121,7 @@
                         android:layout_height="wrap_content"
                         android:inputType="number"
                         android:contentDescription=""
-                        android:maxLength="10"
+                        android:maxLength="9"
                         android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -134,7 +134,7 @@
                     android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="40"
+                    app:counterMaxLength="45"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_email"
@@ -151,7 +151,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription="@null"
-                        android:maxLength="40"
+                        android:maxLength="45"
                         android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -195,7 +195,7 @@
                     android:textColorHint="@color/black"
                     android:paddingVertical="10dp"
                     app:counterEnabled="true"
-                    app:counterMaxLength="15"
+                    app:counterMaxLength="13"
                     app:endIconMode="clear_text"
                     app:errorEnabled="true"
                     app:helperText="@string/create_candidate_helper_phone"
@@ -212,7 +212,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:contentDescription=""
-                        android:maxLength="15"
+                        android:maxLength="13"
                         android:backgroundTint="@color/GrisClaro"
                         android:text="" />
                 </com.google.android.material.textfield.TextInputLayout>

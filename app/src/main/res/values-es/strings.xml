@@ -32,6 +32,14 @@
 
     <string name="candidate_not_recovered">Candidato no recuperado</string>
 
+    <string name="required_username">Usuario Obligatorio!!</string>
+    <string name="required_password">Apellido Obligatorio!!</string>
+    <string name="required_password_repeat">Confirmar clave obligatorio!!</string>
+    <string name="required_name">Nombre Obligatorio!</string>
+    <string name="required_lastname">Apellido Obligatorio!</string>
+    <string name="required_document">Documento Obligatorio!</string>
+    <string name="required_email">Email obligatorio!</string>
+
     <!-- TODO: LOGIN -->
     <string name="login_title">Ingresar</string>
     <string name="hint_login_username">Nombre Usuario</string>

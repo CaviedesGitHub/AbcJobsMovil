@@ -217,7 +217,7 @@ class CrearCandidatoFragment : Fragment() {
 
     private fun validateName(): Boolean {
         if (binding.name.text.toString().trim().isEmpty()) {
-            binding.txtMatName.error = getString(R.string.required_field)
+            binding.txtMatName.error = getString(R.string.required_name)
             binding.name.requestFocus()
             return false
         } else {
@@ -228,7 +228,7 @@ class CrearCandidatoFragment : Fragment() {
 
     private fun validateLastName(): Boolean {
         if (binding.lastname.text.toString().trim().isEmpty()) {
-            binding.txtMatLastName.error = getString(R.string.required_field)
+            binding.txtMatLastName.error = getString(R.string.required_lastname)
             binding.lastname.requestFocus()
             return false
         } else {
@@ -239,7 +239,7 @@ class CrearCandidatoFragment : Fragment() {
 
     private fun validateDocument(): Boolean {
         if (binding.document.text.toString().trim().isEmpty()) {
-            binding.txtMatDocument.error = getString(R.string.required_field)
+            binding.txtMatDocument.error = getString(R.string.required_document)
             binding.document.requestFocus()
             return false
         } else {
@@ -250,7 +250,7 @@ class CrearCandidatoFragment : Fragment() {
 
     private fun validateEmail(): Boolean {
         if (binding.email.text.toString().trim().isEmpty()) {
-            binding.txtMatEmail.error = getString(R.string.required_field)
+            binding.txtMatEmail.error = getString(R.string.required_email)
             binding.email.requestFocus()
             return false
         } else if (!isValidEmail(binding.email.text.toString())) {

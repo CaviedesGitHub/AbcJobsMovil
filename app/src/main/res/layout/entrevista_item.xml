@@ -37,6 +37,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="20dp"
                         android:textAlignment="center"
+                        android:textColor="@color/black"
                         android:textSize="30dp"
                         android:text="@{Integer.toString(entrevista.num)}" />
                 </LinearLayout>
@@ -54,10 +55,12 @@
                             android:id="@+id/lblCuando"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/candidate_interviews_datetime" />
                         <TextView
                             android:id="@+id/txtCuando"
+                            android:textColor="@color/black"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.cuando}" />
@@ -72,10 +75,12 @@
                             android:id="@+id/lblPerfil"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/candidate_interviews_profile" />
                         <TextView
                             android:id="@+id/txtPerfil"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.nom_perfil}" />
@@ -90,10 +95,12 @@
                             android:id="@+id/lblProyecto"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/candidate_interviews_project" />
                         <TextView
                             android:id="@+id/txtProyecto"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.nom_proyecto}" />
@@ -108,10 +115,12 @@
                             android:id="@+id/lblEmpresa"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/candidate_interviews_company" />
                         <TextView
                             android:id="@+id/txtEmpresa"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.nom_empresa}" />
@@ -126,10 +135,12 @@
                             android:id="@+id/lblContacto"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
+                            android:textColor="@color/black"
                             android:textStyle="bold"
                             android:text="@string/candidate_interviews_contact" />
                         <TextView
                             android:id="@+id/txtContacto"
+                            android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{entrevista.contacto}" />

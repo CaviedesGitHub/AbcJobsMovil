@@ -274,7 +274,7 @@ class LoginFragment : Fragment() {
     private fun validateUserName(): Boolean {
         Log.d("testing", "inicio validateUserName")
         if (binding.txtUserName.text.toString().trim().isEmpty()) {
-            binding.txtFieldUsuario.error = getString(R.string.required_field)
+            binding.txtFieldUsuario.error = getString(R.string.required_username)
             binding.txtUserName.requestFocus()
             return false
         } else {
@@ -285,7 +285,7 @@ class LoginFragment : Fragment() {
 
     private fun validatePassword(): Boolean {
         if (binding.txtPassword.text.toString().trim().isEmpty()) {
-            binding.txtFieldClave.error = getString(R.string.required_field)
+            binding.txtFieldClave.error = getString(R.string.required_password)
             binding.txtPassword.requestFocus()
             return false
         }

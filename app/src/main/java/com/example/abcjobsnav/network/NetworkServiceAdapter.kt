@@ -283,14 +283,27 @@ class NetworkServiceAdapter constructor(context: Context) {
                 Log.d("testing Response", response.toString())
                 val idTipo = if (response.getString("tipo")=="CANDIDATO"){
                     if (!response.isNull("candidato")){
-                        response.getJSONObject("candidato").getInt("id")
+                        val jsonCandidato=response.getJSONObject("candidato")
+                        if (!jsonCandidato.isNull("id")){
+                            jsonCandidato.getInt("id")
+                        }
+                        else{
+                            0
+                        }
+                        //response.getJSONObject("candidato").getInt("id")
                     }
                     else{
                         0
                     }
                 } else if (response.getString("tipo")=="EMPRESA"){
                     if(!response.isNull("empresa")){
-                        response.getJSONObject("empresa").getInt("id")
+                        val jsonEmpresa=response.getJSONObject("empresa")
+                        if (!jsonEmpresa.isNull("id")){
+                            jsonEmpresa.getInt("id")
+                        }
+                        else{
+                            0
+                        }
                     }
                     else{
                         0
