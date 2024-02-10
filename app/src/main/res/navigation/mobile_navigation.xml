@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
+    android:label="@string/abc_jobs"
     app:startDestination="@id/loginFragment">
 
     <fragment
@@ -89,6 +90,12 @@
         <argument
             android:name="TOKEN_PARAM"
             app:argType="string" />
+        <action
+            android:id="@+id/action_empresaFragment_to_qualyFragment"
+            app:destination="@id/qualyFragment" />
+        <action
+            android:id="@+id/action_empresaFragment_to_asignaFragment"
+            app:destination="@id/asignaFragment" />
     </fragment>
     <fragment
         android:id="@+id/jobsFragment"
@@ -130,5 +137,145 @@
         <argument
             android:name="token"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/qualyFragment"
+        android:name="com.example.abcjobsnav.ui.QualyFragment"
+        android:label="@string/abc_jobs"
+        tools:layout="@layout/fragment_qualy">
+        <argument
+            android:name="id_emp"
+            app:argType="integer" />
+        <argument
+            android:name="id_user"
+            app:argType="integer" />
+        <argument
+            android:name="token_user"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_qualyFragment_to_evalsFragment"
+            app:destination="@id/evalsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/asignaFragment"
+        android:name="com.example.abcjobsnav.ui.AsignaFragment"
+        android:label="@string/abc_jobs">
+        <argument
+            android:name="id_emp"
+            app:argType="integer" />
+        <argument
+            android:name="id_user"
+            app:argType="integer" />
+        <argument
+            android:name="token_user"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_asignaFragment_to_cumplenFragment"
+            app:destination="@id/cumplenFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/evalsFragment"
+        android:name="com.example.abcjobsnav.EvalsFragment"
+        android:label="@string/abc_jobs"
+        tools:layout="@layout/fragment_evals">
+        <argument
+            android:name="id_perfilProy"
+            app:argType="integer" />
+        <argument
+            android:name="id_user"
+            app:argType="integer" />
+        <argument
+            android:name="token_user"
+            app:argType="string" />
+        <argument
+            android:name="cache"
+            android:defaultValue="true"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_evalsFragment_to_creaEvalFragment"
+            app:destination="@id/creaEvalFragment" />
+        <argument
+            android:name="nom_cand"
+            app:argType="string" />
+        <argument
+            android:name="nom_proy"
+            app:argType="string" />
+        <argument
+            android:name="nom_perfil"
+            app:argType="string" />
+        <argument
+            android:name="id_cand"
+            app:argType="integer" />
+        <argument
+            android:name="fecha_inicio"
+            app:argType="string" />
+        <argument
+            android:name="fecha_asig"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_evalsFragment_to_qualyFragment"
+            app:destination="@id/qualyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/creaEvalFragment"
+        android:name="com.example.abcjobsnav.ui.CreaEvalFragment"
+        android:label="fragment_crea_eval"
+        tools:layout="@layout/fragment_crea_eval">
+        <argument
+            android:name="id_perfilProy"
+            app:argType="integer" />
+        <argument
+            android:name="id_cand"
+            app:argType="integer" />
+        <argument
+            android:name="token_user"
+            app:argType="string" />
+        <argument
+            android:name="nom_cand"
+            app:argType="string" />
+        <argument
+            android:name="nom_proy"
+            app:argType="string" />
+        <argument
+            android:name="nom_perfil"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_creaEvalFragment_to_evalsFragment"
+            app:destination="@id/evalsFragment" />
+        <argument
+            android:name="fecha_inicio"
+            app:argType="string" />
+        <argument
+            android:name="fecha_asig"
+            app:argType="string" />
+        <argument
+            android:name="anno_ult"
+            app:argType="integer" />
+        <argument
+            android:name="mes_ult"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/cumplenFragment"
+        android:name="com.example.abcjobsnav.ui.CumplenFragment"
+        android:label="@string/abc_jobs">
+        <argument
+            android:name="id_emp"
+            app:argType="integer" />
+        <argument
+            android:name="id_user"
+            app:argType="integer" />
+        <argument
+            android:name="token_user"
+            app:argType="string" />
+        <argument
+            android:name="id_perfil"
+            app:argType="integer" />
+        <argument
+            android:name="id_perfilProy"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_cumplenFragment_to_asignaFragment"
+            app:destination="@id/asignaFragment" />
     </fragment>
 </navigation>

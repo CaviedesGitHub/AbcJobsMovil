@@ -177,6 +177,7 @@
                 style="@style/Widget.MaterialComponents.Button.TextButton"
                 android:textAllCaps="false"
                 android:text="@string/already_a_member_log_in" />
+
         </LinearLayout>
 
 </LinearLayout>

@@ -118,6 +118,9 @@
     <string name="result_view_annotations">Annotations</string>
     <string name="interview_not_retrieved">Interview not retrieved</string>
 
+    <!-- TODO: COMPANY -->
+    <string name="company_title">Company</string>
+
     <!-- TODO: OTROS -->
     <string name="candidato">Candidate</string>
     <string name="contacto">Contact</string>
@@ -132,4 +135,62 @@
     <string name="datos_candidato">Candidate Data</string>
     <string name="interviews">Interviews</string>
     <string name="tests">Tests</string>
+    <string name="company_contact">Contact:</string>
+    <string name="company_phone">Phone:</string>
+    <string name="company_email">Email:</string>
+    <string name="company_country">Country:</string>
+    <string name="company_city">City:</string>
+    <string name="company_address">Address:</string>
+    <string name="company_qualifications">qualifications</string>
+    <string name="company_assignment">assignment</string>
+    <string name="company_not_recovered">Company not recovered</string>
+    <string name="jobs_list_not_retrieved">Jobs List not retrieved</string>
+    <string name="no_jobs_were_found">No Jobs were found</string>
+    <string name="list_of_jobs">List of Jobs</string>
+    <string name="Qualy_candidate">Candidate:</string>
+    <string name="qualy_date_of_admission">Date of admission:</string>
+    <string name="qualy_employee">Employee</string>
+    <string name="list_of_jobs_without_assignment">List of jobs without assignment</string>
+    <string name="no_evaluations_were_found">No evaluations were found</string>
+    <string name="evaluations_list_not_retrieved">Evaluations list not retrieved</string>
+    <string name="monthly_evaluations">Monthly evaluations</string>
+    <string name="evaluations">Evaluations</string>
+    <string name="evals_add">Add</string>
+    <string name="create_evaluation_title">Create Evaluation</string>
+    <string name="evaluation_could_not_be_created">Evaluation could not be created</string>
+    <string name="valuation_required">Valuation required!</string>
+    <string name="createeval_year">Year</string>
+    <string name="not_editable">Not editable</string>
+    <string name="evalcreate_month">Month</string>
+    <string name="select_value">Select Value</string>
+    <string name="enter_your_comments">Enter your comments</string>
+    <string name="evalcreate_note">Note</string>
+    <string name="evalcreate_valuation">Valuation</string>
+    <string name="creaeval_type_your_notes">Type your notes</string>
+    <string name="createeval_required_notes">Required Notes</string>
+    <string name="year_not_editable">Year not editable</string>
+    <string name="month_not_editable">Month not editable</string>
+    <string name="could_not_retrieve_list_of_matched_candidates">Could not retrieve list of matched candidates</string>
+    <string name="cumplen_candidate">Candidate</string>
+    <string name="tech_skills">Tech Skills:</string>
+    <string name="soft_skills">Soft Skills:</string>
+    <string name="pers_skills">Pers Skills:</string>
+    <string name="cumplen_birthday">BirthDay</string>
+    <string name="cumple_valuation">Valuation</string>
+    <string name="cumplen_photo">Photo</string>
+    <string name="list_of_candidates_who_meet">Select a candidate</string>
+    <string name="cumplen_assign">Assign</string>
+    <string name="cumplen_back">Back</string>
+    <string name="cumplen_profile">Profile:</string>
+    <string name="cumplen_project">Project:</string>
+    <string name="cumplen_initial_date">initial date:</string>
+
+    <string-array name="qualys4">
+        <item>Excellent</item>
+        <item>Good</item>
+        <item>Fair</item>
+        <item>Poor</item>
+    </string-array>
+
 </resources>
+
