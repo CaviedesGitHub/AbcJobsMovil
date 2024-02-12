@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.abcjobsnav.R
@@ -30,6 +31,7 @@ private const val ARG_PARAM2 = "param2"
 private const val ID_PARAM_EMP = "id_emp"
 private const val ID_PARAM_USER = "id_user"
 private const val TOKEN_PARAM = "token_user"
+private const val CACHE_PARAM = "cache"
 
 /**
  * A simple [Fragment] subclass.
@@ -46,6 +48,7 @@ class AsignaFragment : Fragment() {
     private var id: Int? = null
     private var id_user: Int? = null
     private var tokenUser: String? = null
+    private var cache: String? = null
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -58,6 +61,10 @@ class AsignaFragment : Fragment() {
             id = it.getInt(ID_PARAM_EMP)
             id_user = it.getInt(ID_PARAM_USER)
             tokenUser = it.getString(TOKEN_PARAM)
+            cache = it.getString(CACHE_PARAM)
+            Log.d("testing id=id_emp",id.toString())
+            Log.d("testing id_user",id_user.toString())
+            Log.d("testing tokenUser",tokenUser.toString())
         }
     }
 
@@ -68,7 +75,7 @@ class AsignaFragment : Fragment() {
         Log.d("testing onCreateView", "Inicio")
         _binding = FragmentAsignaBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = AsignaAdapter()
+        viewModelAdapter = AsignaAdapter(id, id_user, tokenUser)
         Log.d("testing onCreateView", "Fin")
         return view
     }
@@ -111,6 +118,13 @@ class AsignaFragment : Fragment() {
         viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
             onNetworkErrorMsg(errorText.toString())
         })
+        binding.btnBackCompany.setOnClickListener(){
+            val action = AsignaFragmentDirections.actionAsignaFragmentToEmpresaFragment(
+                id_user!!,
+                tokenUser!!
+            )
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun onDestroyView() {

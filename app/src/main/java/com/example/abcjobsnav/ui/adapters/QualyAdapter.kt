@@ -15,7 +15,7 @@ import com.example.abcjobsnav.ui.QualyFragmentDirections
 
 //import com.example.abcjobsnav.ui.AlbumFragmentDirections
 
-class QualyAdapter(val idUser: Int?, val tokenUser: String?) : RecyclerView.Adapter<QualyAdapter.QualyViewHolder>(){
+class QualyAdapter(val idUser: Int?, val tokenUser: String?, val idEmp: Int?) : RecyclerView.Adapter<QualyAdapter.QualyViewHolder>(){
 
     var puestosAsig :List<Puesto> = emptyList()
         set(value) {
@@ -48,6 +48,7 @@ class QualyAdapter(val idUser: Int?, val tokenUser: String?) : RecyclerView.Adap
                 puestosAsig[position].id_cand,
                 puestosAsig[position].fecha_inicio,
                 puestosAsig[position].fecha_asig,
+                idEmp!!,
                 true)
             holder.viewDataBinding.root.findNavController().navigate(action)
         }

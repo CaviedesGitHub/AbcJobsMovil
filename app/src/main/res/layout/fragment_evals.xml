@@ -58,7 +58,7 @@
 
                         <TextView
                             android:id="@+id/txtEmpleado"
-                            android:layout_width="wrap_content"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:text="Luis Padilla"
                             android:textColor="@color/black" />
@@ -79,7 +79,7 @@
 
                         <TextView
                             android:id="@+id/txtPerfil"
-                            android:layout_width="wrap_content"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:text="Ingeniero"
                             android:textColor="@color/black" />
@@ -99,7 +99,7 @@
 
                         <TextView
                             android:id="@+id/txtProyecto"
-                            android:layout_width="wrap_content"
+                            android:layout_width="150dp"
                             android:layout_height="wrap_content"
                             android:text="Proyecto del anno"
                             android:textColor="@color/black" />
@@ -120,34 +120,44 @@
             </LinearLayout>
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/txtMsgVacio"
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/evalsPuestoContenido"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/no_evaluations_were_found"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/encabezado_evals" />
+            app:layout_constraintTop_toBottomOf="@id/encabezado_evals" >
 
-        <ProgressBar
-            android:id="@+id/progressBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/encabezado_evals"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            <TextView
+                android:id="@+id/txtMsgVacio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_evaluations_were_found"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/evalsPuestoAsigRv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/encabezado_evals"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/evals_item" />
+            <ProgressBar
+                android:id="@+id/progressBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/evalsPuestoAsigRv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/evals_item" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
             android:layout_width="wrap_content"
@@ -156,6 +166,6 @@
             android:id="@+id/btnBackListJobs"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/evalsPuestoAsigRv" />
+            app:layout_constraintTop_toBottomOf="@id/evalsPuestoContenido" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

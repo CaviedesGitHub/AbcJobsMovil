@@ -117,7 +117,8 @@ class EmpresaFragment : Fragment() {
             val action = EmpresaFragmentDirections.actionEmpresaFragmentToAsignaFragment(
                 viewModel.empresa.value!!.id,
                 viewModel.empresa.value!!.id_usuario,
-                tokenUser!!
+                tokenUser!!,
+                true
             )
             Log.d("testing Empresa", "Despues Action Dentro del If")
             it.findNavController().navigate(action)

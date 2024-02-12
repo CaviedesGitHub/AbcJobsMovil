@@ -44,6 +44,8 @@ private const val PARAM_FECHAINI = "fecha_inicio"
 private const val PARAM_FECHAASIG = "fecha_asig"
 private const val PARAM_ANNO = "anno_ult"
 private const val PARAM_MES = "mes_ult"
+private const val PARAM_IDEMP = "id_emp"
+
 /**
  * A simple [Fragment] subclass.
  * Use the [SignupFragment.newInstance] factory method to
@@ -66,6 +68,8 @@ class CreaEvalFragment : Fragment() {
     private var fecha_asig: String? = null
     private var anno_ult: Int? = null
     private var mes_ult: Int? = null
+    private var idEmp: Int? = null
+
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -87,8 +91,10 @@ class CreaEvalFragment : Fragment() {
             fecha_asig = it.getString(PARAM_FECHAASIG)
             anno_ult = it.getInt(PARAM_ANNO)
             mes_ult = it.getInt(PARAM_MES)
+            idEmp = it.getInt(PARAM_IDEMP)
             Log.d("testing id param crearEvaluacion", id.toString())
             Log.d("testing id param crearEvaluacion", candidato!!)
+            Log.d("testing idEmp param crearEvaluacion", idEmp.toString())
         }
     }
 
@@ -96,6 +102,7 @@ class CreaEvalFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("testing onCreateView crearEvaluacion", "onCreateView")
         _binding = FragmentCreaEvalBinding.inflate(inflater, container, false)
         val view = binding.root
         setupListeners()
@@ -144,6 +151,8 @@ class CreaEvalFragment : Fragment() {
                 id_cand!!,
                 fecha_ini!!,
                 fecha_asig!!,
+                viewModel.
+                idEmp!!,
                 true)
             Navigation.findNavController(it).navigate(action)
         }
@@ -185,6 +194,7 @@ class CreaEvalFragment : Fragment() {
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
+        Log.d("testing onActivityCreated crearEvaluacion", "onActivityCreated")
         activity.actionBar?.title = getString(R.string.abc_jobs)
         viewModel = ViewModelProvider(this, CreateEvalViewModel.Factory(activity.application)).get(
             CreateEvalViewModel::class.java)
@@ -207,7 +217,8 @@ class CreaEvalFragment : Fragment() {
                             viewModel.evaluacion.value!!.id_cand,
                             fecha_ini!!,
                             fecha_asig!!,
-                            false)
+                            viewModel.idEmp,
+                            false,)
                         Navigation.findNavController(myView!!).navigate(action)
                     }
                 }
@@ -224,6 +235,7 @@ class CreaEvalFragment : Fragment() {
         viewModel.idCand=id_cand!!
         viewModel.tokenUser=tokenUser!!
         viewModel.candidato=candidato!!
+        viewModel.idEmp=idEmp!!
 
         binding.txtCandidato.text=candidato
         binding.txtProyecto.text=proyecto

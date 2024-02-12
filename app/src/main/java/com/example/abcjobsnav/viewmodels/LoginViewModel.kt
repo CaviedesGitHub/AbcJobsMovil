@@ -75,17 +75,30 @@ class LoginViewModel(application: Application) :  AndroidViewModel(application) 
                         _isNetworkErrorShown.postValue(false)
                     }
                     catch (e: VolleyError){
-                        val responseBody: String = String(e.networkResponse.data)
-                        val data: JSONObject = JSONObject(responseBody)
+                        Log.d("Testing Error Volley LVM", e.toString())
                         var mensaje: String
-                        if (data.isNull("mensaje")){
-                            mensaje="nullllll"
+                        if (e.networkResponse!=null){
+                            val responseBody: String = String(e.networkResponse.data)
+                            Log.d("Testing Error Volley1 LVM", e.toString())
+                            val data: JSONObject = JSONObject(responseBody)
+                            Log.d("Testing Error Volley2 LVM", e.toString())
+                            Log.d("Testing Error Volley3 LVM", e.toString())
+                            if (data.isNull("mensaje")){
+                                mensaje="nullllll"
+                            }
+                            else{
+                                mensaje = data.getString("mensaje")
+                            }
                         }
                         else{
-                            mensaje = data.getString("mensaje")
+                            mensaje = "network Error"
                         }
+
+                        Log.d("Testing Error Volley4 LVM", e.toString())
                         _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
+                        Log.d("Testing Error Volley5 LVM", e.toString())
                         _isNetworkErrorShown.postValue(false)
+                        Log.d("Testing Error Volley6 LVM", e.toString())
                     }
                     catch (e:Exception){ //se procesa la excepcion
                         Log.d("Testing Error LVM", e.toString())

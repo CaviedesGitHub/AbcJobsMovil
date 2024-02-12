@@ -10,7 +10,9 @@ import android.util.SparseArray
 import androidx.collection.ArrayMap
 import androidx.collection.LruCache
 import androidx.collection.arrayMapOf
+import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.models.CandidatoSel
+import com.example.abcjobsnav.models.PerfilProyecto
 import com.example.abcjobsnav.network.CacheManager
 
 class CumplenRepository (val application: Application){
@@ -37,6 +39,21 @@ class CumplenRepository (val application: Application){
         else{
             Log.d("testing Cache decision", "return ${potentialResp.size} elements from cache")
             return potentialResp
+        }
+    }
+
+    suspend fun asignaCandidato(params: JSONObject, idPerfilProy: Int, token: String): PerfilProyecto {
+        try{
+            val pp: PerfilProyecto = NetworkServiceAdapter.getInstance(application).asignaCand(params, idPerfilProy, token)
+            return pp
+        }
+        catch (e:VolleyError){
+            Log.d("Testing Error Repository", e.toString())
+            throw e
+        }
+        catch (e:Exception){
+            Log.d("Testing Error Repository", e.toString())
+            throw e
         }
     }
 }

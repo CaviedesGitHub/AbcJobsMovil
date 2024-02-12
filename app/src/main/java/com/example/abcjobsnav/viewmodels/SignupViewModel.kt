@@ -52,17 +52,22 @@ class SignupViewModel(application: Application) :  AndroidViewModel(application)
                         _isNetworkErrorShown.postValue(false)
                     }
                     catch (e: VolleyError){
-                        val responseBody: String = String(e.networkResponse.data)
-                        val data: JSONObject = JSONObject(responseBody)
                         var mensaje: String
-                        if (data.isNull("mensaje")){
-                            mensaje="nullllll"
+                        if (e.networkResponse!=null){
+                            val responseBody: String = String(e.networkResponse.data)
+                            val data: JSONObject = JSONObject(responseBody)
+                            if (data.isNull("mensaje")){
+                                mensaje="nullllll"
+                            }
+                            else{
+                                mensaje = data.getString("mensaje")
+                            }
+                            _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
+                            _isNetworkErrorShown.postValue(false)
                         }
                         else{
-                            mensaje = data.getString("mensaje")
+                            mensaje = "network Error"
                         }
-                        _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
-                        _isNetworkErrorShown.postValue(false)
                     }
                     catch (e:Exception){ //se procesa la excepcion
                         Log.d("Testing Error LVM", e.toString())

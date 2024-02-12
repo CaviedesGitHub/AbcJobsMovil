@@ -155,6 +155,9 @@
         <action
             android:id="@+id/action_qualyFragment_to_evalsFragment"
             app:destination="@id/evalsFragment" />
+        <action
+            android:id="@+id/action_qualyFragment_to_empresaFragment"
+            app:destination="@id/empresaFragment" />
     </fragment>
     <fragment
         android:id="@+id/asignaFragment"
@@ -172,6 +175,12 @@
         <action
             android:id="@+id/action_asignaFragment_to_cumplenFragment"
             app:destination="@id/cumplenFragment" />
+        <argument
+            android:name="cache"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_asignaFragment_to_empresaFragment"
+            app:destination="@id/empresaFragment" />
     </fragment>
     <fragment
         android:id="@+id/evalsFragment"
@@ -215,6 +224,9 @@
         <action
             android:id="@+id/action_evalsFragment_to_qualyFragment"
             app:destination="@id/qualyFragment" />
+        <argument
+            android:name="id_emp"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/creaEvalFragment"
@@ -254,6 +266,9 @@
         <argument
             android:name="mes_ult"
             app:argType="integer" />
+        <argument
+            android:name="id_emp"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/cumplenFragment"
@@ -277,5 +292,14 @@
         <action
             android:id="@+id/action_cumplenFragment_to_asignaFragment"
             app:destination="@id/asignaFragment" />
+        <argument
+            android:name="fecha_ini"
+            app:argType="string" />
+        <argument
+            android:name="nom_perfil"
+            app:argType="string" />
+        <argument
+            android:name="nom_proy"
+            app:argType="string" />
     </fragment>
 </navigation>

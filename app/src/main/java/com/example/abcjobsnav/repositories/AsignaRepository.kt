@@ -10,12 +10,16 @@ import android.util.SparseArray
 import androidx.collection.ArrayMap
 import androidx.collection.LruCache
 import androidx.collection.arrayMapOf
+import com.example.abcjobsnav.models.Evaluacion
 import com.example.abcjobsnav.models.Puesto
 import com.example.abcjobsnav.network.CacheManager
 
 class AsignaRepository (val application: Application){
-    suspend fun refreshData(params: JSONObject, empId: Int, token: String):List<Puesto>{
-        var potentialResp = CacheManager.getInstance(application.applicationContext).getPuestosEmpresaSinAsig(empId)
+    suspend fun refreshData(params: JSONObject, empId: Int, token: String, cache: Boolean):List<Puesto>{
+        var potentialResp = listOf<Puesto>()
+        if (cache){
+            potentialResp = CacheManager.getInstance(application.applicationContext).getPuestosEmpresaSinAsig(empId)
+        }
         if(potentialResp.isEmpty()){
             try{
                 Log.d("testing Cache decision", "get from network")

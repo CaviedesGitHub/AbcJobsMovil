@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -17,6 +18,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.abcjobsnav.databinding.FragmentEvalsBinding
 import com.example.abcjobsnav.models.Evaluacion
 import com.example.abcjobsnav.ui.EntrevistasFragment
+import com.example.abcjobsnav.ui.QualyFragmentDirections
 import com.example.abcjobsnav.ui.SignupFragmentDirections
 import com.example.abcjobsnav.ui.adapters.EvalsAdapter
 import com.example.abcjobsnav.viewmodels.EvalsPAViewModel
@@ -37,6 +39,7 @@ private const val PARAM_PROYECTO = "nom_proy"
 private const val PARAM_PERFIL = "nom_perfil"
 private const val PARAM_FECHAINI = "fecha_inicio"
 private const val PARAM_FECHAASIG = "fecha_asig"
+private const val PARAM_IDEMP = "id_emp"
 
 /**
  * A simple [Fragment] subclass.
@@ -60,6 +63,7 @@ class EvalsFragment : Fragment() {
     private var perfil: String? = null
     private var fecha_ini: String? = null
     private var fecha_asig: String? = null
+    private var idEmp: Int? = null
 
     private var anno_ult: Int? = null
     private var mes_ult: Int? = null
@@ -83,6 +87,7 @@ class EvalsFragment : Fragment() {
             perfil = it.getString(PARAM_PERFIL)
             fecha_ini = it.getString(PARAM_FECHAINI)
             fecha_asig = it.getString(PARAM_FECHAASIG)
+            idEmp = it.getInt(PARAM_IDEMP)
 
             Log.d("Testing Param tokenUser", tokenUser.toString())
             Log.d("Testing Param idUser", id_user.toString())
@@ -180,9 +185,21 @@ class EvalsFragment : Fragment() {
                 fecha_ini!!,
                 fecha_asig!!,
                 anno_ult!!,
-                mes_ult!!
+                mes_ult!!,
+                idEmp!!
             )
+            Log.d("testing Evals2222", "Inicio")
             it.findNavController().navigate(action)
+            Log.d("testing Evals333", "Inicio")
+        }
+
+        binding.btnBackListJobs.setOnClickListener(){
+            val action = EvalsFragmentDirections.actionEvalsFragmentToQualyFragment(
+                idEmp!!,
+                id_user!!,
+                tokenUser!!
+            )
+            Navigation.findNavController(it).navigate(action)
         }
     }
 

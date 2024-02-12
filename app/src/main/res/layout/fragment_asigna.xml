@@ -25,34 +25,51 @@
             android:textSize="40sp"
             android:textStyle="bold" />
 
-        <TextView
-            android:id="@+id/txtMsgVacio"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/asignaContenido"
+            app:layout_constraintTop_toBottomOf="@id/txtTitulo"
             android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/txtMsgVacio"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/no_jobs_were_found"
+                android:textAlignment="textStart"
+                android:textColor="@color/black"
+                android:textSize="30sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/puestosSinAsigRv"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                tools:listitem="@layout/asigna_item" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        <Button
+            android:id="@+id/btnBackCompany"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/no_jobs_were_found"
-            android:textAlignment="textStart"
-            android:textColor="@color/black"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            android:visibility="gone"
+            android:layout_marginTop="16dp"
+            android:text="@string/back_to_company"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtTitulo" />
-
-        <ProgressBar
-            android:id="@+id/progressBar"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtTitulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/puestosSinAsigRv"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/txtTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            tools:listitem="@layout/asigna_item" />
-
+            app:layout_constraintTop_toBottomOf="@id/asignaContenido" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -19,6 +19,7 @@ import com.example.abcjobsnav.models.CandidatoSel
 import com.example.abcjobsnav.models.Empresa
 import com.example.abcjobsnav.models.Evaluacion
 import com.example.abcjobsnav.models.Login
+import com.example.abcjobsnav.models.PerfilProyecto
 import com.example.abcjobsnav.models.Puesto
 import com.example.abcjobsnav.models.Signup
 import java.awt.font.NumericShaper
@@ -43,83 +44,24 @@ class NetworkServiceAdapter constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
-    suspend fun getCumplenPerfil(perfilId:Int, token: String)=suspendCoroutine<List<CandidatoSel>>{ contResp ->
-        Log.d("testing","Inicio getEvalsPuesto NetworkServiceAdapter")
-        val strReq = object: StringRequest(Request.Method.GET, BASE_URL+"cumplenPerfil/$perfilId",
-            Response.Listener<String> { response ->
-                Log.d("testing","Response getCumplenPerfil NetworkServiceAdapter")
-                Log.d("testing", response.toString())
-                val resp = JSONObject(response)
-                val respAux = resp.getJSONObject("Respuesta")
-                Log.d("testing Respuesta", respAux.toString())
-                val lstResp = respAux.getJSONArray("Seleccion")
-                Log.d("testing lstResp", lstResp.toString())
-                Log.d("testing","Response3 getCumplenPerfil NetworkServiceAdapter")
-                val list = mutableListOf<CandidatoSel>()
-                Log.d("testing","Response31 getCumplenPerfil NetworkServiceAdapter")
-                for (i in 0 until lstResp.length()) {
-                    Log.d("testing","Response32 getCumplenPerfil NetworkServiceAdapter")
-                    val item = lstResp.getJSONObject(i)
-                    val lstHabils=item.getJSONArray("lstHabils")
-                    var strLstHabilsTec:String=""
-                    var strLstHabilsBlan:String=""
-                    var strLstHabilsPers:String=""
-                    for (j in 0 until lstHabils.length()) {
-                        val itemHab = lstHabils.getJSONObject(j)
-                        var nombreHabil:String=""
-                        nombreHabil=itemHab.getString("nombre")
-                        if (nombreHabil.get(nombreHabil.length-1)== '\n'){  //or [index]
-                            nombreHabil=nombreHabil.substring(0, nombreHabil.length-1)
-                        }
-                        if(itemHab.getString("tipo")=="TECNICA"){
-                            if(strLstHabilsTec==""){
-                                strLstHabilsTec=nombreHabil
-                            }
-                            else{
-                                strLstHabilsTec=strLstHabilsTec+", "+nombreHabil
-                            }
-                        }
-                        else if(itemHab.getString("tipo")=="BLANDA"){
-                            if(strLstHabilsBlan==""){
-                                strLstHabilsBlan=nombreHabil
-                            }
-                            else{
-                                strLstHabilsBlan=strLstHabilsBlan+", "+nombreHabil
-                            }
-                        }
-                        else if(itemHab.getString("tipo")=="PERSONALIDAD"){
-                            if(strLstHabilsPers==""){
-                                strLstHabilsPers=nombreHabil
-                            }
-                            else{
-                                strLstHabilsPers=strLstHabilsPers+", "+nombreHabil
-                            }
-                        }
-                        else {
-                        }
-                    }
-                    Log.d("testing","Response33 getCumplenPerfil NetworkServiceAdapter")
-                    list.add(i, CandidatoSel(
-                        id_cand = item.getInt("id_cand"),
-                        nombres=item.getString("nombres"),
-                        apellidos=item.getString("apellidos"),
-                        fecha_nac=item.getString("fecha_nac"),
-                        email=item.getString("email"),
-                        phone=item.getString("phone"),
-                        ciudad=item.getString("ciudad"),
-                        direccion=item.getString("direccion"),
-                        imagen=item.getString("imagen"),
-                        id_perfil=item.getInt("id_perfil"),
-                        Calificacion = item.getInt("Calificacion"),
-                        habilsTec=strLstHabilsTec,
-                        habilsBlan=strLstHabilsBlan,
-                        habilsPers=strLstHabilsPers))
-                }
-                Log.d("testing","Response4 getCumplenPerfil NetworkServiceAdapter")
-                contResp.resume(list) //onComplete(list)
+    suspend fun asignaCand(body: JSONObject, idProyPerfil: Int, token: String)=suspendCoroutine<PerfilProyecto>{contResp ->
+        Log.d("testing","Inicio asignaCand NetworkServiceAdapter")
+        val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"empresas/proyectos/perfiles/asignacion/$idProyPerfil", body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("testing","Response asignaCand NetworkServiceAdapter")
+                Log.d("testing Response", response.toString())
+                val resp=response.getJSONObject("perfilProyecto")
+                val pp= PerfilProyecto(
+                    id=resp.getInt("id"),
+                    nombre= resp.getString("nombre"),
+                    id_proy= resp.getInt("id_proy"),
+                    id_perfil= resp.getInt("id_perfil"),
+                    id_cand= resp.getInt("id_cand"),
+                    fecha_asig= resp.getString("fecha_asig"))
+                contResp.resume(pp)
             },
             {
-                Log.d("testing","VolleyError getCumplenPerfil NetworkServiceAdapter")
+                Log.d("testing","VolleyError createCandidato NetworkServiceAdapter")
                 contResp.resumeWithException(it) //throw it   //onError(it)
             }){
             override fun getHeaders(): MutableMap<String, String> {
@@ -131,7 +73,105 @@ class NetworkServiceAdapter constructor(context: Context) {
                 return headers  //return super.getHeaders()  // throws AuthFailureError
             }
         };
-        requestQueue.add(strReq)
+        requestQueue.add(jsonReq)
+    }
+
+    suspend fun getCumplenPerfil(perfilId:Int, token: String)=suspendCoroutine<List<CandidatoSel>>{ contResp ->
+        Log.d("testing","Inicio getCumplenPerfil NetworkServiceAdapter")
+        Log.d("testing perfilId", perfilId.toString())
+        Log.d("testing cumplenPerfil", "QUE PASA?")
+        try{
+            val strReq = object: StringRequest(Request.Method.GET, BASE_URL+"cumplenPerfil/$perfilId",
+                Response.Listener<String> { responseX ->
+                    Log.d("testing","Response getCumplenPerfil NetworkServiceAdapter")
+                    Log.d("testing", responseX.toString())
+                    val resp = JSONObject(responseX)
+                    val respAux = resp.getJSONObject("Respuesta")
+                    Log.d("testing Respuesta", respAux.toString())
+                    val lstResp = respAux.getJSONArray("Seleccion")
+                    Log.d("testing lstResp", lstResp.toString())
+                    Log.d("testing","Response3 getCumplenPerfil NetworkServiceAdapter")
+                    val list = mutableListOf<CandidatoSel>()
+                    Log.d("testing","Response31 getCumplenPerfil NetworkServiceAdapter")
+                    for (i in 0 until lstResp.length()) {
+                        Log.d("testing","Response32 getCumplenPerfil NetworkServiceAdapter")
+                        val item = lstResp.getJSONObject(i)
+                        val lstHabils=item.getJSONArray("lstHabils")
+                        var strLstHabilsTec:String=""
+                        var strLstHabilsBlan:String=""
+                        var strLstHabilsPers:String=""
+                        for (j in 0 until lstHabils.length()) {
+                            val itemHab = lstHabils.getJSONObject(j)
+                            var nombreHabil:String=""
+                            nombreHabil=itemHab.getString("nombre")
+                            if (nombreHabil.get(nombreHabil.length-1)== '\n'){  //or [index]
+                                nombreHabil=nombreHabil.substring(0, nombreHabil.length-1)
+                            }
+                            if(itemHab.getString("tipo")=="TECNICA"){
+                                if(strLstHabilsTec==""){
+                                    strLstHabilsTec=nombreHabil
+                                }
+                                else{
+                                    strLstHabilsTec=strLstHabilsTec+", "+nombreHabil
+                                }
+                            }
+                            else if(itemHab.getString("tipo")=="BLANDA"){
+                                if(strLstHabilsBlan==""){
+                                    strLstHabilsBlan=nombreHabil
+                                }
+                                else{
+                                    strLstHabilsBlan=strLstHabilsBlan+", "+nombreHabil
+                                }
+                            }
+                            else if(itemHab.getString("tipo")=="PERSONALIDAD"){
+                                if(strLstHabilsPers==""){
+                                    strLstHabilsPers=nombreHabil
+                                }
+                                else{
+                                    strLstHabilsPers=strLstHabilsPers+", "+nombreHabil
+                                }
+                            }
+                            else {
+                            }
+                        }
+                        Log.d("testing","Response33 getCumplenPerfil NetworkServiceAdapter")
+                        list.add(i, CandidatoSel(
+                            id_cand = item.getInt("id_cand"),
+                            nombres=item.getString("nombres"),
+                            apellidos=item.getString("apellidos"),
+                            fecha_nac=item.getString("fecha_nac"),
+                            email=item.getString("email"),
+                            phone=item.getString("phone"),
+                            ciudad=item.getString("ciudad"),
+                            direccion=item.getString("direccion"),
+                            imagen=item.getString("imagen"),
+                            id_perfil=item.getInt("id_perfil"),
+                            Calificacion = item.getInt("Calificacion"),
+                            habilsTec=strLstHabilsTec,
+                            habilsBlan=strLstHabilsBlan,
+                            habilsPers=strLstHabilsPers))
+                    }
+                    Log.d("testing","Response4 getCumplenPerfil NetworkServiceAdapter")
+                    contResp.resume(list) //onComplete(list)
+                },
+                {
+                    Log.d("testing","VolleyError getCumplenPerfil NetworkServiceAdapter")
+                    contResp.resumeWithException(it) //throw it   //onError(it)
+                }){
+                override fun getHeaders(): MutableMap<String, String> {
+                    Log.d("testing","Inicio getHeaders")
+                    val headers = HashMap<String, String>()
+                    headers["Content-Type"] = "application/json"
+                    headers["Authorization"] = "Bearer $token"
+                    Log.d("testing", headers.toString())
+                    return headers  //return super.getHeaders()  // throws AuthFailureError
+                }
+            };
+            requestQueue.add(strReq)
+        }
+        catch (e:Exception) {
+            Log.d("Testing CP Error", e.toString())
+        }
     }
 
     suspend fun evalCreate(body: JSONObject, token: String)=suspendCoroutine<Evaluacion>{contResp ->

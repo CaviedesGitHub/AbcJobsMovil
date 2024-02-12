@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.abcjobsnav.R
@@ -65,7 +66,7 @@ class QualyFragment : Fragment() {
         Log.d("testing onCreateView", "Inicio")
         _binding = FragmentQualyBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = QualyAdapter(id_user, tokenUser)
+        viewModelAdapter = QualyAdapter(id_user, tokenUser, id)
         Log.d("testing onCreateView", "Fin")
         return view
     }
@@ -108,6 +109,14 @@ class QualyFragment : Fragment() {
         viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
             onNetworkErrorMsg(errorText.toString())
         })
+
+        binding.btnQualyBackCompany.setOnClickListener(){
+            val action = QualyFragmentDirections.actionQualyFragmentToEmpresaFragment(
+                id_user!!,
+                tokenUser!!
+            )
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun onDestroyView() {

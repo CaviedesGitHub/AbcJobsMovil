@@ -1,5 +1,6 @@
 package com.example.abcjobsnav.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
@@ -14,7 +15,7 @@ import com.example.abcjobsnav.ui.AsignaFragmentDirections
 
 //import com.example.abcjobsnav.ui.AlbumFragmentDirections
 
-class AsignaAdapter : RecyclerView.Adapter<AsignaAdapter.AsignaViewHolder>(){
+class AsignaAdapter(val idEmp:Int?, val idUser: Int?, val tokenUser: String?) : RecyclerView.Adapter<AsignaAdapter.AsignaViewHolder>(){
 
     var puestosSinAsig :List<Puesto> = emptyList()
         set(value) {
@@ -36,12 +37,16 @@ class AsignaAdapter : RecyclerView.Adapter<AsignaAdapter.AsignaViewHolder>(){
             it.puesto = puestosSinAsig[position]
         }
         holder.viewDataBinding.root.setOnClickListener {
+            Log.d("testing adapter fecha_ini", puestosSinAsig[position].fecha_inicio)
             val action = AsignaFragmentDirections.actionAsignaFragmentToCumplenFragment(
-                0,
-                0,
-                "",
+                idEmp!!,
+                idUser!!,
+                tokenUser!!,
                 puestosSinAsig[position].id_perfil,
-                puestosSinAsig[position].id)
+                puestosSinAsig[position].id,
+                puestosSinAsig[position].fecha_inicio,
+                puestosSinAsig[position].nom_perfil,
+                puestosSinAsig[position].nom_proyecto)
             holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }

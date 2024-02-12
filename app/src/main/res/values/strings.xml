@@ -184,6 +184,9 @@
     <string name="cumplen_profile">Profile:</string>
     <string name="cumplen_project">Project:</string>
     <string name="cumplen_initial_date">initial date:</string>
+    <string name="assignment_successfully_completed">Assignment successfully completed</string>
+    <string name="select_a_candidate">Select a candidate</string>
+    <string name="back_to_company">Back to Company</string>
 
     <string-array name="qualys4">
         <item>Excellent</item>

@@ -1,6 +1,8 @@
 package com.example.abcjobsnav.ui.adapters
 
+import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.core.net.toUri
@@ -22,6 +24,8 @@ class CumplenAdapter : RecyclerView.Adapter<CumplenAdapter.CumplenViewHolder>(){
             notifyDataSetChanged()
         }
 
+    public var checkedPosition: Int = -1;  //-1 o 0
+    public var id_cand: Int = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CumplenViewHolder {
         val withDataBinding: CumplenItemBinding = DataBindingUtil.inflate(
             LayoutInflater.from(parent.context),
@@ -34,11 +38,26 @@ class CumplenAdapter : RecyclerView.Adapter<CumplenAdapter.CumplenViewHolder>(){
     override fun onBindViewHolder(holder: CumplenViewHolder, position: Int) {
         holder.viewDataBinding.also {
             it.candSel = lstCand[position]
+            it.cardCumplen.setBackgroundColor(Color.WHITE)
         }
         holder.bind(lstCand[position])
+        id_cand=lstCand[position].id_cand
         holder.viewDataBinding.root.setOnClickListener {
-            //val action = EntrevistasFragmentDirections.actionEntrevistasFragmentToResultadoEntrevistaFragment(entrevistas[position].id, "")
-            //holder.viewDataBinding.root.findNavController().navigate(action)
+            //holder.textoFecha.text=holder.adapterPosition.toString()
+            //holder.card.background=getResources().getDrawable(R.drawable.ic_launcher_background)
+            //holder.textoFecha.visibility=View.GONE
+            if (checkedPosition != holder.adapterPosition){
+            //    holder.card.setBackgroundColor(Color.CYAN)
+                  notifyItemChanged(checkedPosition)
+                  checkedPosition=holder.adapterPosition
+                  //holder.textoCalif.text=checkedPosition.toString()
+                  holder.card.setBackgroundColor(Color.CYAN)
+                  //holder.card.requestFocus()
+            }
+            else{
+                //checkedPosition=holder.adapterPosition
+                //holder.card.setBackgroundColor(Color.WHITE)
+            }
         }
     }
 
@@ -49,6 +68,9 @@ class CumplenAdapter : RecyclerView.Adapter<CumplenAdapter.CumplenViewHolder>(){
 
     class CumplenViewHolder(val viewDataBinding: CumplenItemBinding) :
         RecyclerView.ViewHolder(viewDataBinding.root) {
+            val textoCalif = viewDataBinding.txtCalifCumple
+            val textoFecha = viewDataBinding.txtFechaNacCumple
+            val card = viewDataBinding.cardCumplen
         companion object {
             @LayoutRes
             val LAYOUT = R.layout.cumplen_item

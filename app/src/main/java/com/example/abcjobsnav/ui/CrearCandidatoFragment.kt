@@ -80,7 +80,7 @@ class CrearCandidatoFragment : Fragment() {
             Log.d("testing", "inicio Create Candidato onClickListener")
             if (isValidate()) {
                 origenBtn=true
-                Toast.makeText(view.context, "validated", Toast.LENGTH_SHORT).show()
+                //Toast.makeText(view.context, "validated", Toast.LENGTH_SHORT).show()
                 viewModel.refreshDataFromNetwork(
                     binding.name.text.toString(),
                     binding.lastname.text.toString(),

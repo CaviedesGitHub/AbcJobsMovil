@@ -6,6 +6,7 @@ import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.models.CandidatoSel
 import com.example.abcjobsnav.models.Empresa
 import com.example.abcjobsnav.models.Evaluacion
+import com.example.abcjobsnav.models.PerfilProyecto
 import com.example.abcjobsnav.models.Puesto
 
 class CacheManager(context: Context) {
@@ -26,7 +27,6 @@ class CacheManager(context: Context) {
     private var lstEmpresas: HashMap<Int, Empresa> = hashMapOf()
     private var lstCandidatos: HashMap<Int, Candidato> = hashMapOf()
     private var lstEntrevistas: HashMap<Int, Entrevista> = hashMapOf()
-
 
     fun addCumplenPerfil(idPerfil: Int, lstCand: List<CandidatoSel>){
         if (!lstCumplenPerfil.containsKey(idPerfil)){

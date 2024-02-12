@@ -33,6 +33,7 @@ class AsignaViewModel(application: Application) :  AndroidViewModel(application)
     val errorText:LiveData<String>
         get() = _errorText
 
+    public var cache: Boolean = false
     init {
         //refreshDataFromNetwork()
     }
@@ -49,23 +50,28 @@ class AsignaViewModel(application: Application) :  AndroidViewModel(application)
             viewModelScope.launch(Dispatchers.Default){
                 withContext(Dispatchers.IO){
                     try{
-                        var data = asignaRepository.refreshData(JSONObject(postParams), empId, token)
+                        var data = asignaRepository.refreshData(JSONObject(postParams), empId, token, cache)
                         _puestosEmpSinAsig.postValue(data)
                         _eventNetworkError.postValue(false)
                         _isNetworkErrorShown.postValue(false)
                     }
                     catch (e: VolleyError){
-                        val responseBody: String = String(e.networkResponse.data)
-                        val data: JSONObject = JSONObject(responseBody)
                         var mensaje: String
-                        if (data.isNull("mensaje")){
-                            mensaje="nullllll"
+                        if (e.networkResponse!=null){
+                            val responseBody: String = String(e.networkResponse.data)
+                            val data: JSONObject = JSONObject(responseBody)
+                            if (data.isNull("mensaje")){
+                                mensaje="nullllll"
+                            }
+                            else{
+                                mensaje = data.getString("mensaje")
+                            }
+                            _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
+                            _isNetworkErrorShown.postValue(false)
                         }
                         else{
-                            mensaje = data.getString("mensaje")
+                            mensaje = "network Error"
                         }
-                        _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
-                        _isNetworkErrorShown.postValue(false)
                     }
                     catch (e:Exception){ //se procesa la excepcion
                         Log.d("Testing Error LVM", e.toString())

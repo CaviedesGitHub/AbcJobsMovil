@@ -36,7 +36,7 @@ class CreateEvalViewModel(application: Application) :  AndroidViewModel(applicat
     public var idCand: Int = 0
     public var tokenUser: String = ""
     public var candidato: String = ""
-
+    public var idEmp: Int = 0
 
     init {
         //refreshDataFromNetwork("", "")
@@ -69,17 +69,22 @@ class CreateEvalViewModel(application: Application) :  AndroidViewModel(applicat
                         _isNetworkErrorShown.postValue(false)
                     }
                     catch (e: VolleyError){
-                        val responseBody: String = String(e.networkResponse.data)
-                        val data: JSONObject = JSONObject(responseBody)
                         var mensaje: String
-                        if (data.isNull("mensaje")){
-                            mensaje="nullllll"
+                        if (e.networkResponse!=null){
+                            val responseBody: String = String(e.networkResponse.data)
+                            val data: JSONObject = JSONObject(responseBody)
+                            if (data.isNull("mensaje")){
+                                mensaje="nullllll"
+                            }
+                            else{
+                                mensaje = data.getString("mensaje")
+                            }
+                            _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
+                            _isNetworkErrorShown.postValue(false)
                         }
                         else{
-                            mensaje = data.getString("mensaje")
+                            mensaje = "network Error"
                         }
-                        _errorText.postValue(e.toString()+"$"+mensaje)  //_eventNetworkError.postValue(true)
-                        _isNetworkErrorShown.postValue(false)
                     }
                     catch (e:Exception){ //se procesa la excepcion
                         Log.d("Testing Error LVM", e.toString())
