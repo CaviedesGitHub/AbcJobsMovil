@@ -89,8 +89,12 @@ class EvalsFragment : Fragment() {
             fecha_asig = it.getString(PARAM_FECHAASIG)
             idEmp = it.getInt(PARAM_IDEMP)
 
+            Log.d("testing idEmp param", idEmp.toString())
             Log.d("Testing Param tokenUser", tokenUser.toString())
             Log.d("Testing Param idUser", id_user.toString())
+            Log.d("Testing Param fecha_ini", fecha_ini.toString())
+            Log.d("Testing Param fecha_asig", fecha_asig.toString())
+
         }
     }
 
@@ -153,6 +157,8 @@ class EvalsFragment : Fragment() {
                 }
                 anno_ult=lAnno
                 mes_ult=lMes
+                Log.d("testing anno_ult evalsFragment", anno_ult.toString())
+                Log.d("testing mes_ult evalsFragment", mes_ult.toString())
                 //lAnno.toString()+"-"+lMes.toString()
                 Log.d("testing 4EvalsFrag", "Fin")
             }
@@ -186,7 +192,8 @@ class EvalsFragment : Fragment() {
                 fecha_asig!!,
                 anno_ult!!,
                 mes_ult!!,
-                idEmp!!
+                idEmp!!,
+                id_user!!
             )
             Log.d("testing Evals2222", "Inicio")
             it.findNavController().navigate(action)

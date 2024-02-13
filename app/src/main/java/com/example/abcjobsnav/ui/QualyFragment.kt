@@ -56,6 +56,9 @@ class QualyFragment : Fragment() {
             id = it.getInt(ID_PARAM_EMP)
             id_user = it.getInt(ID_PARAM_USER)
             tokenUser = it.getString(TOKEN_PARAM)
+            Log.d("testing id=id_emp param", id.toString())
+            Log.d("testing id_user param", id_user.toString())
+            Log.d("testing tokenUser param", tokenUser.toString())
         }
     }
 

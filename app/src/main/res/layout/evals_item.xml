@@ -55,7 +55,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblCuando"
+                            android:id="@+id/lblCandidate"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:text="@string/qualy_employee"
@@ -63,7 +63,7 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/txtCuando"
+                            android:id="@+id/txtCandidate"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:text="@{evaluacion.candidato}"
@@ -76,15 +76,15 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblPerfil"
+                            android:id="@+id/lblMonth"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/candidate_interviews_profile"
+                            android:text="@string/evals_month"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/txtPerfil"
+                            android:id="@+id/txtMonth"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{evaluacion.strmes}"
@@ -97,15 +97,15 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblProyecto"
+                            android:id="@+id/lblYear"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/candidate_interviews_project"
+                            android:text="@string/evals_year"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/txtProyecto"
+                            android:id="@+id/txtYear"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{Integer.toString(evaluacion.anno)}"
@@ -118,39 +118,18 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblEmpresa"
+                            android:id="@+id/lblValuation"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:text="@string/candidate_interviews_company"
+                            android:text="@string/evals_valuation"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/txtEmpresa"
+                            android:id="@+id/txtValuation"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@{evaluacion.calificacion}"
-                            android:textColor="@color/black" />
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/lblContacto"
-                            android:layout_width="100dp"
-                            android:layout_height="wrap_content"
-                            android:text="@string/qualy_date_of_admission"
-                            android:textColor="@color/black"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/txtContacto"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="@{Integer.toString(evaluacion.mes)}"
                             android:textColor="@color/black" />
                     </LinearLayout>
                 </LinearLayout>

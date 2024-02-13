@@ -35,6 +35,7 @@ import java.util.Locale
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private const val ID_PARAM = "id_perfilProy"
+private const val ID_USER_PARAM = "id_user"
 private const val ID_PARAM_CAND = "id_cand"
 private const val TOKEN_PARAM = "token_user"
 private const val PARAM_CANDIDATO = "nom_cand"
@@ -82,6 +83,7 @@ class CreaEvalFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
             id = it.getInt(ID_PARAM)
+            id_user = it.getInt(ID_USER_PARAM)
             tokenUser = it.getString(TOKEN_PARAM)
             id_cand = it.getInt(ID_PARAM_CAND)
             candidato = it.getString(PARAM_CANDIDATO)
@@ -95,6 +97,13 @@ class CreaEvalFragment : Fragment() {
             Log.d("testing id param crearEvaluacion", id.toString())
             Log.d("testing id param crearEvaluacion", candidato!!)
             Log.d("testing idEmp param crearEvaluacion", idEmp.toString())
+            Log.d("Testing Param fecha_ini", fecha_ini.toString())
+            Log.d("Testing Param fecha_asig", fecha_asig.toString())
+            Log.d("testing anno_ult param", anno_ult.toString())
+            Log.d("testing mes_ult param", mes_ult.toString())
+            Log.d("testing idEmp param", idEmp.toString())
+            Log.d("Testing Param tokenUser", tokenUser.toString())
+            Log.d("Testing Param idUser", id_user.toString())
         }
     }
 
@@ -143,7 +152,7 @@ class CreaEvalFragment : Fragment() {
             origenBtn=true
             val action = CreaEvalFragmentDirections.actionCreaEvalFragmentToEvalsFragment(
                 id!!,
-                0,
+                id_user!!,
                 tokenUser!!,
                 candidato!!,
                 proyecto!!,
@@ -209,7 +218,7 @@ class CreaEvalFragment : Fragment() {
                         Log.d("testing idTipo CreaEvalfragment", viewModel.evaluacion.value!!.id.toString())
                         val action = CreaEvalFragmentDirections.actionCreaEvalFragmentToEvalsFragment(
                             viewModel.evaluacion.value!!.idPerfilProy,
-                            0,
+                            id_user!!,
                             tokenUser!!,
                             viewModel.candidato,
                             proyecto!!,
@@ -241,23 +250,49 @@ class CreaEvalFragment : Fragment() {
         binding.txtProyecto.text=proyecto
         binding.txtPerfil.text=perfil
 
+        Log.d("testing anno_ult", anno_ult.toString())
+        Log.d("testing mes_ult", mes_ult.toString())
         if (anno_ult==-1){
+            Log.d("testing fecha_asig", "if -1")
+            Log.d("testing fecha_asig", fecha_asig.toString())
+            Log.d("testing fecha_asig", "substr")
+            Log.d("testing fecha_asig", fecha_asig?.substring(5, 7).toString())
             anno_ult=Integer.valueOf(fecha_asig?.substring(0, 4))
-            mes_ult=Integer.valueOf(fecha_asig?.substring(5, 6))-1
+            mes_ult=Integer.valueOf(fecha_asig?.substring(5, 7))-1
+            Log.d("testing anno_ult", "if -1")
+            Log.d("testing anno_ult", anno_ult.toString())
+            Log.d("testing mes_ult", mes_ult.toString())
         }
         else{
+            Log.d("testing anno_ult", "if <> -1")
+            Log.d("testing anno_ult", anno_ult.toString())
+            Log.d("testing mes_ult", mes_ult.toString())
             mes_ult= mes_ult?.plus(1)
+            Log.d("testing mes_ult", "mes_ult +1")
+            Log.d("testing mes_ult", mes_ult.toString())
             if (mes_ult==12){
                 mes_ult=0
                 anno_ult= anno_ult?.plus(1)
+                Log.d("testing mes_ult", "mes=12")
+                Log.d("testing anno_ult", anno_ult.toString())
+                Log.d("testing mes_ult", mes_ult.toString())
             }
             val anno_aux = Integer.valueOf(fecha_asig?.substring(0, 4))
-            val mes_aux = Integer.valueOf(fecha_asig?.substring(5, 6))-1
+            val mes_aux = Integer.valueOf(fecha_asig?.substring(5, 7))-1
+            Log.d("testing aux vars", "Auxs")
+            Log.d("testing anno_aux", anno_aux.toString())
+            Log.d("testing mes_aux", mes_aux.toString())
             if((anno_aux > anno_ult!!) or ((anno_aux == anno_ult!!) and (mes_aux>=mes_ult!!))){
                 anno_ult=anno_aux
                 mes_ult=mes_aux
+                Log.d("testing aux mayor", "Auxs mayor")
+                Log.d("testing anno_ult", anno_ult.toString())
+                Log.d("testing mes_ult", mes_ult.toString())
             }
         }
+        Log.d("testing anno_ult", "Valores finales")
+        Log.d("testing anno_ult", anno_ult.toString())
+        Log.d("testing mes_ult", mes_ult.toString())
         binding.txtAnno.setText(Integer.toString(anno_ult!!))
         binding.txtMonth.setText(setStrMonth(mes_ult!!))
     }
