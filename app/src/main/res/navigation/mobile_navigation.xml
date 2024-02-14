@@ -96,6 +96,9 @@
         <action
             android:id="@+id/action_empresaFragment_to_asignaFragment"
             app:destination="@id/asignaFragment" />
+        <action
+            android:id="@+id/action_empresaFragment_to_entrevistasEmpresaFragment"
+            app:destination="@id/entrevistasEmpresaFragment" />
     </fragment>
     <fragment
         android:id="@+id/jobsFragment"
@@ -304,5 +307,32 @@
         <argument
             android:name="nom_proy"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/entrevistasEmpresaFragment"
+        android:name="com.example.abcjobsnav.ui.EntrevistasEmpresaFragment"
+        android:label="@string/abc_jobs"
+        tools:layout="@layout/fragment_entrevistas_empresa">
+        <action
+            android:id="@+id/action_entrevistasEmpresaFragment_to_resultEvEmpresaFragment"
+            app:destination="@id/resultEvEmpresaFragment" />
+        <action
+            android:id="@+id/action_entrevistasEmpresaFragment_to_empresaFragment"
+            app:destination="@id/empresaFragment" />
+        <argument
+            android:name="id_emp"
+            app:argType="integer" />
+        <argument
+            android:name="token"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/resultEvEmpresaFragment"
+        android:name="com.example.abcjobsnav.ui.ResultEvEmpresaFragment"
+        android:label="@string/abc_jobs"
+        tools:layout="@layout/fragment_result_ev_empresa">
+        <action
+            android:id="@+id/action_resultEvEmpresaFragment_to_entrevistasEmpresaFragment"
+            app:destination="@id/entrevistasEmpresaFragment" />
     </fragment>
 </navigation>

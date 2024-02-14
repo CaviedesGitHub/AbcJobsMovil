@@ -2,37 +2,43 @@ package com.example.abcjobsnav.ui
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
-import com.example.abcjobsnav.R
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.example.abcjobsnav.databinding.FragmentEmpresaBinding
-import com.example.abcjobsnav.models.Empresa
-import com.example.abcjobsnav.viewmodels.EmpresaViewModel
-import com.squareup.picasso.Picasso
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.example.abcjobsnav.R
+import com.example.abcjobsnav.databinding.FragmentEntrevistasEmpresaBinding
+import com.example.abcjobsnav.models.Entrevista
+import com.example.abcjobsnav.ui.adapters.EntrevistasEmpresaAdapter
+import com.example.abcjobsnav.viewmodels.EntrevistaViewModel
+import androidx.navigation.fragment.findNavController
+import com.example.abcjobsnav.viewmodels.EntrevistasEmpresaViewModel
 import java.util.Locale
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-private const val ID_PARAM = "ID_PARAM"
-private const val TOKEN_PARAM = "TOKEN_PARAM"
+private const val ID_PARAM = "id_emp"
+private const val TOKEN_PARAM = "token"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [CandidatoFragment.newInstance] factory method to
+ * Use the [EntrevistasFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class EmpresaFragment : Fragment() {
-    private var _binding: FragmentEmpresaBinding? = null
+class EntrevistasEmpresaFragment : Fragment() {
+    private var _binding: FragmentEntrevistasEmpresaBinding? = null
     private val binding get() = _binding!!
-    private lateinit var viewModel: EmpresaViewModel
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var viewModel: EntrevistasEmpresaViewModel
+    private var viewModelAdapter: EntrevistasEmpresaAdapter? = null
 
     private var id: Int? = null
     private var tokenUser: String? = null
@@ -41,100 +47,66 @@ class EmpresaFragment : Fragment() {
     private var param2: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        Log.d("testing Candidatofragment", "Inicio onCreate")
+        Log.d("testing EntrevistasEmpresafragment", "Inicio")
         super.onCreate(savedInstanceState)
-        Log.d("testing Candidatofragment", "Inicio onCreate2")
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
             id = it.getInt(ID_PARAM)
             tokenUser = it.getString(TOKEN_PARAM)
-            Log.d("testing id Candidatofragment", id.toString())
+            Log.d("testing EntrevistasEmpresafragment", "Params")
+            Log.d("testing EntrevistasEmpresafragment", id.toString())
+            Log.d("testing EntrevistasEmpresafragment", tokenUser!!)
         }
-        Log.d("testing Candidatofragment", "Inicio onCreate3")
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        Log.d("testing Empresafragment", "Inicio onCreateView")
-        _binding = FragmentEmpresaBinding.inflate(inflater, container, false)
-        Log.d("testing Empresafragment", "Inicio onCreateView2")
+        Log.d("testing onCreateView", "Inicio")
+        _binding = FragmentEntrevistasEmpresaBinding.inflate(inflater, container, false)
         val view = binding.root
-        Log.d("testing Empresafragment", "Inicio onCreateView3")
+        viewModelAdapter = EntrevistasEmpresaAdapter()
+        Log.d("testing onCreateView", "Fin")
         return view
-        //return inflater.inflate(R.layout.fragment_candidato, container, false)
+        // Inflate the layout for this fragment   return null;
+        //return inflater.inflate(R.layout.fragment_entrevistas, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        Log.d("testing onViewCreated", "Inicio")
+        recyclerView = binding.entrevistasRvEVC
+        recyclerView.layoutManager = LinearLayoutManager(context)
+        recyclerView.adapter = viewModelAdapter
+        Log.d("testing onViewCreated", "Fin")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
-        Log.d("testing Empresafragment", "Inicio onActivityCreated")
+        Log.d("testing onActivityCreated", "Inicio")
         super.onActivityCreated(savedInstanceState)
-        Log.d("testing Empresafragment", "Inicio onActivityCreated2")
         val activity = requireNotNull(this.activity) {
             "You can only access the viewModel after onActivityCreated()"
         }
-        Log.d("testing Empresafragment", "Inicio onActivityCreated3")
         activity.actionBar?.title = getString(R.string.abc_jobs)
-        Log.d("testing Empresafragment", "Inicio onActivityCreated4")
-        viewModel = ViewModelProvider(this, EmpresaViewModel.Factory(activity.application)).get(
-            EmpresaViewModel::class.java)
+        viewModel = ViewModelProvider(this, EntrevistasEmpresaViewModel.Factory(activity.application)).get(EntrevistasEmpresaViewModel::class.java)
         viewModel.refreshDataFromNetwork(id!!, tokenUser!!)
-        Log.d("testing Empresafragment", "Inicio onActivityCreated5")
-        viewModel.empresa.observe(viewLifecycleOwner, Observer<Empresa> {
+        viewModel.entrevistas.observe(viewLifecycleOwner, Observer<List<Entrevista>> {
             it.apply {
-                binding.empresa=viewModel.empresa.value
+                viewModelAdapter!!.entrevistas = this
+                if (viewModel.entrevistas.value.isNullOrEmpty()){
+                    binding.txtMsgVacioEVC.visibility=View.VISIBLE
+                    binding.progressBarEVC.visibility=View.INVISIBLE
+                }
             }
         })
-        Log.d("testing Empresafragment", "Inicio onActivityCreated6")
         viewModel.eventNetworkError.observe(viewLifecycleOwner, Observer<Boolean> { isNetworkError ->
             if (isNetworkError) onNetworkError()
         })
-        Log.d("testing Empresafragment", "Inicio onActivityCreated7")
-
+        Log.d("testing onActivityCreated", "Fin")
         viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
             onNetworkErrorMsg(errorText.toString())
         })
-
-        binding.btnCalificaciones.setOnClickListener() {
-            Log.d("testing Btn Calificaciones", "Inicio")
-            val action = EmpresaFragmentDirections.actionEmpresaFragmentToQualyFragment(
-                viewModel.empresa.value!!.id,
-                viewModel.empresa.value!!.id_usuario,
-                tokenUser!!
-            )
-            Log.d("testing Empresa", "Despues Action Dentro del If")
-            it.findNavController().navigate(action)
-            Log.d("testing Empresa", "Despues Navigate")
-        }
-
-        binding.btnAsignacion.setOnClickListener() {
-            Log.d("testing Btn Asignacion", "Inicio")
-            val action = EmpresaFragmentDirections.actionEmpresaFragmentToAsignaFragment(
-                viewModel.empresa.value!!.id,
-                viewModel.empresa.value!!.id_usuario,
-                tokenUser!!,
-                true
-            )
-            Log.d("testing Empresa", "Despues Action Dentro del If")
-            it.findNavController().navigate(action)
-            Log.d("testing Empresa", "Despues Navigate")
-        }
-
-        binding.btnEntrevistasEmp.setOnClickListener() {
-            Log.d("testing Btn Entrevistas", "Inicio")
-            val action = EmpresaFragmentDirections.actionEmpresaFragmentToEntrevistasEmpresaFragment(
-                viewModel.empresa.value!!.id,
-                tokenUser!!,
-            )
-            Log.d("testing Empresa ev", "Despues Action Dentro del If")
-            it.findNavController().navigate(action)
-            Log.d("testing Empresa ev", "Despues Navigate")
-        }
     }
 
     override fun onDestroyView() {
@@ -148,6 +120,7 @@ class EmpresaFragment : Fragment() {
             viewModel.onNetworkErrorShown()
         }
     }
+
     private fun onNetworkErrorMsg(msg: String) {
         Log.d("Testing funMensaje", msg)
         if (!msg.isNullOrEmpty()){
@@ -162,10 +135,10 @@ class EmpresaFragment : Fragment() {
                 if (!msg.contains("nullllll")){
                     val lenguaje=lenguajeActivo()
                     if (lenguaje=="español"){
-                        mensaje=getString(R.string.company_not_recovered)+": "+msgBackend  //"User already exists"  //Unauthorized
+                        mensaje=getString(R.string.interview_list_not_retrieved)+": "+msgBackend  //"User already exists"  //Unauthorized
                     }
                     else{
-                        mensaje= getString(R.string.company_not_recovered)
+                        mensaje=getString(R.string.interview_list_not_retrieved)
                     }
                 }
                 else{
@@ -173,10 +146,10 @@ class EmpresaFragment : Fragment() {
                     val values=msg1.split(delimiter)
                     val lenguaje=lenguajeActivo()
                     if (lenguaje=="español"){
-                        mensaje=getString(R.string.company_not_recovered)
+                        mensaje=getString(R.string.interview_list_not_retrieved)
                     }
                     else{
-                        mensaje=getString(R.string.company_not_recovered)+": "+values[values.size-1]  //"Login Unsuccessful: Network Error"
+                        mensaje=getString(R.string.interview_list_not_retrieved)+": "+values[values.size-1]  //"Login Unsuccessful: Network Error"
                     }
                 }
                 Toast.makeText(activity, mensaje, Toast.LENGTH_LONG).show()
@@ -188,6 +161,7 @@ class EmpresaFragment : Fragment() {
     private fun lenguajeActivo(): String {
         return Locale.getDefault().getDisplayLanguage()
     }
+
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -195,12 +169,12 @@ class EmpresaFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment CandidatoFragment.
+         * @return A new instance of fragment EntrevistasFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            EmpresaFragment().apply {
+            EntrevistasEmpresaFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
@@ -208,6 +182,3 @@ class EmpresaFragment : Fragment() {
             }
     }
 }
-
-
-

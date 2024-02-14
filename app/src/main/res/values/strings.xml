@@ -191,6 +191,8 @@
     <string name="evals_year">Year:</string>
     <string name="evals_valuation">Valuation:</string>
     <string name="qualy_assigned_on">Assigned on</string>
+    <string name="empresa_interviews">Interviews</string>
+    <string name="empresa_type">Type:</string>
 
     <string-array name="qualys4">
         <item>Excellent</item>

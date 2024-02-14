@@ -44,6 +44,53 @@ class NetworkServiceAdapter constructor(context: Context) {
         Volley.newRequestQueue(context.applicationContext)
     }
 
+    suspend fun getEntrevistasEmpresa(body: JSONObject, id_emp: Int, token: String)=suspendCoroutine<List<Entrevista>>{contResp ->
+        Log.d("testing","Inicio getEntrevistasEmpresa NetworkServiceAdapter")
+        val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"entrevistasEmpresa/$id_emp", body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("testing","Response getEntrevistasEmpresa NetworkServiceAdapter")
+                Log.d("testing", response.toString())
+                val cont=response.getInt("totalCount")
+                Log.d("testing", cont.toString())
+                val resp = response.getJSONArray("Entrevistas")
+                Log.d("testing","Response3 getEntrevistasEmpresa NetworkServiceAdapter")
+                val list = mutableListOf<Entrevista>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    list.add(i, Entrevista(id = item.getInt("id"),
+                        candidato = item.getString("candidato"),
+                        nom_empresa = item.getString("nom_empresa"),
+                        nom_proyecto = item.getString("nom_proyecto"),
+                        nom_perfil = item.getString("nom_perfil"),
+                        cuando = item.getString("cuando"),
+                        contacto = item.getString("contacto"),
+                        calificacion = item.getString("calificacion"),
+                        anotaciones = item.getString("anotaciones"),
+                        id_cand = item.getInt("id_cand"),
+                        idPerfilProy = item.getInt("idPerfilProy"),
+                        id_perfil = item.getInt("id_perfil"),
+                        Num = item.getInt("Num"),
+                        valoracion = 0 ))
+                }
+                Log.d("testing","Response4 getEntrevistasEmpresa NetworkServiceAdapter")
+                contResp.resume(list) //onComplete(list)
+            },
+            {
+                Log.d("testing","VolleyError getEntrevistaEmpresa NetworkServiceAdapter")
+                contResp.resumeWithException(it) //throw it   //onError(it)
+            }){
+            override fun getHeaders(): MutableMap<String, String> {
+                Log.d("testing","Inicio getHeaders")
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Authorization"] = "Bearer $token"
+                Log.d("testing", headers.toString())
+                return headers  //return super.getHeaders()  // throws AuthFailureError
+            }
+        };
+        requestQueue.add(jsonReq)
+    }
+
     suspend fun asignaCand(body: JSONObject, idProyPerfil: Int, token: String)=suspendCoroutine<PerfilProyecto>{contResp ->
         Log.d("testing","Inicio asignaCand NetworkServiceAdapter")
         val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"empresas/proyectos/perfiles/asignacion/$idProyPerfil", body,

@@ -19,6 +19,7 @@ class CacheManager(context: Context) {
                 }
             }
     }
+    private var evsEmpresa: HashMap<Int, List<Entrevista>> = hashMapOf()
     private var evsCandidato: HashMap<Int, List<Entrevista>> = hashMapOf()
     private var puestosEmpresaConAsig: HashMap<Int, List<Puesto>> = hashMapOf()
     private var puestosEmpresaSinAsig: HashMap<Int, List<Puesto>> = hashMapOf()
@@ -61,6 +62,15 @@ class CacheManager(context: Context) {
     }
     fun getPuestosEmpresaConAsig(idEmp: Int) : List<Puesto>{
         return if (puestosEmpresaConAsig.containsKey(idEmp)) puestosEmpresaConAsig[idEmp]!! else listOf<Puesto>()
+    }
+
+    fun addEntrevistasEmpresa(idEmp: Int, evs: List<Entrevista>){
+        if (!evsEmpresa.containsKey(idEmp)){
+            evsEmpresa[idEmp] = evs
+        }
+    }
+    fun getEntrevistasEmpresa(idEmp: Int) : List<Entrevista>{
+        return if (evsEmpresa.containsKey(idEmp)) evsEmpresa[idEmp]!! else listOf<Entrevista>()
     }
 
     fun addEntrevistasCandidato(idUser: Int, evs: List<Entrevista>){

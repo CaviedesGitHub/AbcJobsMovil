@@ -37,7 +37,7 @@
                     android:orientation="horizontal">
 
                     <LinearLayout
-                        android:layout_marginStart="25dp"
+                        android:layout_marginStart="0dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_weight="1"
@@ -60,6 +60,7 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
@@ -69,7 +70,7 @@
                             android:layout_marginTop="0dp"
                             android:textColor="@color/black"
                             android:textStyle="bold"
-                            android:text="@string/company_type" />
+                            android:text="@string/empresa_type" />
 
                         <TextView
                             android:id="@+id/txtTipo"
@@ -83,10 +84,11 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblContacto"
+                            android:id="@+id/lblContactoEVC"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
@@ -95,7 +97,7 @@
                             android:text="@string/company_contact" />
 
                         <TextView
-                            android:id="@+id/txtContacto"
+                            android:id="@+id/txtContactoEVC"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -106,10 +108,11 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblCelular"
+                            android:id="@+id/lblCelularEVC"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
@@ -118,7 +121,7 @@
                             android:text="@string/company_phone" />
 
                         <TextView
-                            android:id="@+id/txtCelular"
+                            android:id="@+id/txtCelularEVC"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -129,10 +132,11 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblCorreo"
+                            android:id="@+id/lblCorreoEVC"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
@@ -141,7 +145,7 @@
                             android:text="@string/company_email" />
 
                         <TextView
-                            android:id="@+id/txtCorreo"
+                            android:id="@+id/txtCorreoEVC"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -152,10 +156,11 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblPais"
+                            android:id="@+id/lblPaisEVC"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
@@ -164,7 +169,7 @@
                             android:text="@string/company_country" />
 
                         <TextView
-                            android:id="@+id/txtPais"
+                            android:id="@+id/txtPaisEVC"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -175,10 +180,11 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblCiudad"
+                            android:id="@+id/lblCiudadEVC"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
@@ -187,7 +193,7 @@
                             android:text="@string/company_city" />
 
                         <TextView
-                            android:id="@+id/txtCiudad"
+                            android:id="@+id/txtCiudadEVC"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -198,10 +204,11 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/lblDir"
+                            android:id="@+id/lblDirEVC"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="0dp"
@@ -210,7 +217,7 @@
                             android:text="@string/company_address" />
 
                         <TextView
-                            android:id="@+id/txtDir"
+                            android:id="@+id/txtDirEVC"
                             android:textColor="@color/black"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -222,12 +229,15 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_marginTop="25dp"
+                    android:orientation="vertical">
                     <Button
                         android:id="@+id/btnCalificaciones"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="5dp"
                         android:backgroundTint="@color/design_default_color_primary"
                         android:text="@string/company_qualifications"
                         android:textColor="@color/white"
@@ -236,12 +246,26 @@
 
                     <Button
                         android:id="@+id/btnAsignacion"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="15dp"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="5dp"
                         android:backgroundTint="@color/design_default_color_primary"
                         android:text="@string/company_assignment"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        style="?android:attr/buttonBarButtonStyle" />
+
+                    <Button
+                        android:id="@+id/btnEntrevistasEmp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginEnd="15dp"
+                        android:layout_marginTop="5dp"
+                        android:backgroundTint="@color/design_default_color_primary"
+                        android:text="@string/empresa_interviews"
                         android:textColor="@color/white"
                         android:textSize="16sp"
                         style="?android:attr/buttonBarButtonStyle" />
