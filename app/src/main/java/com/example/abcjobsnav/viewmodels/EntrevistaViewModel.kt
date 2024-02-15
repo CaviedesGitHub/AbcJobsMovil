@@ -41,7 +41,8 @@ class EntrevistaViewModel(application: Application) :  AndroidViewModel(applicat
             "empresa" to "",
             "proyecto" to "",
             "perfil" to "",
-            "contacto" to ""
+            "contacto" to "",
+            "candidato" to ""
         )
 
         try {

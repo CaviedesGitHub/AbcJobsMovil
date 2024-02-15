@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import com.example.abcjobsnav.R
 import com.example.abcjobsnav.models.Entrevista
 import androidx.lifecycle.Observer
+import androidx.navigation.Navigation
 import com.example.abcjobsnav.databinding.FragmentResultadoEntrevistaBinding
 import com.example.abcjobsnav.viewmodels.ResultEvViewModel
 import java.util.Locale
@@ -22,6 +23,10 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private const val ID_PARAM = "evId"
 private const val TOKEN_PARAM = "token"
+private const val IDEMP_PARAM = "idEmp"
+private const val IDCAND_PARAM = "idCand"
+private const val TYPECALL_PARAM = "typeCall"
+private const val IDUSER_PARAM = "idUser"
 
 class ResultadoEntrevistaFragment : Fragment() {
     private var _binding: FragmentResultadoEntrevistaBinding? = null
@@ -30,6 +35,10 @@ class ResultadoEntrevistaFragment : Fragment() {
 
     private var id: Int? = null
     private var tokenUser: String? = null
+    private var idUser: Int? = null
+    private var idEmp: Int? = null
+    private var idCand: Int? = null
+    private var typeCall: Int? = null
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
@@ -43,6 +52,10 @@ class ResultadoEntrevistaFragment : Fragment() {
             param2 = it.getString(ARG_PARAM2)
             id = it.getInt(ID_PARAM)
             tokenUser = it.getString(TOKEN_PARAM)
+            idEmp = it.getInt(IDEMP_PARAM)
+            idCand = it.getInt(IDCAND_PARAM)
+            typeCall=it.getInt(TYPECALL_PARAM)
+            idUser = it.getInt(IDUSER_PARAM)
         }
         Log.d("testing ResultEvfragment", "Inicio onCreate3")
     }
@@ -92,6 +105,30 @@ class ResultadoEntrevistaFragment : Fragment() {
         viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
             onNetworkErrorMsg(errorText.toString())
         })
+        binding.btnBackFromEV.setOnClickListener(){
+            if(typeCall==0){
+                val action = ResultadoEntrevistaFragmentDirections.actionResultadoEntrevistaFragmentToEntrevistasFragment(
+                    idCand!!,
+                    tokenUser!!,
+                    idUser!!
+                )
+                Navigation.findNavController(it).navigate(action)
+            }
+            else if(typeCall==1){
+                val action = ResultadoEntrevistaFragmentDirections.actionResultadoEntrevistaFragmentToEntrevistasEmpresaFragment(
+                    idEmp!!,
+                    tokenUser!!,
+                    idUser!!,
+                )
+                Navigation.findNavController(it).navigate(action)
+            }
+            else if(typeCall==2){
+
+            }
+            else{
+
+            }
+        }
         /*binding.btnEntrevistasCand.setOnClickListener() {
             Log.d("testing Entrevistas", "Inicio")
             val action = CandidatoFragmentDirections.actionCandidatoFragmentToEntrevistasFragment(

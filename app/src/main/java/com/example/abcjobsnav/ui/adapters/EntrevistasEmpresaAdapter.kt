@@ -10,10 +10,11 @@ import com.example.abcjobsnav.R
 import com.example.abcjobsnav.databinding.EntrevistasempresaItemBinding
 import com.example.abcjobsnav.models.Entrevista
 import com.example.abcjobsnav.ui.EntrevistasEmpresaFragmentDirections
+import com.example.abcjobsnav.ui.EntrevistasFragmentDirections
 
 //import com.example.abcjobsnav.ui.AlbumFragmentDirections
 
-class EntrevistasEmpresaAdapter : RecyclerView.Adapter<EntrevistasEmpresaAdapter.EntrevistasEmpresaViewHolder>(){
+class EntrevistasEmpresaAdapter(val idEmp: Int?, val tokenUser: String?, val idUser: Int?) : RecyclerView.Adapter<EntrevistasEmpresaAdapter.EntrevistasEmpresaViewHolder>(){
 
     var entrevistas :List<Entrevista> = emptyList()
         set(value) {
@@ -35,7 +36,13 @@ class EntrevistasEmpresaAdapter : RecyclerView.Adapter<EntrevistasEmpresaAdapter
             it.entrevista = entrevistas[position]
         }
         holder.viewDataBinding.root.setOnClickListener {
-            val action = EntrevistasEmpresaFragmentDirections.actionEntrevistasEmpresaFragmentToResultEvEmpresaFragment()  //entrevistas[position].id, ""
+            val action = EntrevistasEmpresaFragmentDirections.actionEntrevistasEmpresaFragmentToResultadoEntrevistaFragment(
+                entrevistas[position].id,
+                tokenUser!!,
+                idEmp!!,
+                0,
+                1,
+                idUser!!)
             holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }

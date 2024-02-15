@@ -37,6 +37,12 @@
         <action
             android:id="@+id/action_entrevistasFragment_to_resultadoEntrevistaFragment"
             app:destination="@id/resultadoEntrevistaFragment" />
+        <action
+            android:id="@+id/action_entrevistasFragment_to_candidatoFragment"
+            app:destination="@id/candidatoFragment" />
+        <argument
+            android:name="id_user"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -116,6 +122,24 @@
         <argument
             android:name="token"
             app:argType="string" />
+        <action
+            android:id="@+id/action_resultadoEntrevistaFragment_to_entrevistasEmpresaFragment"
+            app:destination="@id/entrevistasEmpresaFragment" />
+        <action
+            android:id="@+id/action_resultadoEntrevistaFragment_to_entrevistasFragment"
+            app:destination="@id/entrevistasFragment" />
+        <argument
+            android:name="idEmp"
+            app:argType="integer" />
+        <argument
+            android:name="idCand"
+            app:argType="integer" />
+        <argument
+            android:name="typeCall"
+            app:argType="integer" />
+        <argument
+            android:name="idUser"
+            app:argType="integer" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -325,6 +349,12 @@
         <argument
             android:name="token"
             app:argType="string" />
+        <argument
+            android:name="id_user"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_entrevistasEmpresaFragment_to_resultadoEntrevistaFragment"
+            app:destination="@id/resultadoEntrevistaFragment" />
     </fragment>
     <fragment
         android:id="@+id/resultEvEmpresaFragment"
@@ -335,4 +365,9 @@
             android:id="@+id/action_resultEvEmpresaFragment_to_entrevistasEmpresaFragment"
             app:destination="@id/entrevistasEmpresaFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/paramDialogFragment"
+        android:name="com.example.abcjobsnav.ui.ParamDialogFragment"
+        android:label="fragment_param_dialog"
+        tools:layout="@layout/fragment_param_dialog" />
 </navigation>

@@ -21,32 +21,52 @@
         android:textSize="40sp"
         android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/txtMsgVacioEVC"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/EVCContenido"
+        app:layout_constraintTop_toBottomOf="@id/txtTituloEVC"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:layout_marginBottom="20dp"
-        app:layout_constraintTop_toBottomOf="@id/txtTituloEVC"
-        android:text="@string/no_interviews_were_found"
-        android:textAlignment="textStart"
-        android:textColor="@color/black"
-        android:textSize="30sp"
-        android:textStyle="bold" />
+        android:layout_height="wrap_content">
 
-    <ProgressBar
-        android:id="@+id/progressBarEVC"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtTituloEVC"
+        <TextView
+            android:id="@+id/txtMsgVacioEVC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:layout_marginBottom="20dp"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/no_interviews_were_found"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <ProgressBar
+            android:id="@+id/progressBarEVC"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/entrevistasRvEVC"
+            android:paddingBottom="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/entrevistasempresa_item" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <Button
+        android:id="@+id/btnEvBackCompany"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/entrevistasRvEVC"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtTituloEVC"
-        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:listitem="@layout/entrevistasempresa_item" />
+        android:layout_marginTop="10dp"
+        android:text="@string/back_to_company"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/EVCContenido" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

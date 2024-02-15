@@ -49,4 +49,14 @@
         android:layout_height="wrap_content"
         tools:listitem="@layout/entrevista_item" />
 
+    <Button
+        android:id="@+id/btnLstEvBackCandidato"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/back_to_candidate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/entrevistasRv" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -193,6 +193,11 @@
     <string name="qualy_assigned_on">Assigned on</string>
     <string name="empresa_interviews">Interviews</string>
     <string name="empresa_type">Type:</string>
+    <string name="EVsEmp_filters">Filters</string>
+    <string name="param_apply">Apply</string>
+    <string name="EvEmpresa_candidate">Candidate:</string>
+    <string name="ResultEV_back">Back</string>
+    <string name="back_to_candidate">Back to candidate</string>
 
     <string-array name="qualys4">
         <item>Excellent</item>

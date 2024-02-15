@@ -9,6 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.abcjobsnav.R
@@ -26,6 +27,7 @@ private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private const val ID_PARAM = "id_cand"
 private const val TOKEN_PARAM = "token"
+private const val IDUSER_PARAM = "id_user"
 
 /**
  * A simple [Fragment] subclass.
@@ -40,6 +42,7 @@ class EntrevistasFragment : Fragment() {
     private var viewModelAdapter: EntrevistasAdapter? = null
 
     private var id: Int? = null
+    private var id_user: Int? = null
     private var tokenUser: String? = null
     // TODO: Rename and change types of parameters
     private var param1: String? = null
@@ -52,6 +55,7 @@ class EntrevistasFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
             id = it.getInt(ID_PARAM)
+            id_user = it.getInt(IDUSER_PARAM)
             tokenUser = it.getString(TOKEN_PARAM)
             Log.d("testing Entrevistasfragment", "Params")
             Log.d("testing Entrevistasfragment", id.toString())
@@ -66,7 +70,7 @@ class EntrevistasFragment : Fragment() {
         Log.d("testing onCreateView", "Inicio")
         _binding = FragmentEntrevistasBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = EntrevistasAdapter()
+        viewModelAdapter = EntrevistasAdapter(id, tokenUser, id_user)
         Log.d("testing onCreateView", "Fin")
         return view
         // Inflate the layout for this fragment   return null;
@@ -107,6 +111,15 @@ class EntrevistasFragment : Fragment() {
         viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
             onNetworkErrorMsg(errorText.toString())
         })
+        binding.btnLstEvBackCandidato.setOnClickListener(){
+            val action = EntrevistasFragmentDirections.actionEntrevistasFragmentToCandidatoFragment(
+                tokenUser!!,
+                "",
+                id_user!!,
+                0,
+            )
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun onDestroyView() {

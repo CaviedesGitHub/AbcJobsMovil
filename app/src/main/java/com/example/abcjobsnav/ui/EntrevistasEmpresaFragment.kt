@@ -7,8 +7,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.loader.app.LoaderManager
+import androidx.navigation.Navigation
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.abcjobsnav.R
@@ -26,6 +30,7 @@ import java.util.Locale
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private const val ID_PARAM = "id_emp"
+private const val ID_PARAM_USER = "id_user"
 private const val TOKEN_PARAM = "token"
 
 /**
@@ -41,11 +46,13 @@ class EntrevistasEmpresaFragment : Fragment() {
     private var viewModelAdapter: EntrevistasEmpresaAdapter? = null
 
     private var id: Int? = null
+    private var id_user: Int? = null
     private var tokenUser: String? = null
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
+    private var isLargeLayout: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         Log.d("testing EntrevistasEmpresafragment", "Inicio")
         super.onCreate(savedInstanceState)
@@ -53,6 +60,7 @@ class EntrevistasEmpresaFragment : Fragment() {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
             id = it.getInt(ID_PARAM)
+            id_user = it.getInt(ID_PARAM_USER)
             tokenUser = it.getString(TOKEN_PARAM)
             Log.d("testing EntrevistasEmpresafragment", "Params")
             Log.d("testing EntrevistasEmpresafragment", id.toString())
@@ -67,7 +75,7 @@ class EntrevistasEmpresaFragment : Fragment() {
         Log.d("testing onCreateView", "Inicio")
         _binding = FragmentEntrevistasEmpresaBinding.inflate(inflater, container, false)
         val view = binding.root
-        viewModelAdapter = EntrevistasEmpresaAdapter()
+        viewModelAdapter = EntrevistasEmpresaAdapter(id, tokenUser, id_user)
         Log.d("testing onCreateView", "Fin")
         return view
         // Inflate the layout for this fragment   return null;
@@ -79,6 +87,7 @@ class EntrevistasEmpresaFragment : Fragment() {
         recyclerView = binding.entrevistasRvEVC
         recyclerView.layoutManager = LinearLayoutManager(context)
         recyclerView.adapter = viewModelAdapter
+        isLargeLayout = resources.getBoolean(R.bool.large_layout)
         Log.d("testing onViewCreated", "Fin")
     }
 
@@ -92,11 +101,19 @@ class EntrevistasEmpresaFragment : Fragment() {
         viewModel = ViewModelProvider(this, EntrevistasEmpresaViewModel.Factory(activity.application)).get(EntrevistasEmpresaViewModel::class.java)
         viewModel.refreshDataFromNetwork(id!!, tokenUser!!)
         viewModel.entrevistas.observe(viewLifecycleOwner, Observer<List<Entrevista>> {
+            Log.d("testing Observe", "Inicio Observe")
             it.apply {
                 viewModelAdapter!!.entrevistas = this
+                binding.progressBarEVC.visibility=View.GONE
                 if (viewModel.entrevistas.value.isNullOrEmpty()){
+                    Log.d("testing Observe", "Lista Vacia")
                     binding.txtMsgVacioEVC.visibility=View.VISIBLE
-                    binding.progressBarEVC.visibility=View.INVISIBLE
+                    //binding.entrevistasRvEVC.visibility=View.INVISIBLE
+                }
+                else{
+                    Log.d("testing Observe", "Lista NO Vacia")
+                    binding.txtMsgVacioEVC.visibility=View.GONE
+                    //binding.entrevistasRvEVC.visibility=View.VISIBLE
                 }
             }
         })
@@ -107,6 +124,13 @@ class EntrevistasEmpresaFragment : Fragment() {
         viewModel.errorText.observe(viewLifecycleOwner, Observer<String> {errorText ->
             onNetworkErrorMsg(errorText.toString())
         })
+        binding.btnEvBackCompany.setOnClickListener(){
+            val action = EntrevistasEmpresaFragmentDirections.actionEntrevistasEmpresaFragmentToEmpresaFragment(
+                id_user!!,
+                tokenUser!!
+            )
+            Navigation.findNavController(it).navigate(action)
+        }
     }
 
     override fun onDestroyView() {

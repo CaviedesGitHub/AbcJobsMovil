@@ -20,7 +20,9 @@ class EntrevistasEmpresaRepository (val application: Application){
             try{
                 Log.d("testing Cache decision", "get from network")
                 var evs = NetworkServiceAdapter.getInstance(application).getEntrevistasEmpresa(params, idEmp, token)
+                Log.d("testing Cache decision2", "get from network2")
                 CacheManager.getInstance(application.applicationContext).addEntrevistasEmpresa(idEmp, evs)
+                Log.d("testing Cache decision3", "get from network3")
                 return evs
             }
             catch (e:VolleyError){

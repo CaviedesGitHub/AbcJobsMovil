@@ -13,7 +13,7 @@ import com.example.abcjobsnav.ui.EntrevistasFragmentDirections
 
 //import com.example.abcjobsnav.ui.AlbumFragmentDirections
 
-class EntrevistasAdapter : RecyclerView.Adapter<EntrevistasAdapter.EntrevistaViewHolder>(){
+class EntrevistasAdapter(val idCand: Int?, val tokenUser: String?, val idUser: Int?) : RecyclerView.Adapter<EntrevistasAdapter.EntrevistaViewHolder>(){
 
     var entrevistas :List<Entrevista> = emptyList()
         set(value) {
@@ -35,7 +35,13 @@ class EntrevistasAdapter : RecyclerView.Adapter<EntrevistasAdapter.EntrevistaVie
             it.entrevista = entrevistas[position]
         }
         holder.viewDataBinding.root.setOnClickListener {
-            val action = EntrevistasFragmentDirections.actionEntrevistasFragmentToResultadoEntrevistaFragment(entrevistas[position].id, "")
+            val action = EntrevistasFragmentDirections.actionEntrevistasFragmentToResultadoEntrevistaFragment(
+                entrevistas[position].id,
+                tokenUser!!,
+                0,
+                idCand!!,
+                0,
+                idUser!!)
             holder.viewDataBinding.root.findNavController().navigate(action)
         }
     }

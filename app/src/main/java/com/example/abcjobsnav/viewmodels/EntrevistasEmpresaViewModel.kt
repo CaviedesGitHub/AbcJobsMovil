@@ -41,7 +41,8 @@ class EntrevistasEmpresaViewModel(application: Application) :  AndroidViewModel(
             "empresa" to "",
             "proyecto" to "",
             "perfil" to "",
-            "contacto" to ""
+            "contacto" to "",
+            "candidato" to ""
         )
 
         try {
@@ -49,9 +50,12 @@ class EntrevistasEmpresaViewModel(application: Application) :  AndroidViewModel(
                 withContext(Dispatchers.IO){
                     try{
                         var data = entrevistaEmpresaRepository.refreshData(JSONObject(postParams), idEmp, token)
+                        Log.d("testing after repo", "VM")
                         _entrevistas.postValue(data)
+                        Log.d("testing after value", "VM")
                         _eventNetworkError.postValue(false)
                         _isNetworkErrorShown.postValue(false)
+                        Log.d("testing after error", "VM")
                     }
                     catch (e: VolleyError){
                         var mensaje: String

@@ -116,7 +116,8 @@ class CandidatoFragment : Fragment() {
             Log.d("testing Entrevistas", "Inicio")
             val action = CandidatoFragmentDirections.actionCandidatoFragmentToEntrevistasFragment(
                 viewModel.candidato.value!!.id,
-                tokenUser!!
+                tokenUser!!,
+                id!!
             )
             Log.d("testing Entrevistas", "Despues Action Dentro del If")
             it.findNavController().navigate(action)
