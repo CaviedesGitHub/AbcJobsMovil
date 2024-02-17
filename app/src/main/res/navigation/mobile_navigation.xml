@@ -110,7 +110,17 @@
         android:id="@+id/jobsFragment"
         android:name="com.example.abcjobsnav.ui.JobsFragment"
         android:label="@string/abc_jobs"
-        tools:layout="@layout/fragment_jobs" />
+        tools:layout="@layout/fragment_jobs" >
+        <action
+            android:id="@+id/action_jobsFragment_to_asignaAbcFragment"
+            app:destination="@id/asignaAbcFragment" />
+        <argument
+            android:name="idUser"
+            app:argType="integer" />
+        <argument
+            android:name="tokenUser"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/resultadoEntrevistaFragment"
         android:name="com.example.abcjobsnav.ui.ResultadoEntrevistaFragment"
@@ -370,4 +380,22 @@
         android:name="com.example.abcjobsnav.ui.ParamDialogFragment"
         android:label="fragment_param_dialog"
         tools:layout="@layout/fragment_param_dialog" />
+    <fragment
+        android:id="@+id/asignaAbcFragment"
+        android:name="com.example.abcjobsnav.ui.AsignaAbcFragment"
+        android:label="@string/abc_jobs"
+        tools:layout="@layout/fragment_asigna_abc">
+        <argument
+            android:name="idUser"
+            app:argType="integer" />
+        <argument
+            android:name="tokenUser"
+            app:argType="string" />
+        <argument
+            android:name="cache"
+            app:argType="boolean" />
+        <action
+            android:id="@+id/action_asignaAbcFragment_to_jobsFragment"
+            app:destination="@id/jobsFragment" />
+    </fragment>
 </navigation>

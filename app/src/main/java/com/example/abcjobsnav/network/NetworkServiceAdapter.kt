@@ -18,6 +18,7 @@ import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.models.CandidatoSel
 import com.example.abcjobsnav.models.Empresa
 import com.example.abcjobsnav.models.Evaluacion
+import com.example.abcjobsnav.models.ListaPuesto
 import com.example.abcjobsnav.models.Login
 import com.example.abcjobsnav.models.PerfilProyecto
 import com.example.abcjobsnav.models.Puesto
@@ -42,6 +43,113 @@ class NetworkServiceAdapter constructor(context: Context) {
     private val requestQueue: RequestQueue by lazy {
         // applicationContext keeps you from leaking the Activity or BroadcastReceiver if someone passes one in.
         Volley.newRequestQueue(context.applicationContext)
+    }
+
+    suspend fun getPuestosAsig(body: JSONObject, userId:Int, token: String)=suspendCoroutine<List<Puesto>>{ contResp ->
+        Log.d("testing","Inicio getPuestosAsig NetworkServiceAdapter")
+        val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"empresas/puestosAsig", body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("testing","Response getPuestosAsig NetworkServiceAdapter")
+                Log.d("testing", response.toString())
+                val cont=response.getInt("totalCount")
+                Log.d("testing", cont.toString())
+                val resp = response.getJSONArray("Puestos")
+                Log.d("testing","Response3 getPuestosAsig NetworkServiceAdapter")
+                val list = mutableListOf<Puesto>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    var strImagen: String=""
+                    if (!item.isNull("imagen")){
+                        strImagen=item.getString("imagen")
+                    }
+                    else{
+                        strImagen=""
+                    }
+                    list.add(i, Puesto(
+                        Num = item.getInt("Num"),
+                        id = item.getInt("id"),
+                        nom_proyecto = item.getString("nom_proyecto"),
+                        nom_perfil = item.getString("nom_perfil"),
+                        id_perfil = item.getInt("id_perfil"),
+                        id_cand = item.getInt("id_cand"),
+                        candidato = item.getString("candidato"),
+                        fecha_inicio = item.getString("fecha_inicio"),
+                        fecha_asig = item.getString("fecha_asig"),
+                        nom_empresa = item.getString("nom_empresa"),
+                        imagen = strImagen))
+                }
+                Log.d("testing","Response4 getPuestosAsig NetworkServiceAdapter")
+                contResp.resume(list) //onComplete(list)
+            },
+            {
+                Log.d("testing","VolleyError getPuestosAsig NetworkServiceAdapter")
+                contResp.resumeWithException(it) //throw it   //onError(it)
+            }){
+            override fun getHeaders(): MutableMap<String, String> {
+                Log.d("testing","Inicio getHeaders")
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Authorization"] = "Bearer $token"
+                Log.d("testing", headers.toString())
+                return headers  //return super.getHeaders()  // throws AuthFailureError
+            }
+        };
+        requestQueue.add(jsonReq)
+    }
+    suspend fun getPuestosNoAsig(body: JSONObject, userId:Int, token: String)=suspendCoroutine<ListaPuesto>{ contResp ->
+        Log.d("testing","Inicio getPuestosNoAsig NetworkServiceAdapter")
+        val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"empresas/puestosNoAsig", body,
+            Response.Listener<JSONObject> { response ->
+                Log.d("testing","Response getPuestosNoAsig NetworkServiceAdapter")
+                Log.d("testing", response.toString())
+                val cont=response.getInt("totalCount")
+                Log.d("testing", cont.toString())
+                val resp = response.getJSONArray("Puestos")
+                Log.d("testing","Response3 getPuestosNoAsig NetworkServiceAdapter")
+                val list = mutableListOf<Puesto>()
+                for (i in 0 until resp.length()) {
+                    val item = resp.getJSONObject(i)
+                    var strImagen: String=""
+                    if (!item.isNull("imagen")){
+                        strImagen=item.getString("imagen")
+                    }
+                    else{
+                        strImagen=""
+                    }
+                    list.add(i, Puesto(
+                        Num = item.getInt("Num"),
+                        id = item.getInt("id"),
+                        nom_proyecto = item.getString("nom_proyecto"),
+                        nom_perfil = item.getString("nom_perfil"),
+                        id_perfil = item.getInt("id_perfil"),
+                        id_cand = item.getInt("id_cand"),
+                        candidato = item.getString("candidato"),
+                        fecha_inicio = item.getString("fecha_inicio"),
+                        fecha_asig = item.getString("fecha_asig"),
+                        nom_empresa = item.getString("nom_empresa"),
+                        imagen = strImagen))
+                }
+                val lista=ListaPuesto(
+                    total_reg = cont,
+                    lista = list
+                )
+                Log.d("testing","Response4 getPuestosNoAsig NetworkServiceAdapter")
+                contResp.resume(lista) //onComplete(list)
+            },
+            {
+                Log.d("testing","VolleyError getPuestosNoAsig NetworkServiceAdapter")
+                contResp.resumeWithException(it) //throw it   //onError(it)
+            }){
+            override fun getHeaders(): MutableMap<String, String> {
+                Log.d("testing","Inicio getHeaders")
+                val headers = HashMap<String, String>()
+                headers["Content-Type"] = "application/json"
+                headers["Authorization"] = "Bearer $token"
+                Log.d("testing", headers.toString())
+                return headers  //return super.getHeaders()  // throws AuthFailureError
+            }
+        };
+        requestQueue.add(jsonReq)
     }
 
     suspend fun getEntrevistasEmpresa(body: JSONObject, id_emp: Int, token: String)=suspendCoroutine<List<Entrevista>>{contResp ->
@@ -682,6 +790,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                         candidato = item.getString("candidato"),
                         fecha_inicio = item.getString("fecha_inicio"),
                         fecha_asig = item.getString("fecha_asig"),
+                        nom_empresa = item.getString("nom_empresa"),
                         imagen = strImagen))
                 }
                 Log.d("testing","Response4 getPuestosEmpresaNoAsig NetworkServiceAdapter")
@@ -732,6 +841,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                         candidato = item.getString("candidato"),
                         fecha_inicio = item.getString("fecha_inicio"),
                         fecha_asig = item.getString("fecha_asig"),
+                        nom_empresa = item.getString("nom_empresa"),
                         imagen = strImagen))
                 }
                 Log.d("testing","Response4 getPuestosEmpresaAsig NetworkServiceAdapter")

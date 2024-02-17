@@ -5,6 +5,7 @@ data class Puesto (
     val id: Int,
     val nom_proyecto: String,
     val nom_perfil: String,
+    val nom_empresa: String,
     val id_perfil: Int,
     val id_cand: Int,
     val candidato: String,

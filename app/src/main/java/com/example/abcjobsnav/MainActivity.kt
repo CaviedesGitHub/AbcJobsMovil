@@ -90,7 +90,9 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.language_change -> Toast.makeText(this, "Language Change", Toast.LENGTH_SHORT).show()
+            R.id.language_change -> {
+                Toast.makeText(this, "Language Change", Toast.LENGTH_SHORT).show()
+            }
             R.id.action_profile -> Toast.makeText(this, "Profile", Toast.LENGTH_SHORT).show()
             R.id.action_exit -> {
                 Toast.makeText(this, "Exit", Toast.LENGTH_SHORT).show()

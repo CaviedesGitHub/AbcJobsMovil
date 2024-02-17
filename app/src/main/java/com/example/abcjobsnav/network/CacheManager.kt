@@ -6,6 +6,7 @@ import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.models.CandidatoSel
 import com.example.abcjobsnav.models.Empresa
 import com.example.abcjobsnav.models.Evaluacion
+import com.example.abcjobsnav.models.ListaPuesto
 import com.example.abcjobsnav.models.PerfilProyecto
 import com.example.abcjobsnav.models.Puesto
 
@@ -28,6 +29,17 @@ class CacheManager(context: Context) {
     private var lstEmpresas: HashMap<Int, Empresa> = hashMapOf()
     private var lstCandidatos: HashMap<Int, Candidato> = hashMapOf()
     private var lstEntrevistas: HashMap<Int, Entrevista> = hashMapOf()
+    private var lstPuestosABCSinAsig: HashMap<Int, ListaPuesto> = hashMapOf()
+
+    fun addLstPuestosABCSinAsig(id: Int, lstP: ListaPuesto){
+        if (!lstPuestosABCSinAsig.containsKey(id)){
+            lstPuestosABCSinAsig[id] = lstP
+        }
+    }
+    fun getLstPuestosABCSinAsig(id: Int) : ListaPuesto{
+        val aux: ListaPuesto = ListaPuesto( 0, listOf<Puesto>())
+        return if (lstPuestosABCSinAsig.containsKey(id)) lstPuestosABCSinAsig[id]!! else aux
+    }
 
     fun addCumplenPerfil(idPerfil: Int, lstCand: List<CandidatoSel>){
         if (!lstCumplenPerfil.containsKey(idPerfil)){

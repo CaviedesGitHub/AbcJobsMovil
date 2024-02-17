@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        tools:context=".ui.AsignaFragment">
+        tools:context=".ui.AsignaAbcFragment">
         <TextView
             android:id="@+id/txtTitulo"
             android:layout_width="match_parent"
@@ -27,9 +27,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/asignaContenido"
-            app:layout_constraintTop_toBottomOf="@id/txtTitulo"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/txtTitulo">
 
             <TextView
                 android:id="@+id/txtMsgVacio"
@@ -47,27 +47,65 @@
 
             <ProgressBar
                 android:id="@+id/progressBar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/puestosSinAsigRv"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/puestosAbcSinAsigRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:listitem="@layout/asigna_item" />
+
+            <LinearLayout
+                android:id="@+id/paginaJobsABC"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/puestosAbcSinAsigRv"
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/Fucsia">
+
+                <Button
+                    android:id="@+id/btnFiltersJobsABC"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/jobsabc_filters" />
+
+                <EditText
+                    android:id="@+id/editTextText"
+                    android:layout_width="80dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text"
+                    android:text="0-0 de 0" />
+
+                <ImageButton
+                    android:id="@+id/pagAnt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/btn_star" />
+
+                <ImageButton
+                    android:id="@+id/pagSig"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/btn_star" />
+            </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+
         <Button
-            android:id="@+id/btnBackCompany"
+            android:id="@+id/btnBackJobs"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/back_to_company"
+            android:text="@string/asignaabc_back_to_jobs"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/asignaContenido" />

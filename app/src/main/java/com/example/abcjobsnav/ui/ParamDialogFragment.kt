@@ -10,21 +10,42 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.widget.Button
 import android.widget.Toolbar
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentManager
 import com.example.abcjobsnav.R
+import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 
 
-class ParamDialogFragment : DialogFragment() {
+class ParamDialogFragment : DialogFragment(), View.OnClickListener {
 
     /** The system calls this to get the DialogFragment's layout, regardless
     of whether it's being displayed as a dialog or an embedded fragment. */
 
+    private var paramPerfil :String? = null
+    private var paramProyecto :String? = null
+    private var paramEmpresa :String? = null
+    private var paramCandidato :String? = null
+
     val TAG: String? = "paramsEVsEmp"
     private val toolbar: Toolbar? = null
 
+    lateinit var perfilTxt:TextInputEditText
+    lateinit var proyTxt:TextInputEditText
+    lateinit var empTxt:TextInputEditText
+    lateinit var candTxt:TextInputEditText
+
+    private var callback: Callback? = null
+    fun setCallback(callback: Callback?) {
+        this.callback = callback
+    }
     companion object {
+        private const val ARG_PERFIL = "argPerfil"
+        private const val ARG_PROYECTO = "argProyecto"
+        private const val ARG_EMPRESA = "argEmpresa"
+        private const val ARG_CANDIDATO = "argCandidato"
         fun display(fragmentManager: FragmentManager?): ParamDialogFragment? {
             val exampleDialog = ParamDialogFragment()
             if (fragmentManager != null) {
@@ -32,11 +53,34 @@ class ParamDialogFragment : DialogFragment() {
             }
             return exampleDialog
         }
+
+        fun newInstance(): ParamDialogFragment? {
+            return ParamDialogFragment()
+        }
+    }
+
+    override fun onClick(v: View) {
+        val id = v.id
+        when (id) {
+            R.id.btnCancelDialogAbc -> dismiss()
+            R.id.btnApplyDialogAbc -> {
+                Log.d("Testing CallBack", "Inicio Apply")
+                callback!!.onActionClick(perfilTxt.text?.toString(), proyTxt.text?.toString(),
+                    empTxt.text?.toString(), candTxt.text?.toString())
+                dismiss()
+            }
+        }
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         //setStyle(STYLE_NORMAL, com.example.abcjobsnav.R.style.AppTheme_FullScreenDialog)
+        arguments?.let {
+            paramPerfil = it.getString(ARG_PERFIL)
+            paramProyecto = it.getString(ARG_PROYECTO)
+            paramEmpresa = it.getString(ARG_EMPRESA)
+            paramCandidato = it.getString(ARG_CANDIDATO)
+        }
     }
 
     override fun onStart() {
@@ -59,6 +103,18 @@ class ParamDialogFragment : DialogFragment() {
         super.onCreateView(inflater, container, savedInstanceState)
         val view: View = inflater.inflate(R.layout.fragment_param_dialog, container, false)
         //toolbar = view.findViewById<View>(R.id.toolbar)
+        val close = view.findViewById<Button>(R.id.btnCancelDialogAbc)
+        val action = view.findViewById<Button>(R.id.btnApplyDialogAbc)
+        close.setOnClickListener(this)
+        action.setOnClickListener(this)
+        perfilTxt = view.findViewById<TextInputEditText>(R.id.profileParam)
+        proyTxt = view.findViewById<TextInputEditText>(R.id.projectParam)
+        empTxt = view.findViewById<TextInputEditText>(R.id.companyParam)
+        candTxt = view.findViewById<TextInputEditText>(R.id.candidateParam)
+        perfilTxt.setText(paramPerfil)
+        proyTxt.setText(paramProyecto)
+        empTxt.setText(paramEmpresa)
+        candTxt.setText(paramCandidato)
         return view
     }
 
@@ -82,4 +138,10 @@ class ParamDialogFragment : DialogFragment() {
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         return dialog
     }
+
+
+    interface Callback {
+        fun onActionClick(nom_perfil: String?, nom_proy: String?, nom_emp: String?, nom_cand: String?,)
+    }
+
 }

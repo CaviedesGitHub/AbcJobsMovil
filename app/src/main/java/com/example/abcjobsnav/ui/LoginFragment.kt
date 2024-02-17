@@ -121,7 +121,9 @@ class LoginFragment : Fragment() {
                         }
                     }
                     else{
-                        val action = LoginFragmentDirections.actionLoginFragmentToJobsFragment()
+                        val action = LoginFragmentDirections.actionLoginFragmentToJobsFragment(
+                            viewModel.login.value!!.id,
+                            viewModel.login.value!!.token)
                         if (myView!=null){
                             Navigation.findNavController(myView!!).navigate(action)
                         }

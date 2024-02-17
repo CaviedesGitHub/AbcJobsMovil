@@ -198,6 +198,15 @@
     <string name="EvEmpresa_candidate">Candidate:</string>
     <string name="ResultEV_back">Back</string>
     <string name="back_to_candidate">Back to candidate</string>
+    <string name="ABC_assignment">Assignment</string>
+    <string name="ABC_interviews">Interviews</string>
+    <string name="ABC_tests">Tests</string>
+    <string name="asignaabc_back_to_jobs">Back to Jobs</string>
+    <string name="jobsabc_filters">Filters</string>
+    <string name="abc_apply_filters">Apply</string>
+    <string name="abc_cancel_filters">Cancel</string>
+    <string name="abc_filters">Filters</string>
+    <string name="abc_param_project">Project</string>
 
     <string-array name="qualys4">
         <item>Excellent</item>
