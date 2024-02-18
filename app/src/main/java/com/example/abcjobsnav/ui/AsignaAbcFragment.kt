@@ -103,6 +103,13 @@ class AsignaAbcFragment : Fragment() {
                 if (viewModel.puestosSinAsig.value!!.lista.isNullOrEmpty()){
                     binding.txtMsgVacio.visibility=View.VISIBLE
                     binding.puestosAbcSinAsigRv.visibility=View.INVISIBLE
+                    binding.pagAnt.isEnabled=false
+                    binding.pagAnt2.isEnabled=false
+                    binding.pagSig.isEnabled=false
+                    binding.pagSig2.isEnabled=false
+                    var strRegs:String ="0-0 of 0"
+                    binding.editTextText.setText(strRegs)
+                    binding.editTextText2.setText(strRegs)
                 }
                 else{
                     binding.txtMsgVacio.visibility=View.GONE
@@ -122,17 +129,22 @@ class AsignaAbcFragment : Fragment() {
                     var strRegs:String =""
                     strRegs=num_ini.toString()+"-"+num_fin.toString()+" of "+viewModel.puestosSinAsig.value!!.total_reg.toString()
                     binding.editTextText.setText(strRegs)
+                    binding.editTextText2.setText(strRegs)
                     if (viewModel.num_pag==1){
                         binding.pagAnt.isEnabled=false
+                        binding.pagAnt2.isEnabled=false
                     }
                     else{
                         binding.pagAnt.isEnabled=true
+                        binding.pagAnt2.isEnabled=true
                     }
                     if (viewModel.num_pag<viewModel.total_pags){
                         binding.pagSig.isEnabled=true
+                        binding.pagSig2.isEnabled=true
                     }
                     else{
                         binding.pagSig.isEnabled=false
+                        binding.pagSig2.isEnabled=false
                     }
                 }
             }
@@ -153,68 +165,97 @@ class AsignaAbcFragment : Fragment() {
             Navigation.findNavController(it).navigate(action)
         }
         binding.pagAnt.setOnClickListener(){
-            viewModel.num_pag=viewModel.num_pag-1
-            viewModel.refreshDataFromNetwork(id!!, tokenUser!!, viewModel.max_items, viewModel.num_pag,
-                viewModel.nom_proy, viewModel.nom_perfil, viewModel.nom_cand, viewModel.nom_cand)
+            prevItem()
         }
         binding.pagSig.setOnClickListener(){
-            viewModel.num_pag=viewModel.num_pag+1
-            viewModel.refreshDataFromNetwork(id!!, tokenUser!!, viewModel.max_items, viewModel.num_pag,
-                viewModel.nom_proy, viewModel.nom_perfil, viewModel.nom_cand, viewModel.nom_cand)
+            nextItem()
         }
         binding.btnFiltersJobsABC.setOnClickListener() {
-            Log.d("testing Btn Params Entrevistas", "Inicio")
-            //val newFragment = ParamDialogFragment()
-            //newFragment.show(requireFragmentManager(), "paramsEVsEmp")
+            despliegaDialogo()
+        }
+        binding.pagAnt2.setOnClickListener(){
+            prevItem()
+        }
+        binding.pagSig2.setOnClickListener(){
+            nextItem()
+        }
+        binding.btnFiltersJobsABC2.setOnClickListener() {
+            despliegaDialogo()
+        }
+    }
 
-            val fragmentManager = requireFragmentManager()
-            val newFragment = ParamDialogFragment()
-            val args = Bundle()
-            args.putString("argPerfil", viewModel.nom_perfil)
-            args.putString("argProyecto", viewModel.nom_proy)
-            args.putString("argEmpresa", viewModel.nom_emp)
-            args.putString("argCandidato", viewModel.nom_cand)
-            newFragment.setArguments(args)
-            if (true) {
-                // The device is using a large layout, so show the fragment as a dialog
-                newFragment.setCallback(object : ParamDialogFragment.Callback {
-                    override fun onActionClick(
-                        nom_perfil: String?,
-                        nom_proy: String?,
-                        nom_emp: String?,
-                        nom_cand: String?
-                    ) {
-                        //Toast.makeText(this@MainActivity, name, Toast.LENGTH_SHORT).show()
-                        Log.d("testing param", nom_perfil.toString())
-                        viewModel.nom_perfil=nom_perfil!!
-                        viewModel.nom_proy=nom_proy!!
-                        viewModel.nom_emp=nom_emp!!
-                        viewModel.nom_cand=nom_cand!!
-                        viewModel.num_pag=1
-                        viewModel.refreshDataFromNetwork(id!!, tokenUser!!, viewModel.max_items, viewModel.num_pag,
-                            viewModel.nom_proy, viewModel.nom_perfil, viewModel.nom_cand, viewModel.nom_cand)
-                    }
-                })
-                newFragment.show(fragmentManager, "paramsEVsEmp")
-                Log.d("testing como dialog","despues show")
-            } else {
-                // The device is smaller, so show the fragment fullscreen
-                Log.d("testing max screen","inicio else")
-                val transaction = fragmentManager.beginTransaction()
-                Log.d("testing max screen","begin transaction")
-                // For a little polish, specify a transition animation
-                transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                Log.d("testing max screen","set Transition")
-                // To make it fullscreen, use the 'content' root view as the container
-                // for the fragment, which is always the root view for the activity
-                Log.d("testing max screen","antes add")
-                transaction
-                    .add(R.id.entrevistasEmpresaFragment, newFragment)
-                    .addToBackStack(null)
-                    .commit()
-                // R.id.entrevistasEmpresaFragment  android.R.id.content
-                Log.d("testing max screen","despues add")
-            }
+    fun prevItem(){
+        binding.progressBar.visibility=View.VISIBLE
+        binding.puestosAbcSinAsigRv.visibility=View.INVISIBLE
+        binding.txtMsgVacio.visibility=View.INVISIBLE
+        viewModel.num_pag=viewModel.num_pag-1
+        viewModel.refreshDataFromNetwork(id!!, tokenUser!!, viewModel.max_items, viewModel.num_pag,
+            viewModel.nom_proy, viewModel.nom_perfil, viewModel.nom_cand, viewModel.nom_cand)
+    }
+
+    fun nextItem(){
+        binding.progressBar.visibility=View.VISIBLE
+        binding.puestosAbcSinAsigRv.visibility=View.INVISIBLE
+        binding.txtMsgVacio.visibility=View.INVISIBLE
+        viewModel.num_pag=viewModel.num_pag+1
+        viewModel.refreshDataFromNetwork(id!!, tokenUser!!, viewModel.max_items, viewModel.num_pag,
+            viewModel.nom_proy, viewModel.nom_perfil, viewModel.nom_cand, viewModel.nom_cand)
+    }
+    fun despliegaDialogo(){
+        Log.d("testing Btn Params Entrevistas", "Inicio")
+        //val newFragment = ParamDialogFragment()
+        //newFragment.show(requireFragmentManager(), "paramsEVsEmp")
+
+        val fragmentManager = requireFragmentManager()
+        val newFragment = ParamDialogFragment()
+        val args = Bundle()
+        args.putString("argPerfil", viewModel.nom_perfil)
+        args.putString("argProyecto", viewModel.nom_proy)
+        args.putString("argEmpresa", viewModel.nom_emp)
+        args.putString("argCandidato", viewModel.nom_cand)
+        newFragment.setArguments(args)
+        if (true) {
+            // The device is using a large layout, so show the fragment as a dialog
+            newFragment.setCallback(object : ParamDialogFragment.Callback {
+                override fun onActionClick(
+                    nom_perfil: String?,
+                    nom_proy: String?,
+                    nom_emp: String?,
+                    nom_cand: String?
+                ) {
+                    //Toast.makeText(this@MainActivity, name, Toast.LENGTH_SHORT).show()
+                    Log.d("testing param", nom_perfil.toString())
+                    binding.progressBar.visibility=View.VISIBLE
+                    binding.puestosAbcSinAsigRv.visibility=View.INVISIBLE
+                    binding.txtMsgVacio.visibility=View.INVISIBLE
+                    viewModel.nom_perfil=nom_perfil!!
+                    viewModel.nom_proy=nom_proy!!
+                    viewModel.nom_emp=nom_emp!!
+                    viewModel.nom_cand=nom_cand!!
+                    viewModel.num_pag=1
+                    viewModel.refreshDataFromNetwork(id!!, tokenUser!!, viewModel.max_items, viewModel.num_pag,
+                        viewModel.nom_proy, viewModel.nom_perfil, viewModel.nom_cand, viewModel.nom_emp )
+                }
+            })
+            newFragment.show(fragmentManager, "paramsEVsEmp")
+            Log.d("testing como dialog","despues show")
+        } else {
+            // The device is smaller, so show the fragment fullscreen
+            Log.d("testing max screen","inicio else")
+            val transaction = fragmentManager.beginTransaction()
+            Log.d("testing max screen","begin transaction")
+            // For a little polish, specify a transition animation
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            Log.d("testing max screen","set Transition")
+            // To make it fullscreen, use the 'content' root view as the container
+            // for the fragment, which is always the root view for the activity
+            Log.d("testing max screen","antes add")
+            transaction
+                .add(R.id.entrevistasEmpresaFragment, newFragment)
+                .addToBackStack(null)
+                .commit()
+            // R.id.entrevistasEmpresaFragment  android.R.id.content
+            Log.d("testing max screen","despues add")
         }
     }
 

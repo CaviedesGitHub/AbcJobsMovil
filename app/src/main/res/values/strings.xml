@@ -207,6 +207,10 @@
     <string name="abc_cancel_filters">Cancel</string>
     <string name="abc_filters">Filters</string>
     <string name="abc_param_project">Project</string>
+    <string name="abcjobs_inicio_de_proyecto">Init:</string>
+    <string name="abcjobs_num">No:</string>
+    <string name="abcjobs_nav_previous_item">Previous Item</string>
+    <string name="abcjobs_nav_next_item">Next Item</string>
 
     <string-array name="qualys4">
         <item>Excellent</item>

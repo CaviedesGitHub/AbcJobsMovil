@@ -1,183 +1,195 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/paramLayout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_margin="20dp"
-    android:background="@color/Fucsia"
-    tools:context=".ui.ParamDialogFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/txtTitulo"
+    <data>
+
+    </data>
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        app:layout_constraintTop_toTopOf="parent"
-        android:text="@string/abc_filters"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="40sp"
-        android:textStyle="bold" />
+        android:layout_height="match_parent" >
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textMatPerfilParam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:hint="Profile"
-        android:textColorHint="@color/black"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:counterTextColor="@color/black"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:helperText="Type the Profile"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/black"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtTitulo"
-        app:startIconDrawable="@drawable/perfil_24">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/profileParam"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/paramLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/GrisClaro"
-            android:contentDescription=""
-            android:maxLength="20"
-            android:text="" />
-    </com.google.android.material.textfield.TextInputLayout>
+            android:layout_height="match_parent"
+            android:layout_margin="20dp"
+            android:padding="0dp"
+            tools:context=".ui.ParamDialogFragment">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textMatProyectoParam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:hint="@string/abc_param_project"
-        android:textColorHint="@color/black"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:helperText="Type the Project"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/black"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textMatPerfilParam"
-        app:startIconDrawable="@drawable/proyecto_24">
+            <TextView
+                android:id="@+id/txtTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/abc_filters"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/projectParam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/GrisClaro"
-            android:contentDescription=""
-            android:maxLength="20"
-            android:text="" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textMatPerfilParam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Profile"
+                android:textColorHint="@color/black"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:counterTextColor="@color/black"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="Type the Profile"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/black"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:hintTextColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/txtTitulo"
+                app:startIconDrawable="@drawable/perfil_24">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textMatEmpresaParam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:hint="Company"
-        android:textColorHint="@color/black"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:counterTextColor="@color/black"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:helperText="Type the Company"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/black"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textMatProyectoParam"
-        app:startIconDrawable="@drawable/empresa_24">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/profileParam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/GrisClaro"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/companyParam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/GrisClaro"
-            android:contentDescription=""
-            android:maxLength="20"
-            android:text="" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textMatProyectoParam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="@string/abc_param_project"
+                android:textColorHint="@color/black"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="Type the Project"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/black"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:hintTextColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textMatPerfilParam"
+                app:startIconDrawable="@drawable/proyecto_24">
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/textMatCandidatoParam"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:hint="Candidate"
-        android:textColorHint="@color/black"
-        app:counterEnabled="true"
-        app:counterMaxLength="20"
-        app:counterTextColor="@color/black"
-        app:endIconMode="clear_text"
-        app:errorEnabled="true"
-        app:helperText="Type the Candidate"
-        app:helperTextEnabled="true"
-        app:helperTextTextColor="@color/black"
-        app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
-        app:hintTextColor="@color/black"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textMatEmpresaParam"
-        app:startIconDrawable="@drawable/usuario_24">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/projectParam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/GrisClaro"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/candidateParam"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:backgroundTint="@color/GrisClaro"
-            android:contentDescription=""
-            android:maxLength="20"
-            android:text="" />
-    </com.google.android.material.textfield.TextInputLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textMatEmpresaParam"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Company"
+                android:textColorHint="@color/black"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:counterTextColor="@color/black"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="Type the Company"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/black"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:hintTextColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textMatProyectoParam"
+                app:startIconDrawable="@drawable/empresa_24">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        app:layout_constraintTop_toBottomOf="@id/textMatCandidatoParam"
-        android:layout_marginTop="20dp"
-        android:layout_marginHorizontal="20dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/companyParam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/GrisClaro"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <Button
-            android:id="@+id/btnCancelDialogAbc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:text="@string/abc_cancel_filters"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textMatCandidatoParam"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:hint="Candidate"
+                android:textColorHint="@color/black"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:counterTextColor="@color/black"
+                app:endIconMode="clear_text"
+                app:errorEnabled="true"
+                app:helperText="Type the Candidate"
+                app:helperTextEnabled="true"
+                app:helperTextTextColor="@color/black"
+                app:hintTextAppearance="@style/TextAppearance.AppCompat.Small"
+                app:hintTextColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textMatEmpresaParam"
+                app:startIconDrawable="@drawable/usuario_24">
 
-        <Button
-            android:id="@+id/btnApplyDialogAbc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            android:text="@string/abc_apply_filters"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/candidateParam"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="@color/GrisClaro"
+                    android:contentDescription=""
+                    android:maxLength="20"
+                    android:text="" />
+            </com.google.android.material.textfield.TextInputLayout>
 
+            <androidx.constraintlayout.widget.ConstraintLayout
+                app:layout_constraintTop_toBottomOf="@id/textMatCandidatoParam"
+                android:layout_marginTop="20dp"
+                android:layout_marginHorizontal="20dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                <Button
+                    android:id="@+id/btnCancelDialogAbc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/abc_cancel_filters"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <Button
+                    android:id="@+id/btnApplyDialogAbc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:text="@string/abc_apply_filters"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</layout>
