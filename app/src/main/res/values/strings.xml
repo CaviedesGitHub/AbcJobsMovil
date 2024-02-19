@@ -211,6 +211,9 @@
     <string name="abcjobs_num">No:</string>
     <string name="abcjobs_nav_previous_item">Previous Item</string>
     <string name="abcjobs_nav_next_item">Next Item</string>
+    <string name="qualy_param_profile">Profile</string>
+    <string name="qualy_param_company">Company</string>
+    <string name="qualy_param_candidate">Candidate</string>
 
     <string-array name="qualys4">
         <item>Excellent</item>

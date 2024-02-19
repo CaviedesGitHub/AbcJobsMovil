@@ -18,6 +18,7 @@ import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.models.CandidatoSel
 import com.example.abcjobsnav.models.Empresa
 import com.example.abcjobsnav.models.Evaluacion
+import com.example.abcjobsnav.models.ListaEntrevista
 import com.example.abcjobsnav.models.ListaPuesto
 import com.example.abcjobsnav.models.Login
 import com.example.abcjobsnav.models.PerfilProyecto
@@ -152,7 +153,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(jsonReq)
     }
 
-    suspend fun getEntrevistasEmpresa(body: JSONObject, id_emp: Int, token: String)=suspendCoroutine<List<Entrevista>>{contResp ->
+    suspend fun getEntrevistasEmpresa(body: JSONObject, id_emp: Int, token: String)=suspendCoroutine<ListaEntrevista>{ contResp ->
         Log.d("testing","Inicio getEntrevistasEmpresa NetworkServiceAdapter")
         val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"entrevistasEmpresa/$id_emp", body,
             Response.Listener<JSONObject> { response ->
@@ -180,8 +181,12 @@ class NetworkServiceAdapter constructor(context: Context) {
                         Num = item.getInt("Num"),
                         valoracion = 0 ))
                 }
+                val lista=ListaEntrevista(
+                    total_reg = cont,
+                    lista = list
+                )
                 Log.d("testing","Response4 getEntrevistasEmpresa NetworkServiceAdapter")
-                contResp.resume(list) //onComplete(list)
+                contResp.resume(lista) //onComplete(list)
             },
             {
                 Log.d("testing","VolleyError getEntrevistaEmpresa NetworkServiceAdapter")
@@ -345,6 +350,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     candidato = "",
                     valoracion = response.getInt("valoracion"),
                     calificacion = response.getString("calificacion"),
+                    num = response.getInt("num"),
                     nota = response.getString("nota") )
                 contResp.resume(eval)
             },
@@ -739,6 +745,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                         candidato = item.getString("candidato"),
                         valoracion = item.getInt("valoracion"),
                         calificacion = item.getString("calificacion"),
+                        num = item.getInt("num"),
                         nota = item.getString("nota") ))
                 }
                 Log.d("testing","Response4 getEvalsPuesto NetworkServiceAdapter")
@@ -760,8 +767,8 @@ class NetworkServiceAdapter constructor(context: Context) {
         requestQueue.add(strReq)
     }
 
-    suspend fun getPuestosEmpresaNoAsig(body: JSONObject, empId:Int, token: String)=suspendCoroutine<List<Puesto>>{ contResp ->
-        Log.d("testing","Inicio getPuestosEmpresaAsig NetworkServiceAdapter")
+    suspend fun getPuestosEmpresaNoAsig(body: JSONObject, empId:Int, token: String)=suspendCoroutine<ListaPuesto>{ contResp ->
+        Log.d("testing","Inicio getPuestosEmpresaNoAsig NetworkServiceAdapter")
         val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"empresas/$empId/puestosNoAsig", body,
             Response.Listener<JSONObject> { response ->
                 Log.d("testing","Response getPuestosEmpresaNoAsig NetworkServiceAdapter")
@@ -793,8 +800,12 @@ class NetworkServiceAdapter constructor(context: Context) {
                         nom_empresa = item.getString("nom_empresa"),
                         imagen = strImagen))
                 }
+                val lista=ListaPuesto(
+                    total_reg = cont,
+                    lista = list
+                )
                 Log.d("testing","Response4 getPuestosEmpresaNoAsig NetworkServiceAdapter")
-                contResp.resume(list) //onComplete(list)
+                contResp.resume(lista) //onComplete(list)
             },
             {
                 Log.d("testing","VolleyError getPuestosEmpresaNoAsig NetworkServiceAdapter")
@@ -811,7 +822,7 @@ class NetworkServiceAdapter constructor(context: Context) {
         };
         requestQueue.add(jsonReq)
     }
-    suspend fun getPuestosEmpresaAsig(body: JSONObject, empId:Int, token: String)=suspendCoroutine<List<Puesto>>{ contResp ->
+    suspend fun getPuestosEmpresaAsig(body: JSONObject, empId:Int, token: String)=suspendCoroutine<ListaPuesto>{ contResp ->
         Log.d("testing","Inicio getPuestosEmpresaAsig NetworkServiceAdapter")
         val jsonReq = object: JsonObjectRequest(Request.Method.POST, BASE_URL+"empresas/$empId/puestosAsig", body,
             Response.Listener<JSONObject> { response ->
@@ -823,6 +834,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                 Log.d("testing","Response3 getPuestosEmpresaAsig NetworkServiceAdapter")
                 val list = mutableListOf<Puesto>()
                 for (i in 0 until resp.length()) {
+                    Log.d("testing","Response31 getPuestosEmpresaAsig NetworkServiceAdapter")
                     val item = resp.getJSONObject(i)
                     var strImagen: String=""
                     if (!item.isNull("imagen")){
@@ -831,6 +843,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     else{
                         strImagen=""
                     }
+                    Log.d("testing","Response32 getPuestosEmpresaAsig NetworkServiceAdapter")
                     list.add(i, Puesto(
                         Num = item.getInt("Num"),
                         id = item.getInt("id"),
@@ -844,8 +857,12 @@ class NetworkServiceAdapter constructor(context: Context) {
                         nom_empresa = item.getString("nom_empresa"),
                         imagen = strImagen))
                 }
+                val lista=ListaPuesto(
+                    total_reg = cont,
+                    lista = list
+                )
                 Log.d("testing","Response4 getPuestosEmpresaAsig NetworkServiceAdapter")
-                contResp.resume(list) //onComplete(list)
+                contResp.resume(lista) //onComplete(list)
             },
             {
                 Log.d("testing","VolleyError getPuestosEmpresaAsig NetworkServiceAdapter")

@@ -21,6 +21,7 @@ import com.example.abcjobsnav.models.Entrevista
 import com.example.abcjobsnav.ui.adapters.EntrevistasEmpresaAdapter
 import com.example.abcjobsnav.viewmodels.EntrevistaViewModel
 import androidx.navigation.fragment.findNavController
+import com.example.abcjobsnav.models.ListaEntrevista
 import com.example.abcjobsnav.viewmodels.EntrevistasEmpresaViewModel
 import java.util.Locale
 
@@ -99,21 +100,73 @@ class EntrevistasEmpresaFragment : Fragment() {
         }
         activity.actionBar?.title = getString(R.string.abc_jobs)
         viewModel = ViewModelProvider(this, EntrevistasEmpresaViewModel.Factory(activity.application)).get(EntrevistasEmpresaViewModel::class.java)
-        viewModel.refreshDataFromNetwork(id!!, tokenUser!!)
-        viewModel.entrevistas.observe(viewLifecycleOwner, Observer<List<Entrevista>> {
+        viewModel.refreshDataFromNetwork(id!!, tokenUser!!,20, 1, "", "", "", "")
+        viewModel.entrevistas.observe(viewLifecycleOwner, Observer<ListaEntrevista> {
             Log.d("testing Observe", "Inicio Observe")
             it.apply {
-                viewModelAdapter!!.entrevistas = this
+                viewModelAdapter!!.entrevistas = this.lista
                 binding.progressBarEVC.visibility=View.GONE
-                if (viewModel.entrevistas.value.isNullOrEmpty()){
-                    Log.d("testing Observe", "Lista Vacia")
+                if (viewModel.entrevistas.value!!.lista.isNullOrEmpty()){
                     binding.txtMsgVacioEVC.visibility=View.VISIBLE
-                    //binding.entrevistasRvEVC.visibility=View.INVISIBLE
+                    binding.entrevistasRvEVC.visibility=View.INVISIBLE
+                    binding.pagAnt.isEnabled=false
+                    binding.pagAnt2.isEnabled=false
+                    binding.pagSig.isEnabled=false
+                    binding.pagSig2.isEnabled=false
+                    var strRegs:String ="0-0 of 0"
+                    binding.editTextText.setText(strRegs)
+                    binding.editTextText2.setText(strRegs)
                 }
                 else{
-                    Log.d("testing Observe", "Lista NO Vacia")
+                    if (viewModel.entrevistas.value!!.total_reg < 10){
+                        binding.paginaJobsABC.visibility=View.INVISIBLE
+                    }
+                    else{
+                        binding.paginaJobsABC.visibility=View.VISIBLE
+                    }
                     binding.txtMsgVacioEVC.visibility=View.GONE
-                    //binding.entrevistasRvEVC.visibility=View.VISIBLE
+                    binding.entrevistasRvEVC.visibility=View.VISIBLE
+
+                    viewModel.total_pags=(viewModel.entrevistas.value!!.total_reg/viewModel.max_items)
+                    if ((viewModel.entrevistas.value!!.total_reg%viewModel.max_items)!=0){
+                        viewModel.total_pags=viewModel.total_pags+1
+                    }
+                    //if (viewModel.num_pag>viewModel.total_pags){
+                    //    viewModel.num_pag=viewModel.total_pags
+                    //}
+                    var num_ini: Int =(viewModel.num_pag-1)*viewModel.max_items + 1
+                    var num_fin: Int = 0
+                    if (viewModel.num_pag!=viewModel.total_pags){
+                        num_fin=(viewModel.num_pag)*viewModel.max_items
+                    }
+                    else{
+                        if (viewModel.entrevistas.value!!.total_reg % viewModel.max_items==0){
+                            num_fin=num_ini+viewModel.max_items-1
+                        }
+                        else{
+                            num_fin=num_ini+viewModel.entrevistas.value!!.total_reg % viewModel.max_items-1
+                        }
+                    }
+                    var strRegs:String =""
+                    strRegs=num_ini.toString()+"-"+num_fin.toString()+" of "+viewModel.entrevistas.value!!.total_reg.toString()
+                    binding.editTextText.setText(strRegs)
+                    binding.editTextText2.setText(strRegs)
+                    if (viewModel.num_pag==1){
+                        binding.pagAnt.isEnabled=false
+                        binding.pagAnt2.isEnabled=false
+                    }
+                    else{
+                        binding.pagAnt.isEnabled=true
+                        binding.pagAnt2.isEnabled=true
+                    }
+                    if (viewModel.num_pag<viewModel.total_pags){
+                        binding.pagSig.isEnabled=true
+                        binding.pagSig2.isEnabled=true
+                    }
+                    else{
+                        binding.pagSig.isEnabled=false
+                        binding.pagSig2.isEnabled=false
+                    }
                 }
             }
         })
@@ -130,6 +183,100 @@ class EntrevistasEmpresaFragment : Fragment() {
                 tokenUser!!
             )
             Navigation.findNavController(it).navigate(action)
+        }
+
+        binding.pagAnt.setOnClickListener(){
+            prevItem()
+        }
+        binding.pagSig.setOnClickListener(){
+            nextItem()
+        }
+        binding.btnFiltersJobsABC.setOnClickListener() {
+            despliegaDialogo()
+        }
+        binding.pagAnt2.setOnClickListener(){
+            prevItem()
+        }
+        binding.pagSig2.setOnClickListener(){
+            nextItem()
+        }
+        binding.btnFiltersJobsABC2.setOnClickListener() {
+            despliegaDialogo()
+        }
+    }
+
+    fun prevItem(){
+        binding.progressBarEVC.visibility=View.VISIBLE
+        binding.entrevistasRvEVC.visibility=View.INVISIBLE
+        binding.txtMsgVacioEVC.visibility=View.INVISIBLE
+        viewModel.num_pag=viewModel.num_pag-1
+        viewModel.refreshDataFromNetwork(id!!, tokenUser!!, viewModel.max_items, viewModel.num_pag,
+            viewModel.nom_proy, viewModel.nom_perfil, viewModel.nom_cand, viewModel.nom_cand)
+    }
+
+    fun nextItem(){
+        binding.progressBarEVC.visibility=View.VISIBLE
+        binding.entrevistasRvEVC.visibility=View.INVISIBLE
+        binding.txtMsgVacioEVC.visibility=View.INVISIBLE
+        viewModel.num_pag=viewModel.num_pag+1
+        viewModel.refreshDataFromNetwork(id!!, tokenUser!!, viewModel.max_items, viewModel.num_pag,
+            viewModel.nom_proy, viewModel.nom_perfil, viewModel.nom_cand, viewModel.nom_cand)
+    }
+    fun despliegaDialogo(){
+        Log.d("testing Btn Params Entrevistas", "Inicio")
+        //val newFragment = ParamDialogFragment()
+        //newFragment.show(requireFragmentManager(), "paramsEVsEmp")
+
+        val fragmentManager = requireFragmentManager()
+        val newFragment = ParamEntrevistaDialogFragment()
+        val args = Bundle()
+        args.putString("argPerfil", viewModel.nom_perfil)
+        args.putString("argProyecto", viewModel.nom_proy)
+        args.putString("argEmpresa", viewModel.nom_emp)
+        args.putString("argCandidato", viewModel.nom_cand)
+        newFragment.setArguments(args)
+        if (true) {
+            // The device is using a large layout, so show the fragment as a dialog
+            newFragment.setCallback(object : ParamEntrevistaDialogFragment.Callback {
+                override fun onActionClick(
+                    nom_perfil: String?,
+                    nom_proy: String?,
+                    nom_emp: String?,
+                    nom_cand: String?
+                ) {
+                    //Toast.makeText(this@MainActivity, name, Toast.LENGTH_SHORT).show()
+                    Log.d("testing param", nom_perfil.toString())
+                    binding.progressBarEVC.visibility=View.VISIBLE
+                    binding.entrevistasRvEVC.visibility=View.INVISIBLE
+                    binding.txtMsgVacioEVC.visibility=View.INVISIBLE
+                    viewModel.nom_perfil=nom_perfil!!
+                    viewModel.nom_proy=nom_proy!!
+                    viewModel.nom_emp=nom_emp!!
+                    viewModel.nom_cand=nom_cand!!
+                    viewModel.num_pag=1
+                    viewModel.refreshDataFromNetwork(id!!, tokenUser!!, viewModel.max_items, viewModel.num_pag,
+                        viewModel.nom_proy, viewModel.nom_perfil, viewModel.nom_cand, viewModel.nom_emp )
+                }
+            })
+            newFragment.show(fragmentManager, "paramsEVsEmp")
+            Log.d("testing como dialog","despues show")
+        } else {
+            // The device is smaller, so show the fragment fullscreen
+            Log.d("testing max screen","inicio else")
+            val transaction = fragmentManager.beginTransaction()
+            Log.d("testing max screen","begin transaction")
+            // For a little polish, specify a transition animation
+            transaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            Log.d("testing max screen","set Transition")
+            // To make it fullscreen, use the 'content' root view as the container
+            // for the fragment, which is always the root view for the activity
+            Log.d("testing max screen","antes add")
+            transaction
+                .add(R.id.entrevistasEmpresaFragment, newFragment)
+                .addToBackStack(null)
+                .commit()
+            // R.id.entrevistasEmpresaFragment  android.R.id.content
+            Log.d("testing max screen","despues add")
         }
     }
 

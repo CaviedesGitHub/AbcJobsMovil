@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.android.volley.VolleyError
 import com.example.abcjobsnav.models.Entrevista
+import com.example.abcjobsnav.models.ListaEntrevista
 import com.example.abcjobsnav.network.NetworkServiceAdapter
 import com.example.abcjobsnav.repositories.EntrevistasEmpresaRepository
 import org.json.JSONObject
@@ -16,8 +17,8 @@ import kotlinx.coroutines.withContext
 class EntrevistasEmpresaViewModel(application: Application) :  AndroidViewModel(application) {
     private val entrevistaEmpresaRepository = EntrevistasEmpresaRepository(application)
 
-    private val _entrevistas = MutableLiveData<List<Entrevista>>()
-    val entrevistas: LiveData<List<Entrevista>>
+    private val _entrevistas = MutableLiveData<ListaEntrevista>()
+    val entrevistas: LiveData<ListaEntrevista>
         get() = _entrevistas
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
@@ -32,17 +33,29 @@ class EntrevistasEmpresaViewModel(application: Application) :  AndroidViewModel(
     val errorText:LiveData<String>
         get() = _errorText
 
+    public var num_pag: Int = 1
+    public var total_pags: Int = 0
+    public var max_items: Int = 20
+    public var nom_proy: String =""
+    public var nom_perfil: String =""
+    public var nom_cand: String =""
+    public var nom_emp: String =""
+
     init {
         //refreshDataFromNetwork()
     }
 
-    public fun refreshDataFromNetwork(idEmp: Int, token: String) {
+    public fun refreshDataFromNetwork(idEmp: Int, token: String, max: Int, num_pag: Int,
+                                      proyecto: String, perfil: String,
+                                      candidato: String, empresa: String) {
         val postParams = mapOf<String, Any>(
-            "empresa" to "",
-            "proyecto" to "",
-            "perfil" to "",
-            "contacto" to "",
-            "candidato" to ""
+            "max" to max,
+            "num_pag" to num_pag,
+            "order" to "ASC",
+            "proyecto" to proyecto,
+            "perfil" to perfil,
+            "candidato" to candidato,
+            "empresa" to empresa
         )
 
         try {

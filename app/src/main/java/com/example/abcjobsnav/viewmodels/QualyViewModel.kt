@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.android.volley.VolleyError
+import com.example.abcjobsnav.models.ListaPuesto
 import com.example.abcjobsnav.models.Puesto
 import com.example.abcjobsnav.network.NetworkServiceAdapter
 import com.example.abcjobsnav.repositories.QualyRepository
@@ -16,8 +17,8 @@ import kotlinx.coroutines.withContext
 class QualyViewModel(application: Application) :  AndroidViewModel(application) {
     private val qualyRepository = QualyRepository(application)
 
-    private val _puestosEmpAsig = MutableLiveData<List<Puesto>>()
-    val puestosEmpAsig: LiveData<List<Puesto>>
+    private val _puestosEmpAsig = MutableLiveData<ListaPuesto>()
+    val puestosEmpAsig: LiveData<ListaPuesto>
         get() = _puestosEmpAsig
 
     private var _eventNetworkError = MutableLiveData<Boolean>(false)
@@ -32,19 +33,30 @@ class QualyViewModel(application: Application) :  AndroidViewModel(application) 
     val errorText:LiveData<String>
         get() = _errorText
 
+    public var num_pag: Int = 1
+    public var total_pags: Int = 0
+    public var max_items: Int = 20
+    public var nom_proy: String =""
+    public var nom_perfil: String =""
+    public var nom_cand: String =""
+    public var nom_emp: String =""
     init {
         //refreshDataFromNetwork()
     }
 
-    public fun refreshDataFromNetwork(empId: Int, token: String) {
+    public fun refreshDataFromNetwork(empId: Int, token: String, max: Int, num_pag: Int,
+                                      proyecto: String, perfil: String,
+                                      candidato: String, empresa: String) {
         val postParams = mapOf<String, Any>(
-            "max" to 20,
-            "num_pag" to 1,
+            "max" to max,
+            "num_pag" to num_pag,
             "order" to "ASC",
-            "proyecto" to "",
-            "perfil" to "",
-            "candidato" to ""
+            "proyecto" to proyecto,
+            "perfil" to perfil,
+            "candidato" to candidato,
+            "empresa" to empresa
         )
+        Log.d("Testing candi", candidato.toString())
         try {
             viewModelScope.launch(Dispatchers.Default){
                 withContext(Dispatchers.IO){

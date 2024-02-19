@@ -6,6 +6,7 @@ import com.example.abcjobsnav.models.Candidato
 import com.example.abcjobsnav.models.CandidatoSel
 import com.example.abcjobsnav.models.Empresa
 import com.example.abcjobsnav.models.Evaluacion
+import com.example.abcjobsnav.models.ListaEntrevista
 import com.example.abcjobsnav.models.ListaPuesto
 import com.example.abcjobsnav.models.PerfilProyecto
 import com.example.abcjobsnav.models.Puesto
@@ -30,7 +31,37 @@ class CacheManager(context: Context) {
     private var lstCandidatos: HashMap<Int, Candidato> = hashMapOf()
     private var lstEntrevistas: HashMap<Int, Entrevista> = hashMapOf()
     private var lstPuestosABCSinAsig: HashMap<Int, ListaPuesto> = hashMapOf()
+    private var lstPuestosEmpresaAsig: HashMap<Int, ListaPuesto> = hashMapOf()
+    private var lstPuestosEmpresaNoAsig: HashMap<Int, ListaPuesto> = hashMapOf()
+    private var lstEntrevistasEmpresa: HashMap<Int, ListaEntrevista> = hashMapOf()
 
+    fun addlstEntrevistasEmpresa(id: Int, lstE: ListaEntrevista){
+        if (!lstEntrevistasEmpresa.containsKey(id)){
+            lstEntrevistasEmpresa[id] = lstE
+        }
+    }
+    fun getlstEntrevistasEmpresa(id: Int) : ListaEntrevista{
+        val aux: ListaEntrevista = ListaEntrevista( 0, listOf<Entrevista>())
+        return if (lstEntrevistasEmpresa.containsKey(id)) lstEntrevistasEmpresa[id]!! else aux
+    }
+    fun addlstPuestosEmpresaNoAsig(id: Int, lstP: ListaPuesto){
+        if (!lstPuestosEmpresaNoAsig.containsKey(id)){
+            lstPuestosEmpresaNoAsig[id] = lstP
+        }
+    }
+    fun getlstPuestosEmpresaNoAsig(id: Int) : ListaPuesto{
+        val aux: ListaPuesto = ListaPuesto( 0, listOf<Puesto>())
+        return if (lstPuestosEmpresaNoAsig.containsKey(id)) lstPuestosEmpresaNoAsig[id]!! else aux
+    }
+    fun addLstPuestosEmpresaAsig(id: Int, lstP: ListaPuesto){
+        if (!lstPuestosEmpresaAsig.containsKey(id)){
+            lstPuestosEmpresaAsig[id] = lstP
+        }
+    }
+    fun getLstPuestosEmpresaAsig(id: Int) : ListaPuesto{
+        val aux: ListaPuesto = ListaPuesto( 0, listOf<Puesto>())
+        return if (lstPuestosEmpresaAsig.containsKey(id)) lstPuestosEmpresaAsig[id]!! else aux
+    }
     fun addLstPuestosABCSinAsig(id: Int, lstP: ListaPuesto){
         if (!lstPuestosABCSinAsig.containsKey(id)){
             lstPuestosABCSinAsig[id] = lstP

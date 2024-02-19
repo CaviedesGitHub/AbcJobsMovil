@@ -10,17 +10,28 @@ import android.util.SparseArray
 import androidx.collection.ArrayMap
 import androidx.collection.LruCache
 import androidx.collection.arrayMapOf
+import com.example.abcjobsnav.models.ListaPuesto
 import com.example.abcjobsnav.models.Puesto
 import com.example.abcjobsnav.network.CacheManager
 
 class QualyRepository (val application: Application){
-    suspend fun refreshData(params: JSONObject, empId: Int, token: String):List<Puesto>{
-        var potentialResp = CacheManager.getInstance(application.applicationContext).getPuestosEmpresaConAsig(empId)
-        if(potentialResp.isEmpty()){
+    suspend fun refreshData(params: JSONObject, empId: Int, token: String): ListaPuesto {
+        var idHash: Int=0
+        val strEmpId=empId.toString()
+        val strNumPag=params.getInt("num_pag").toString()
+        val strProy=params.getString("proyecto")
+        val strPerfil=params.getString("perfil")
+        val strCand=params.getString("candidato")
+        val strEmp=params.getString("empresa")
+        val str=strEmpId+"_"+strNumPag+"_"+strProy+"_"+strPerfil+"_"+strCand+"_"+strEmp
+        idHash=str.hashCode()
+        Log.d("Testing Cache idHash Qualy", idHash.toString())
+        var potentialResp = CacheManager.getInstance(application.applicationContext).getLstPuestosEmpresaAsig(idHash)
+        if(potentialResp.total_reg==0){
             try{
                 Log.d("testing Cache decision", "get from network")
                 var lstP = NetworkServiceAdapter.getInstance(application).getPuestosEmpresaAsig(params, empId, token)
-                CacheManager.getInstance(application.applicationContext).addPuestosEmpresaConAsig(empId, lstP)
+                CacheManager.getInstance(application.applicationContext).addLstPuestosEmpresaAsig(idHash, lstP)
                 return lstP
             }
             catch (e:VolleyError){
@@ -33,7 +44,7 @@ class QualyRepository (val application: Application){
             }
         }
         else{
-            Log.d("testing Cache decision", "return ${potentialResp.size} elements from cache")
+            Log.d("testing Cache decision", "return ${potentialResp.lista.size} elements from cache")
             return potentialResp
         }
     }

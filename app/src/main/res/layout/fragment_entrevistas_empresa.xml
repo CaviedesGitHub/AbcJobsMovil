@@ -22,8 +22,64 @@
         android:textStyle="bold" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/paginaJobsABC2"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:padding="0dp"
+        android:layout_marginBottom="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/txtTituloEVC">
+
+        <Button
+            android:id="@+id/btnFiltersJobsABC2"
+            android:autoSizeTextType="none"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="0dp"
+            android:padding="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/jobsabc_filters" />
+
+        <EditText
+            android:id="@+id/editTextText2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="4dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:textIsSelectable="false"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="text"
+            android:text="0-0 de 0"
+            app:layout_constraintEnd_toStartOf="@id/pagAnt2"
+            app:layout_constraintStart_toEndOf="@id/btnFiltersJobsABC2"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/pagAnt2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/abcjobs_nav_previous_item"
+            app:layout_constraintEnd_toStartOf="@id/pagSig2"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/navigate_before_24" />
+
+        <ImageButton
+            android:id="@+id/pagSig2"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/abcjobs_nav_next_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/navigate_next_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/EVCContenido"
-        app:layout_constraintTop_toBottomOf="@id/txtTituloEVC"
+        app:layout_constraintTop_toBottomOf="@id/paginaJobsABC2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -59,6 +115,60 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/paginaJobsABC"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:orientation="horizontal"
+        android:padding="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/EVCContenido">
+
+        <Button
+            android:id="@+id/btnFiltersJobsABC"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginTop="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="@string/jobsabc_filters" />
+
+        <EditText
+            android:id="@+id/editTextText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="4dp"
+            android:clickable="true"
+            android:focusable="false"
+            android:textIsSelectable="false"
+            android:ems="10"
+            android:gravity="center"
+            android:inputType="text"
+            android:text="0-0 de 0"
+            app:layout_constraintEnd_toStartOf="@id/pagAnt"
+            app:layout_constraintStart_toEndOf="@id/btnFiltersJobsABC"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageButton
+            android:id="@+id/pagAnt"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/abcjobs_nav_previous_item"
+            app:layout_constraintEnd_toStartOf="@id/pagSig"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/navigate_before_24" />
+
+        <ImageButton
+            android:id="@+id/pagSig"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:contentDescription="@string/abcjobs_nav_next_item"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:src="@drawable/navigate_next_24" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <Button
         android:id="@+id/btnEvBackCompany"
         android:layout_width="wrap_content"
@@ -67,6 +177,6 @@
         android:text="@string/back_to_company"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/EVCContenido" />
+        app:layout_constraintTop_toBottomOf="@id/paginaJobsABC" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

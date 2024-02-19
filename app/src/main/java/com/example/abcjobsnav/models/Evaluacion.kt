@@ -1,6 +1,7 @@
 package com.example.abcjobsnav.models
 
 data class Evaluacion (
+    val num: Int,
     val id: Int,
     val id_cand: Int,
     val candidato: String,

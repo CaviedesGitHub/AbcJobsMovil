@@ -112,9 +112,19 @@ class AsignaAbcFragment : Fragment() {
                     binding.editTextText2.setText(strRegs)
                 }
                 else{
+                    if (viewModel.puestosSinAsig.value!!.total_reg < 10){
+                        binding.paginaJobsABC.visibility=View.INVISIBLE
+                    }
+                    else{
+                        binding.paginaJobsABC.visibility=View.VISIBLE
+                    }
                     binding.txtMsgVacio.visibility=View.GONE
                     binding.puestosAbcSinAsigRv.visibility=View.VISIBLE
-                    viewModel.total_pags=(viewModel.puestosSinAsig.value!!.total_reg/viewModel.max_items)+1
+
+                    viewModel.total_pags=(viewModel.puestosSinAsig.value!!.total_reg/viewModel.max_items)
+                    if ((viewModel.puestosSinAsig.value!!.total_reg%viewModel.max_items)!=0){
+                        viewModel.total_pags=viewModel.total_pags+1
+                    }
                     //if (viewModel.num_pag>viewModel.total_pags){
                     //    viewModel.num_pag=viewModel.total_pags
                     //}
@@ -124,7 +134,12 @@ class AsignaAbcFragment : Fragment() {
                         num_fin=(viewModel.num_pag)*viewModel.max_items
                     }
                     else{
-                        num_fin=num_ini+viewModel.puestosSinAsig.value!!.total_reg%viewModel.max_items-1
+                        if (viewModel.puestosSinAsig.value!!.total_reg % viewModel.max_items==0){
+                            num_fin=num_ini+viewModel.max_items-1
+                        }
+                        else{
+                            num_fin=num_ini+viewModel.puestosSinAsig.value!!.total_reg % viewModel.max_items-1
+                        }
                     }
                     var strRegs:String =""
                     strRegs=num_ini.toString()+"-"+num_fin.toString()+" of "+viewModel.puestosSinAsig.value!!.total_reg.toString()
