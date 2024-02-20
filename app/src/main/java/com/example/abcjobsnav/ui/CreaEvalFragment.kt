@@ -168,6 +168,7 @@ class CreaEvalFragment : Fragment() {
         val qualys=resources.getStringArray(R.array.qualys4)
         val arrayAdapter = ArrayAdapter(requireContext(), R.layout.dropdown_item, qualys)
         binding.AutoComplete1.setAdapter(arrayAdapter)
+        //binding.AutoComplete1.threshold = 1;
         return view
     }
 

@@ -350,7 +350,7 @@ class NetworkServiceAdapter constructor(context: Context) {
                     candidato = "",
                     valoracion = response.getInt("valoracion"),
                     calificacion = response.getString("calificacion"),
-                    num = response.getInt("num"),
+                    num = 0,
                     nota = response.getString("nota") )
                 contResp.resume(eval)
             },

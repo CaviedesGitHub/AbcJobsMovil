@@ -214,6 +214,10 @@
     <string name="qualy_param_profile">Profile</string>
     <string name="qualy_param_company">Company</string>
     <string name="qualy_param_candidate">Candidate</string>
+    <string name="evals_back_jobs_list">Jobs List</string>
+    <string name="creaeval_cancel">Cancel</string>
+    <string name="creaeval_create">Create</string>
+    <string name="firstvalue_excellent">Excellent</string>
 
     <string-array name="qualys4">
         <item>Excellent</item>

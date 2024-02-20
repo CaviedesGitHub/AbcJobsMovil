@@ -192,7 +192,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:inputType="none"
-                    android:text=""
+                    android:text="@string/firstvalue_excellent"
                     tools:text="Qualy"
                     android:backgroundTint="@color/GrisClaro" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -244,7 +244,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="Cancel"
+                    android:text="@string/creaeval_cancel"
                     />
 
                 <Button
@@ -253,7 +253,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/signup_submit"
+                    android:text="@string/creaeval_create"
                     />
 
             </LinearLayout>
