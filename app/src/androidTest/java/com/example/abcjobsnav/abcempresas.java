@@ -100,8 +100,7 @@ public class abcempresas {
         );
     }
 
-    //public ActivityTestRule<MainActivity> ;
-    //@Test
+    @Test
     public void e2eQualys() throws InterruptedException {
         ViewInteraction nameLogin = onView(withId(R.id.txtUserName));
         nameLogin.perform(replaceText("Daniel1"), closeSoftKeyboard());
@@ -210,7 +209,7 @@ public class abcempresas {
         BtnQualyBackCompany.perform(ViewActions.scrollTo()).perform(click());
     }
 
-    //@Test
+    @Test
     public void e2eAsigna() throws InterruptedException {
         ViewInteraction nameLogin = onView(withId(R.id.txtUserName));
         nameLogin.perform(replaceText("Daniel1"), closeSoftKeyboard());
