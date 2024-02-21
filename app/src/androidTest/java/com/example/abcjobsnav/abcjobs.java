@@ -4,6 +4,7 @@ import androidx.test.espresso.ViewInteraction;
 import androidx.test.filters.LargeTest;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import org.junit.Rule;
 import org.junit.Test;
@@ -42,21 +43,25 @@ public class abcjobs {
     public ActivityScenarioRule<MainActivity> mActivityTestRule = new ActivityScenarioRule<>(MainActivity.class);
 
     @Test
-    public void Signup() {
-        ViewInteraction signBtn = onView(allOf(withId(R.id.textButtonSignup), withText("Do not have an account? sign up"), isDisplayed()));
-        signBtn.perform(click());
+    public void Signup() throws InterruptedException {
+        ViewInteraction signBtn = onView(allOf(withId(R.id.textButtonSignup), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.don_t_have_an_account_sign_up)), isDisplayed()));
+        signBtn.perform(scrollTo(), click());
 
+        long ms = System.currentTimeMillis();
+        String nombreUsuario="User"+Long.toString(ms);
         ViewInteraction usernameTxt = onView(withId(R.id.userName));
-        usernameTxt.perform(scrollTo(), replaceText("Luis_Edo10"), closeSoftKeyboard());
+        usernameTxt.perform(scrollTo(), replaceText(nombreUsuario), closeSoftKeyboard());
 
         ViewInteraction pwdTxt = onView(withId(R.id.password));
-        pwdTxt.perform(scrollTo(), replaceText("User_10"), closeSoftKeyboard());
+        pwdTxt.perform(scrollTo(), replaceText("User_12345"), closeSoftKeyboard());
 
         ViewInteraction pwdTxt2 = onView(withId(R.id.confirmPassword));
-        pwdTxt2.perform(scrollTo(), replaceText("User_10"), closeSoftKeyboard());
+        pwdTxt2.perform(scrollTo(), replaceText("User_12345"), closeSoftKeyboard());
 
-        ViewInteraction confirmSignupBtn = onView(allOf(withId(R.id.btnSignUp), withText("Submit")));
+        ViewInteraction confirmSignupBtn = onView(allOf(withId(R.id.btnSignUp), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.signup_submit))));
         confirmSignupBtn.perform(scrollTo(), click());
+
+        Thread.sleep(2000);
     }
 
     @Test
@@ -75,8 +80,8 @@ public class abcjobs {
 
     @Test
     public void e2e() throws InterruptedException {
-        ViewInteraction signBtn = onView(allOf(withId(R.id.textButtonSignup), withText("Do not have an account? sign up"), isDisplayed()));
-        signBtn.perform(click());
+        ViewInteraction signBtn = onView(allOf(withId(R.id.textButtonSignup), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.don_t_have_an_account_sign_up)), isDisplayed()));
+        signBtn.perform(scrollTo(), click());
 
         long ms = System.currentTimeMillis();
         String nombreUsuario="User"+Long.toString(ms);
@@ -89,7 +94,7 @@ public class abcjobs {
         ViewInteraction pwdTxt2 = onView(withId(R.id.confirmPassword));
         pwdTxt2.perform(scrollTo(), replaceText("User_12345"), closeSoftKeyboard());
 
-        ViewInteraction confirmSignupBtn = onView(allOf(withId(R.id.btnSignUp), withText("Submit")));
+        ViewInteraction confirmSignupBtn = onView(allOf(withId(R.id.btnSignUp), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.signup_submit))));
         confirmSignupBtn.perform(scrollTo(), click());
 
         Thread.sleep(2000);
@@ -100,8 +105,8 @@ public class abcjobs {
         ViewInteraction pwdLogin = onView(withId(R.id.txtPassword));
         pwdLogin.perform(replaceText("User_12345"), closeSoftKeyboard());
 
-        ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.btnLogin), withText("Submit")));
-        confirmLoginBtn.perform(click());
+        ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.btnLogin), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.login_submit))));
+        confirmLoginBtn.perform(scrollTo(), click());
 
         Thread.sleep(2000);
 
@@ -131,8 +136,8 @@ public class abcjobs {
         ViewInteraction DirCand = onView(withId(R.id.address));
         DirCand.perform(scrollTo(), replaceText("Calle 10 # 17 - 27"), closeSoftKeyboard());
 
-        ViewInteraction CreateCandBtn = onView(allOf(withId(R.id.btnCreate), withText("Submit")));
-        CreateCandBtn.perform(click());
+        ViewInteraction CreateCandBtn = onView(allOf(withId(R.id.btnCreate), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.create_candidate_submit))));
+        CreateCandBtn.perform(scrollTo(), click());
 
         ViewInteraction lastnameCand = onView(withId(R.id.txtApellidosCand));
         lastnameCand.check(matches(withText("Padilla")));
