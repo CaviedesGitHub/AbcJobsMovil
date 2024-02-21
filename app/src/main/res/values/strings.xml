@@ -218,6 +218,7 @@
     <string name="creaeval_cancel">Cancel</string>
     <string name="creaeval_create">Create</string>
     <string name="firstvalue_excellent">Excellent</string>
+    <string name="evresult_candidate">Candidate:</string>
 
     <string-array name="qualys4">
         <item>Excellent</item>

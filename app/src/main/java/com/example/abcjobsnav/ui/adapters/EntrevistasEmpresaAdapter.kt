@@ -16,7 +16,7 @@ import com.example.abcjobsnav.ui.EntrevistasFragmentDirections
 
 class EntrevistasEmpresaAdapter(val idEmp: Int?, val tokenUser: String?, val idUser: Int?) : RecyclerView.Adapter<EntrevistasEmpresaAdapter.EntrevistasEmpresaViewHolder>(){
 
-    var entrevistas :List<Entrevista> = emptyList()
+    public var entrevistas :List<Entrevista> = emptyList()
         set(value) {
             field = value
             notifyDataSetChanged()
