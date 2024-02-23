@@ -38,7 +38,7 @@
                         android:layout_marginHorizontal="20dp"
                         android:textAlignment="center"
                         android:textColor="@color/black"
-                        android:textSize="30dp"
+                        android:textSize="30sp"
                         android:text="@{Integer.toString(entrevista.num)}" />
                 </LinearLayout>
                 <LinearLayout

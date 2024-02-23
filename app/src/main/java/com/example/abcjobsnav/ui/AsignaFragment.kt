@@ -106,6 +106,8 @@ class AsignaFragment : Fragment() {
                 if (viewModel.puestosEmpSinAsig.value!!.lista.isNullOrEmpty()){
                     binding.txtMsgVacio.visibility=View.VISIBLE
                     binding.puestosSinAsigRv.visibility=View.INVISIBLE
+                    binding.paginaJobsABC.visibility=View.INVISIBLE
+                    Log.d("Testing Invisible","Invisible")
                     binding.pagAnt.isEnabled=false
                     binding.pagAnt2.isEnabled=false
                     binding.pagSig.isEnabled=false
@@ -116,9 +118,11 @@ class AsignaFragment : Fragment() {
                 }
                 else{
                     if (viewModel.puestosEmpSinAsig.value!!.total_reg < 10){
+                        Log.d("Testing <10","SI")
                         binding.paginaJobsABC.visibility=View.INVISIBLE
                     }
                     else{
+                        Log.d("Testing <10","NO")
                         binding.paginaJobsABC.visibility=View.VISIBLE
                     }
                     binding.txtMsgVacio.visibility=View.GONE

@@ -118,7 +118,9 @@ public class abcjobs {
 
         ViewInteraction DocumentoCand = onView(withId(R.id.document));
         long numero = (long) (Math.random() * 1500000000) + 1;
+        //numero=numero / (long) (Math.random() * 10) + 1;
         String docStr = Long.toString(numero);
+        docStr = docStr.substring(0, docStr.length()-1);
         DocumentoCand.perform(scrollTo(), replaceText(docStr), closeSoftKeyboard());
 
         ViewInteraction EmailCand = onView(withId(R.id.email));
@@ -145,7 +147,7 @@ public class abcjobs {
         ViewInteraction nameCand = onView(withId(R.id.txtNombresCand));
         nameCand.check(matches(withText(nombreUsuario)));
 
-        ViewInteraction docCand = onView(withId(R.id.txtDocumento));
+        ViewInteraction docCand = onView(withId(R.id.txtDocumento));  //docCand.perform(scrollTo());
         docCand.check(matches(withText(docStr)));
 
         ViewInteraction fechaCand = onView(withId(R.id.txtFechaNac));

@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:text="ABC Jobs"
+            android:text="@string/abc_jobs"
             android:textAlignment="center"
             android:textColor="@color/black"
             android:textSize="40sp"

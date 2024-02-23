@@ -53,7 +53,7 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="text"
-            android:text="0-0 de 0"
+            android:text="@string/initial_values"
             app:layout_constraintEnd_toStartOf="@id/pagAnt2"
             app:layout_constraintStart_toEndOf="@id/btnFiltersJobsABC2"
             app:layout_constraintTop_toTopOf="parent" />
@@ -145,7 +145,7 @@
             android:ems="10"
             android:gravity="center"
             android:inputType="text"
-            android:text="0-0 de 0"
+            android:text="@string/initial_values"
             app:layout_constraintEnd_toStartOf="@id/pagAnt"
             app:layout_constraintStart_toEndOf="@id/btnFiltersJobsABC"
             app:layout_constraintTop_toTopOf="parent" />

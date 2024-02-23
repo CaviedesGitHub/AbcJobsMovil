@@ -54,37 +54,6 @@ public class abcempresas {
     @Rule
     public ActivityScenarioRule<MainActivity> mActivityTestRule = new ActivityScenarioRule<>(MainActivity.class);
 
-    //@Test
-    public void Signup() {
-        ViewInteraction signBtn = onView(allOf(withId(R.id.textButtonSignup), withText("Do not have an account? sign up"), isDisplayed()));
-        signBtn.perform(click());
-
-        ViewInteraction usernameTxt = onView(withId(R.id.userName));
-        usernameTxt.perform(scrollTo(), replaceText("Luis_Edo10"), closeSoftKeyboard());
-
-        ViewInteraction pwdTxt = onView(withId(R.id.password));
-        pwdTxt.perform(scrollTo(), replaceText("User_10"), closeSoftKeyboard());
-
-        ViewInteraction pwdTxt2 = onView(withId(R.id.confirmPassword));
-        pwdTxt2.perform(scrollTo(), replaceText("User_10"), closeSoftKeyboard());
-
-        ViewInteraction confirmSignupBtn = onView(allOf(withId(R.id.btnSignUp), withText("Submit")));
-        confirmSignupBtn.perform(scrollTo(), click());
-    }
-
-    //@Test
-    public void login() throws InterruptedException {
-        ViewInteraction usernameTxt = onView(withId(R.id.txtUserName));
-        usernameTxt.perform(replaceText("Luis_Edo10"), closeSoftKeyboard());
-
-        ViewInteraction pwdTxt = onView(withId(R.id.txtPassword));
-        pwdTxt.perform(replaceText("User_10"), closeSoftKeyboard());
-
-        ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.btnLogin), withText("Submit")));
-        confirmLoginBtn.perform(click());
-
-        Thread.sleep(5000);
-    }
 
     @Rule
     public ActivityScenarioRule<MainActivity> getmActivityTestRule() {
@@ -108,12 +77,11 @@ public class abcempresas {
         ViewInteraction pwdLogin = onView(withId(R.id.txtPassword));
         pwdLogin.perform(replaceText("12345"), closeSoftKeyboard());
 
-        ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.btnLogin), withText("Submit")));
+        ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.btnLogin), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.login_submit))));
         confirmLoginBtn.perform(click());
 
         Thread.sleep(2000);
 
-        //ViewInteraction BtnQualyCompany = onView(allOf(withId(R.id.btnLogin), withText("Submit")));
         ViewInteraction BtnQualyCompany = onView(allOf(withId(R.id.btnCalificaciones), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.company_qualifications))));
         BtnQualyCompany.perform(click());
         Thread.sleep(5000);
@@ -166,7 +134,7 @@ public class abcempresas {
         notaEval.perform(replaceText("Notas de la evaluacion."), closeSoftKeyboard());
         Thread.sleep(1000);
 
-        ViewInteraction BtnCreateCreaEval = onView(allOf(withId(R.id.btnCreateEval), withText("Create")));
+        ViewInteraction BtnCreateCreaEval = onView(allOf(withId(R.id.btnCreateEval), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.creaeval_create))));
         BtnCreateCreaEval.perform(ViewActions.scrollTo()).perform(click());
 
         //ViewInteraction BtnCancelCreaEval = onView(allOf(withId(R.id.btnCancelCreateEval), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.creaeval_cancel))));
@@ -217,7 +185,7 @@ public class abcempresas {
         ViewInteraction pwdLogin = onView(withId(R.id.txtPassword));
         pwdLogin.perform(replaceText("12345"), closeSoftKeyboard());
 
-        ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.btnLogin), withText("Submit")));
+        ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.btnLogin), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.login_submit))));
         confirmLoginBtn.perform(click());
 
         Thread.sleep(2000);
@@ -313,7 +281,7 @@ public class abcempresas {
         ViewInteraction pwdLogin = onView(withId(R.id.txtPassword));
         pwdLogin.perform(replaceText("12345"), closeSoftKeyboard());
 
-        ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.btnLogin), withText("Submit")));
+        ViewInteraction confirmLoginBtn = onView(allOf(withId(R.id.btnLogin), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.login_submit))));
         confirmLoginBtn.perform(click());
 
         Thread.sleep(2000);
@@ -333,8 +301,7 @@ public class abcempresas {
         );
 
         if (ItemCountEntrevistas[0]==0){
-            //ViewInteraction BtnEntrevistaBackCompany = onView(allOf(withId(R.id.btnEvBackCompany), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.back_to_company))));
-            ViewInteraction BtnEntrevistaBackCompany = onView(allOf(withId(R.id.btnEvBackCompany), withText("Back to Company")));
+            ViewInteraction BtnEntrevistaBackCompany = onView(allOf(withId(R.id.btnEvBackCompany), withText(InstrumentationRegistry.getInstrumentation().getTargetContext().getString(R.string.back_to_company))));
             BtnEntrevistaBackCompany.perform(ViewActions.scrollTo()).perform(click());
         }
         else{

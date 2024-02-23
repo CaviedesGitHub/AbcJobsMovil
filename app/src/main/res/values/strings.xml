@@ -219,6 +219,17 @@
     <string name="creaeval_create">Create</string>
     <string name="firstvalue_excellent">Excellent</string>
     <string name="evresult_candidate">Candidate:</string>
+    <string name="asignaitem_init">Init:</string>
+    <string name="candidate_photo">Candidate photo</string>
+    <string name="initial_values">0-0 de 0</string>
+    <string name="evals_employee">Employee</string>
+    <string name="evals_profile">Profile</string>
+    <string name="evals_project">Project:</string>
+    <string name="home_valuation">Valuation</string>
+    <string name="home_excelente">Excellent</string>
+    <string name="param_profile">Profile</string>
+    <string name="param_company">Company</string>
+    <string name="param_candidate">Candidate</string>
 
     <string-array name="qualys4">
         <item>Excellent</item>

@@ -52,7 +52,7 @@
                             android:id="@+id/lblEmpleado"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:text="Employee"
+                            android:text="@string/evals_employee"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
@@ -60,7 +60,7 @@
                             android:id="@+id/txtEmpleado"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:text="Luis Padilla"
+                            android:text=""
                             android:textColor="@color/black" />
                     </LinearLayout>
 
@@ -73,7 +73,7 @@
                             android:id="@+id/lblPerfil"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:text="Profile"
+                            android:text="@string/evals_profile"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
@@ -81,7 +81,7 @@
                             android:id="@+id/txtPerfil"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:text="Ingeniero"
+                            android:text=""
                             android:textColor="@color/black" />
                     </LinearLayout>
                     <LinearLayout
@@ -93,7 +93,7 @@
                             android:id="@+id/lblProyecto"
                             android:layout_width="100dp"
                             android:layout_height="wrap_content"
-                            android:text="Project:"
+                            android:text="@string/evals_project"
                             android:textColor="@color/black"
                             android:textStyle="bold" />
 
@@ -101,7 +101,7 @@
                             android:id="@+id/txtProyecto"
                             android:layout_width="150dp"
                             android:layout_height="wrap_content"
-                            android:text="Proyecto del anno"
+                            android:text=""
                             android:textColor="@color/black" />
                     </LinearLayout>
                 </LinearLayout>

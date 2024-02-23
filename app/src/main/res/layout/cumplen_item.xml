@@ -87,7 +87,7 @@
                                     android:layout_height="wrap_content"
                                     android:text="@{Integer.toString(candSel.calificacion)}"
                                     android:textColor="@color/black"
-                                    android:textSize="30dp" />
+                                    android:textSize="30sp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -126,6 +126,7 @@
 
                                 <ImageView
                                     android:id="@+id/imgPhotoCumple"
+                                    android:contentDescription="@string/candidate_photo"
                                     android:layout_width="80dp"
                                     android:layout_height="80dp" />
 
